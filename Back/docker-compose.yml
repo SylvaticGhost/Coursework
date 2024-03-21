@@ -1,0 +1,21 @@
+﻿services:
+  accountservice:
+    image: accountservice
+    build:
+      context: .
+      dockerfile: AccountService/Dockerfile
+
+  AcountDb:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - accountdb:/var/lib/postgresql/data
+
+
+volumes:
+    accountdb:
+    
