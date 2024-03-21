@@ -1,0 +1,3 @@
+﻿CREATE DATABASE AccountDB;
+
+CREATE SCHEMA user_schema;
