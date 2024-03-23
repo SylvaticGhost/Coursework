@@ -31,22 +31,14 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-builder.Services.AddCors((options) =>
+builder.Services.AddCors(options =>
 {
-    options.AddPolicy("DevCors", (corsBuilder) =>
-    {
-        corsBuilder.WithOrigins("http://localhost:4200", "http://localhost:3000", "http://localhost:8000")
+    options.AddDefaultPolicy(
+        builder => builder.WithOrigins("http://localhost:3000")
             .AllowAnyMethod()
             .AllowAnyHeader()
-            .AllowCredentials();
-    });
-    options.AddPolicy("ProdCors", (corsBuilder) =>
-    {
-        corsBuilder.WithOrigins("https://myProductionSite.com")
-            .AllowAnyMethod()
-            .AllowAnyHeader()
-            .AllowCredentials();
-    });
+            .AllowCredentials()
+    );
 });
 
 builder.Services.AddDbContext<DataContextEf>(options =>
@@ -65,7 +57,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseHttpsRedirection();
+app.UseRouting();
 
 app.MapControllers();
 app.Run();

@@ -71,4 +71,40 @@ public class UserRepository : IUserRepository
         
         return token;
     }
+    
+    
+    public async Task<string> RefreshToken(Guid id)
+    {
+        UserAccount? user = await _dataContextEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
+        
+        if (user == null)
+            throw new ArgumentException("User not found");
+        
+        string token = _authHelpers.GenerateJwtToken(user);
+        
+        return token;
+    }
+
+
+    public async Task<bool> DeleteUser(Guid id)
+    {
+        UserAccount? user = await GetUserById(id);
+        
+        if (user == null)
+            throw new ArgumentException("User not found");
+        
+        _dataContextEf.UserAccount.Remove(user);
+        
+        await _dataContextEf.SaveChangesAsync();
+        
+        return true;
+    }
+    
+    
+    public async Task<bool> CheckIfEmailExists(string email) =>
+        await _dataContextEf.UserAccount.AnyAsync(x => x.Email == email);
+    
+    
+    public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber) =>
+        await _dataContextEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
 }

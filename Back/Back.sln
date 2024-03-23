@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{8C2F7376
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountServiceTests", "AccountServiceTests\AccountServiceTests.csproj", "{8AA0BB27-3399-412F-9765-05D96037C202}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomExceptions", "CustomExceptions\CustomExceptions.csproj", "{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{8AA0BB27-3399-412F-9765-05D96037C202}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AA0BB27-3399-412F-9765-05D96037C202}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AA0BB27-3399-412F-9765-05D96037C202}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8AA0BB27-3399-412F-9765-05D96037C202} = {8C2F7376-11E1-4F27-A8A4-0D58F51A65CA}
