@@ -1,8 +1,9 @@
 import {UserAuth} from "@/lib/Types/UserAuth";
+import {UserRegister} from "@/lib/Types/UserRegister";
 
 const url : string = 'http://localhost:5239/UserAuth'
 
-export default async function UserLogin(userAuth: UserAuth) { 
+export async function UserLogin(userAuth: UserAuth) { 
     
     let typeLogin : string;
     if(userAuth.email.includes("@"))
@@ -27,4 +28,9 @@ export default async function UserLogin(userAuth: UserAuth) {
         return response.json();
     
     throw new Error('Failed to login');
+}
+
+
+export async function UserRegistration(userRegister: UserRegister) { 
+    
 }

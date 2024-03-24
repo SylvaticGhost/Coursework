@@ -20,9 +20,9 @@ public class UserAuth : ControllerBase
 {
     private readonly IUserRepository _userRepository;
     
-    public UserAuth(DataContextEf dataContextEf, IConfiguration configuration)
+    public UserAuth(DataContextNpgEf dataContextNpgEf, IConfiguration configuration)
     {
-        _userRepository = new UserRepository(dataContextEf, configuration);
+        _userRepository = new UserRepository(dataContextNpgEf, configuration);
     }
     
     

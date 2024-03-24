@@ -1,12 +1,18 @@
+using System.Data;
 using System.Text;
 using AccountService.Data;
+using AccountService.Models;
 using AccountService.Repositories;
+using GlobalHelpers.DataHelpers.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using MongoDB.Driver;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
+#region "Configuration"
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -34,19 +40,25 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy(
-        builder => builder.WithOrigins("http://localhost:3000")
+        b => b.WithOrigins("http://localhost:3000")
             .AllowAnyMethod()
             .AllowAnyHeader()
             .AllowCredentials()
     );
 });
 
-builder.Services.AddDbContext<DataContextEf>(options =>
+builder.Services.AddDbContext<DataContextNpgEf>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
 
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
+builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
+
+if (mongoDbSettings is null)
+   throw new DataException("MongoDbSettings not found in appsettings.json");
+
+#endregion
 
 var app = builder.Build();
 

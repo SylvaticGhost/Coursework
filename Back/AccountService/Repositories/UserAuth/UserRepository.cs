@@ -8,12 +8,12 @@ namespace AccountService.Repositories;
 
 public class UserRepository : IUserRepository
 {
-    private readonly DataContextEf _dataContextEf;
+    private readonly DataContextNpgEf _dataContextNpgEf;
     private readonly AuthHelpers _authHelpers;
 
-    public UserRepository(DataContextEf dataContextEf, IConfiguration configuration)
+    public UserRepository(DataContextNpgEf dataContextNpgEf, IConfiguration configuration)
     {
-        _dataContextEf = dataContextEf;
+        _dataContextNpgEf = dataContextNpgEf;
         _authHelpers = new AuthHelpers(configuration);
     }
 
@@ -33,21 +33,21 @@ public class UserRepository : IUserRepository
             PasswordSalt = password.PasswordSalt
         };
         
-        await _dataContextEf.UserAccount.AddAsync(userAccount);
-        await _dataContextEf.SaveChangesAsync();
+        await _dataContextNpgEf.UserAccount.AddAsync(userAccount);
+        await _dataContextNpgEf.SaveChangesAsync();
 
         return userAccount.Id;
     }
     
     
     public async Task<UserAccount?> GetUserByEmail(string email) => 
-        await _dataContextEf.UserAccount.FirstOrDefaultAsync(x => x.Email == email);
+        await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Email == email);
     
     public async Task<UserAccount?> GetUserById(Guid id) =>
-        await _dataContextEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
+        await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
     
     public async Task<UserAccount?> GetUserByPhoneNumber(string phoneNumber) =>
-        await _dataContextEf.UserAccount.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
+        await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
     
     
     public async Task<string> Login(string credential, string password, TypeOfLogin typeOfLogin)
@@ -75,7 +75,7 @@ public class UserRepository : IUserRepository
     
     public async Task<string> RefreshToken(Guid id)
     {
-        UserAccount? user = await _dataContextEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
+        UserAccount? user = await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
         
         if (user == null)
             throw new ArgumentException("User not found");
@@ -93,18 +93,18 @@ public class UserRepository : IUserRepository
         if (user == null)
             throw new ArgumentException("User not found");
         
-        _dataContextEf.UserAccount.Remove(user);
+        _dataContextNpgEf.UserAccount.Remove(user);
         
-        await _dataContextEf.SaveChangesAsync();
+        await _dataContextNpgEf.SaveChangesAsync();
         
         return true;
     }
     
     
     public async Task<bool> CheckIfEmailExists(string email) =>
-        await _dataContextEf.UserAccount.AnyAsync(x => x.Email == email);
+        await _dataContextNpgEf.UserAccount.AnyAsync(x => x.Email == email);
     
     
     public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber) =>
-        await _dataContextEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
+        await _dataContextNpgEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
 }

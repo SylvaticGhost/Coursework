@@ -15,6 +15,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountServiceTests", "Acco
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomExceptions", "CustomExceptions\CustomExceptions.csproj", "{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanySvc", "CompanySvc\CompanySvc.csproj", "{DBB899D4-9235-41B9-8A29-6E2D5D9FA86B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalModels", "GlobalModels\GlobalModels.csproj", "{4AABE91E-C342-4B12-825C-73AC964760F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,14 @@ Global
 		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6682F46B-EFBA-4EAE-9E60-F7FD1EF1FD8F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DBB899D4-9235-41B9-8A29-6E2D5D9FA86B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DBB899D4-9235-41B9-8A29-6E2D5D9FA86B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DBB899D4-9235-41B9-8A29-6E2D5D9FA86B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DBB899D4-9235-41B9-8A29-6E2D5D9FA86B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4AABE91E-C342-4B12-825C-73AC964760F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4AABE91E-C342-4B12-825C-73AC964760F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4AABE91E-C342-4B12-825C-73AC964760F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4AABE91E-C342-4B12-825C-73AC964760F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8AA0BB27-3399-412F-9765-05D96037C202} = {8C2F7376-11E1-4F27-A8A4-0D58F51A65CA}

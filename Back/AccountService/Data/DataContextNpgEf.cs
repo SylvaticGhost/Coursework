@@ -6,11 +6,11 @@ using EFCore.NamingConventions;
 
 namespace AccountService.Data;
 
-public class DataContextEf : DbContext
+public class DataContextNpgEf : DbContext
 {
     public virtual DbSet<UserAccount> UserAccount { get; protected init; }
 
-    public DataContextEf(DbContextOptions options) : base(options)
+    public DataContextNpgEf(DbContextOptions options) : base(options)
     {
     
     }

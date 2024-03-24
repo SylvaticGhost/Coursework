@@ -14,8 +14,19 @@
       - "5432:5432"
     volumes:
       - accountdb:/var/lib/postgresql/data
+          
+  MongoDb:
+    image: mongo
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin123
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data/db
 
 
 volumes:
     accountdb:
+    mongodb:
     
