@@ -1,7 +1,11 @@
-﻿namespace AccountService.Models;
+﻿using GlobalModels;
+
+namespace AccountService.Models;
 
 public record UserProfileToAddDto(
-    string City,
+    string? City,
     string Country,
-    string Contacts
+    IEnumerable<Contact>? Contacts,
+    string? About,
+    byte[]? Avatar
     );

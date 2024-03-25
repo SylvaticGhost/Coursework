@@ -870,6 +870,16 @@
         "runtime": {
           "bin/placeholder/GlobalHelpers.dll": {}
         }
+      },
+      "GlobalModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/GlobalModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GlobalModels.dll": {}
+        }
       }
     }
   },
@@ -2377,6 +2387,11 @@
       "type": "project",
       "path": "../GlobalHelpers/GlobalHelpers.csproj",
       "msbuildProject": "../GlobalHelpers/GlobalHelpers.csproj"
+    },
+    "GlobalModels/1.0.0": {
+      "type": "project",
+      "path": "../GlobalModels/GlobalModels.csproj",
+      "msbuildProject": "../GlobalModels/GlobalModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -2384,6 +2399,7 @@
       "CustomExceptions >= 1.0.0",
       "EFCore.NamingConventions >= 7.0.0",
       "GlobalHelpers >= 1.0.0",
+      "GlobalModels >= 1.0.0",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 8.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.3",
       "MongoDB.Entities >= 23.1.0",
@@ -2429,6 +2445,9 @@
             },
             "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj": {
               "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj"
+            },
+            "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj": {
+              "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj"
             }
           }
         }

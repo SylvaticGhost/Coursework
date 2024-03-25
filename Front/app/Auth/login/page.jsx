@@ -2,7 +2,7 @@
 'use client';
 
 import {useState} from "react";
-import UserLogin from "../../../lib/auth";
+import {UserLogin} from "../../../lib/auth";
 import {UserAuth} from "../../../lib/Types/UserAuth";
 
 
@@ -22,6 +22,7 @@ export default function Login() {
             console.log(error);
         }
     };
+    
 
   return (
       <div className="flex h-screen justify-center items-center">
@@ -29,9 +30,9 @@ export default function Login() {
           {setError && `Error: ${error}`}
       </div>
       <div
-          className="content-center flex-col flex justify-center items-center border-4 border-red-500 rounded-xl p-10 w-min h-min">
-              <div className="py-4 flex-col">
-                  <label>Email or phone number</label>
+          className="content-center flex-col flex justify-center items-center border-4 border-fuchsia-600 rounded-2xl p-8 w-min h-min">
+              <div className="py-3 flex-col">
+                  <h2 className="font-semibold text-purple-500 flex justify-center items-center">Login</h2>
                   <br/>
                   <div className="py-2">
                       <input
@@ -39,24 +40,28 @@ export default function Login() {
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           className="border-2 rounded-md"
+                          placeholder={"Email or phone number"}
                       />
                   </div>
               </div>
               <div className="justify-center">
-                  <label className="w-full text-center">Password</label>
+                  
                   <div className="py-2">
                       <input
                           type="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           className="border-2 rounded-md"
+                          placeholder="Password"
                       />
                   </div>
               </div>
               <div className="py-3">
-                  <button className="py-2" onClick={login}>Login</button>
+                  <button 
+                      className="my-2 flex justify-center items-center bg-fuchsia-500 p-2 rounded-xl text-amber-50 font-semibold" 
+                      onClick={login}>Login</button>
                   <br/>
-                  <a href="/Auth/register">Create an account</a>
+                  <a href="/Auth/register" className="text-purple-400">Create an account</a>
 
               </div>
           </div>

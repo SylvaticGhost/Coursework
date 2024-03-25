@@ -8,8 +8,10 @@ public class UserProfileRepository
     {
         
     }
-    
-    
+
+
     public async Task AddUserProfile(UserProfileToAddDto userProfileToAddDto)
-    {}
+    {
+        
+    }
 }

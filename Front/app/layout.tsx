@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import React from "react";
+import Link from "next/link";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -17,8 +19,9 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body>
-      <header>
-        <a href="http://localhost:3000/Auth/login">Login</a>
+      <header className="py-2 border-b-4 border-b-fuchsia-600 px-1 flex justify-between">
+          <Link href="http://localhost:3000" className="font-semibold flex shrink "><h3>WORKLY </h3> </Link>
+        <a href="http://localhost:3000/Auth/login" className="flex ">Login</a>
       </header>
         <main>{children}</main>
       <footer></footer>

@@ -32,5 +32,24 @@ export async function UserLogin(userAuth: UserAuth) {
 
 
 export async function UserRegistration(userRegister: UserRegister) { 
+    const response = await fetch(url + '/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'AcceptEncoding': 'gzip, deflate, br',
+        },
+        body: JSON.stringify({
+            email: userRegister.email,
+            phoneNumber: userRegister.phoneNumber,
+            password: userRegister.password,
+            name: userRegister.name,
+            birthDate: userRegister.birthDate,
+        }),
+    });
     
+    if(response.ok)
+        return response.json();
+    
+    throw new Error('Failed to register');
 }
