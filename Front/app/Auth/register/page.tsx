@@ -6,6 +6,8 @@ import {useState} from "react";
 import {UserRegister} from "@/lib/Types/UserRegister";
 import {ValidRegistrationForm} from "@/lib/Helpers/authHelpers";
 import {UserRegistration} from "@/lib/auth";
+import { useNavigate } from 'react-router-dom';
+
 
 export default function Register() {
     
@@ -13,11 +15,12 @@ export default function Register() {
     const [phone, setPhone] = useState('')
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
-    const [name, setName] = useState('')
+    const [firstName, setFirstName] = useState('')
     const [lastname, setLastname] = useState('')
     const [birthDate, setBirthDate] = useState(new Date())
     const [terms, setTerms] = useState(false)
     const [error, setError] = useState('')
+    const [showPassword, setShowPassword] = useState(false)
     
     function CreateAccount(event: any) {
         event.preventDefault();
@@ -35,7 +38,8 @@ export default function Register() {
             email: email,
             phoneNumber: phone,
             password: password,
-            name: name,
+            lastName: firstName,
+            firstName: lastname,
             birthDate: birthDate.toISOString().split('T')[0]
         }
         
@@ -46,13 +50,12 @@ export default function Register() {
             return
         }
         
-        try{
+        
             const response = UserRegistration(user)
             console.log(response)
-        }
-        catch(e) {
-            setError('Occured an error')
-        }
+           
+            window.location.href = 'http://localhost:3000/Auth/CreateProfile'
+        
     }
     
     return (
@@ -62,52 +65,61 @@ export default function Register() {
                     <h2 className="font-semibold text-purple-500 flex justify-center items-center">Create account</h2>
                     <div className="register__container__form">
                         <form>
-                            <div className="register__container__form__input my-2"> 
+                            <div className="register__container__form__input my-2">
                                 <input type="email" placeholder="Email" className="border-2 rounded-md"
                                        value={email}
                                        onChange={e => {
-                                           setEmail(e.target.value.replace(/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, ''));
+                                           setEmail(e.target.value);
                                        }}/>
                             </div>
                             <div className="register__container__form__input  my-2">
                                 <input type="text" placeholder="Phone Number" className="border-2 rounded-md"
-                                        value={phone}
+                                       value={phone}
                                        onChange={e => {
                                            setPhone(e.target.value.replace(/[^0-9+]/g, ''));
                                        }}/>
                             </div>
                             <div className="register__container__form__input  my-2">
-                                <input type="password" placeholder="Password" className="border-2 rounded-md"
+                                <input type={showPassword ? "text" : "password"} placeholder="Password"
+                                       className="border-2 rounded-md"
                                        value={password}
-                                onChange={e => setPassword(e.target.value)}/>
+                                       onChange={e => setPassword(e.target.value)}/>
                             </div>
                             <div className="register__container__form__input  my-2">
-                                <input type="password" placeholder="Confirm Password" className="border-2 rounded-md"
-                                        value={confirmPassword}
-                                onChange={e => setConfirmPassword(e.target.value)}/>
+                                <input type={showPassword ? "text" : "password"} placeholder="Confirm Password"
+                                       className="border-2 rounded-md"
+                                       value={confirmPassword}
+                                       onChange={e => setConfirmPassword(e.target.value)}/>
                             </div>
                             <div className="register__container__form__input  my-2">
                                 <input type="text" placeholder="Name" className="border-2 rounded-md"
-                                       value={name}
+                                       value={firstName}
                                        onChange={e => {
-                                           setName(e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, ''));
+                                           setFirstName(e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, ''));
                                        }}/>
                             </div>
                             <div className="register__container__form__input  my-2">
                                 <input type="text" placeholder="Lastname" className="border-2 rounded-md"
-                                        value={lastname}
+                                       value={lastname}
                                        onChange={e => {
                                            setLastname(e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, ''));
                                        }}/>
                             </div>
                             <div className="register__container__form__input  my-2">
                                 <input type="date" placeholder="Birth Date" className="border-2 rounded-md"
-                                        value={birthDate.toISOString().split('T')[0]}
-                                onChange={e => setBirthDate(new Date(e.target.value))}/>
+                                       value={birthDate.toISOString().split('T')[0]}
+                                       onChange={e => setBirthDate(new Date(e.target.value))}/>
                             </div>
-                            <div>
-                                <input type="checkbox" className="m-2" 
-                                        value={terms.toString()}
+                            <div className="flex justify-center py-1">
+                                <button type="button" onClick={() => setShowPassword(!showPassword)}
+                                className="text-purple-500 hover:text-purple-700">
+                                    {showPassword ? "Hide Password" : "Show Password"}
+                                </button>
+                            </div>
+                            <div className="flex justify-center">
+                                <input type="checkbox" className="m-2
+                                text-purple-500 hover:text-purple-700"
+                                       value={terms.toString()}
                                        onChange={e => setTerms(e.target.checked)}/>
                                 <a>I accept the terms</a>
                             </div>
@@ -120,6 +132,7 @@ export default function Register() {
                                     Create
                                 </button>
                             </div>
+
                         </form>
                     </div>
                 </div>

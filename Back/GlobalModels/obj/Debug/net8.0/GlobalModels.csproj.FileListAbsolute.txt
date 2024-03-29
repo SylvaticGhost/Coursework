@@ -1,0 +1,12 @@
+G:\GitHub\Coursework\Back\GlobalModels\bin\Debug\net8.0\GlobalModels.deps.json
+G:\GitHub\Coursework\Back\GlobalModels\bin\Debug\net8.0\GlobalModels.dll
+G:\GitHub\Coursework\Back\GlobalModels\bin\Debug\net8.0\GlobalModels.pdb
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.GeneratedMSBuildEditorConfig.editorconfig
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.AssemblyInfoInputs.cache
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.AssemblyInfo.cs
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.csproj.CoreCompileInputs.cache
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.sourcelink.json
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.dll
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\refint\GlobalModels.dll
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\GlobalModels.pdb
+G:\GitHub\Coursework\Back\GlobalModels\obj\Debug\net8.0\ref\GlobalModels.dll

@@ -1,6 +1,6 @@
 ﻿namespace CustomExceptions._500s_exceptions;
 
-public class ServiceUnavailableException : Exception
+public class ServiceUnavailableException : Exception, ICustomException
 {
     public int StatusCode { get; }
     
@@ -9,4 +9,6 @@ public class ServiceUnavailableException : Exception
     {
         StatusCode = statusCode;
     }
+
+    
 }

@@ -3,8 +3,11 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
 import Link from "next/link";
+import Cookies from "js-cookie";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const loginLink = "http://localhost:3000/Auth/login";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -16,14 +19,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const logged: boolean = Cookies.get('logged') === 'true';
+  const id: string | undefined = Cookies.get('id') || undefined;
+    
   return (
       <html lang="en">
       <body>
       <header className="py-2 border-b-4 border-b-fuchsia-600 px-1 flex justify-between">
-          <Link href="http://localhost:3000" className="font-semibold flex shrink "><h3>WORKLY </h3> </Link>
-        <a href="http://localhost:3000/Auth/login" className="flex ">Login</a>
+          <Link href="http://localhost:3000" className="font-semibold flex shrink "><h3>WORKLY</h3> </Link>
+          {logged && id ?
+              <a>Profile</a>:
+              <a href="http://localhost:3000/Auth/login" className="flex ">Login</a> 
+          }
       </header>
-        <main>{children}</main>
+      <main>{children}</main>
       <footer></footer>
       </body>
       </html>

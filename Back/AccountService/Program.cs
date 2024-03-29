@@ -3,6 +3,7 @@ using System.Text;
 using AccountService.Data;
 using AccountService.Models;
 using AccountService.Repositories;
+using AccountService.Repositories.UserProfile;
 using GlobalHelpers.DataHelpers.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -47,9 +48,12 @@ builder.Services.AddCors(options =>
     );
 });
 
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection")!;
+Console.WriteLine($"Connection string to npg: {connectionString}");
+
 builder.Services.AddDbContext<DataContextNpgEf>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+    options.UseNpgsql(connectionString);
 });
 
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
@@ -57,6 +61,8 @@ builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nam
 
 if (mongoDbSettings is null)
    throw new DataException("MongoDbSettings not found in appsettings.json");
+
+builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
 #endregion
 

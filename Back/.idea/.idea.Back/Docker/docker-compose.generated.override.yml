@@ -1,0 +1,20 @@
+# This is a generated file. Not intended for manual editing.
+services:
+  accountservice:
+    build:
+      context: "G:\\GitHub\\Coursework\\Back"
+      dockerfile: "AccountService/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/AccountService.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "accountservice:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\ktkac\\.nuget\\packages:/home/app/.nuget/packages"
+    - "G:\\GitHub\\Coursework\\Back\\AccountService:/app:rw"
+    - "G:\\GitHub\\Coursework\\Back:/src:rw"
+    working_dir: "/app"
