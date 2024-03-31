@@ -6,7 +6,7 @@ import {useState} from "react";
 import {UserRegister} from "@/lib/Types/UserRegister";
 import {ValidRegistrationForm} from "@/lib/Helpers/authHelpers";
 import {UserRegistration} from "@/lib/auth";
-import { useNavigate } from 'react-router-dom';
+
 
 
 export default function Register() {
@@ -66,21 +66,26 @@ export default function Register() {
                     <div className="register__container__form">
                         <form>
                             <div className="register__container__form__input my-2">
-                                <input type="email" placeholder="Email" className="border-2 rounded-md"
+                                <input type="email" 
+                                       placeholder=" Email" 
+                                       className="border-2 rounded-md"
                                        value={email}
                                        onChange={e => {
                                            setEmail(e.target.value);
                                        }}/>
                             </div>
                             <div className="register__container__form__input  my-2">
-                                <input type="text" placeholder="Phone Number" className="border-2 rounded-md"
+                                <input type="text" 
+                                       placeholder=" Phone Number" 
+                                       className="border-2 rounded-md"
                                        value={phone}
                                        onChange={e => {
                                            setPhone(e.target.value.replace(/[^0-9+]/g, ''));
                                        }}/>
                             </div>
                             <div className="register__container__form__input  my-2">
-                                <input type={showPassword ? "text" : "password"} placeholder="Password"
+                                <input type={showPassword ? "text" : "password"} 
+                                       placeholder="Password"
                                        className="border-2 rounded-md"
                                        value={password}
                                        onChange={e => setPassword(e.target.value)}/>
@@ -117,8 +122,8 @@ export default function Register() {
                                 </button>
                             </div>
                             <div className="flex justify-center">
-                                <input type="checkbox" className="m-2
-                                text-purple-500 hover:text-purple-700"
+                                <input type="checkbox" 
+                                       className="m-2 text-purple-500 hover:text-purple-700"
                                        value={terms.toString()}
                                        onChange={e => setTerms(e.target.checked)}/>
                                 <a>I accept the terms</a>

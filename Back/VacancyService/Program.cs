@@ -1,4 +1,5 @@
 using System.Data;
+using DefaultNamespace;
 using GlobalHelpers.DataHelpers.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nam
 if (mongoDbSettings is null)
     throw new DataException("MongoDbSettings not found in appsettings.json");
 
+builder.Services.AddScoped<IVacancyRepo, VacancyRepo>();
 
 var app = builder.Build();
 

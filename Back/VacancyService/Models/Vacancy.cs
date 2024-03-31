@@ -1,9 +1,11 @@
-﻿using MongoDB.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using MongoDB.Entities;
 
 namespace VacancyService.Models;
 
 public class Vacancy : Entity
 {
+    [Required]
     public Guid Id { get; set; }
 
     public string Title { get; set; }
@@ -14,13 +16,7 @@ public class Vacancy : Entity
     
     public DateTime UpdatedAt { get; set; }
     
-    public Guid CompanyId { get; set; }
-    
-    public string CompanyName { get; set; }
-    
-    public string CompanyAddress { get; set; }
-    
-    public string CompanyEmail { get; set; }
+    public CompanyShortInfo CompanyInfo { get; set; }
     
     
 }

@@ -492,6 +492,16 @@
         "runtime": {
           "bin/placeholder/GlobalHelpers.dll": {}
         }
+      },
+      "GlobalModels/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "compile": {
+          "bin/placeholder/GlobalModels.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/GlobalModels.dll": {}
+        }
       }
     }
   },
@@ -1487,51 +1497,52 @@
       "type": "project",
       "path": "../GlobalHelpers/GlobalHelpers.csproj",
       "msbuildProject": "../GlobalHelpers/GlobalHelpers.csproj"
+    },
+    "GlobalModels/1.0.0": {
+      "type": "project",
+      "path": "../GlobalModels/GlobalModels.csproj",
+      "msbuildProject": "../GlobalModels/GlobalModels.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net8.0": [
       "GlobalHelpers >= 1.0.0",
+      "GlobalModels >= 1.0.0",
       "Microsoft.AspNetCore.OpenApi >= 8.0.3",
       "MongoDB.Entities >= 23.1.0",
       "Swashbuckle.AspNetCore >= 6.4.0"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ktkac\\.nuget\\packages\\": {},
-    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
+    "/Users/Kostia/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\VacancyService\\VacancyService.csproj",
+      "projectUniqueName": "/Users/Kostia/Documents/GitHub/Coursework/Back/VacancyService/VacancyService.csproj",
       "projectName": "VacancyService",
-      "projectPath": "G:\\GitHub\\Coursework\\Back\\VacancyService\\VacancyService.csproj",
-      "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
-      "outputPath": "G:\\GitHub\\Coursework\\Back\\VacancyService\\obj\\",
+      "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/VacancyService/VacancyService.csproj",
+      "packagesPath": "/Users/Kostia/.nuget/packages/",
+      "outputPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/VacancyService/obj/",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/Kostia/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj": {
-              "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj"
+            "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/GlobalHelpers.csproj": {
+              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/GlobalHelpers.csproj"
+            },
+            "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj": {
+              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj"
             }
           }
         }
@@ -1578,7 +1589,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

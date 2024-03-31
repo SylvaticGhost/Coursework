@@ -1,6 +1,7 @@
 using System.Data;
 
 using CompanySvc.Data;
+using DefaultNamespace;
 using GlobalHelpers.DataHelpers.Models;
 using MongoDB.Entities;
 
@@ -18,7 +19,11 @@ builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nam
 if (mongoDbSettings is null)
     throw new DataException("MongoDbSettings not found in appsettings.json");
 
+builder.Services.AddScoped<ICompanyRepo, CompanyRepo>();
+
 var app = builder.Build();
+
+await MongoDbInit.InitDb(app, mongoDbSettings);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

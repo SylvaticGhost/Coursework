@@ -44,7 +44,7 @@ export default function Login() {
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                                 className="border-2 rounded-md"
-                                placeholder={"Email or phone number"}
+                                placeholder={" Email or phone number"}
                             />
                         </div>
                     </div>
@@ -56,7 +56,7 @@ export default function Login() {
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 className="border-2 rounded-md"
-                                placeholder="Password"
+                                placeholder=" Password"
                             />
                         </div>
                     </div>
