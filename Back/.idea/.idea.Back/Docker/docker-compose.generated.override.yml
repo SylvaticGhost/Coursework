@@ -1,5 +1,23 @@
 # This is a generated file. Not intended for manual editing.
 services:
+  CompanySvc:
+    build:
+      context: "G:\\GitHub\\Coursework\\Back"
+      dockerfile: "CompanySvc/Dockerfile"
+      target: "base"
+    command: []
+    entrypoint:
+    - "dotnet"
+    - "/app/bin/Debug/net8.0/CompanySvc.dll"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+    image: "companysvc:dev"
+    ports: []
+    volumes:
+    - "C:\\Users\\ktkac\\.nuget\\packages:/home/app/.nuget/packages"
+    - "G:\\GitHub\\Coursework\\Back\\CompanySvc:/app:rw"
+    - "G:\\GitHub\\Coursework\\Back:/src:rw"
+    working_dir: "/app"
   accountservice:
     build:
       context: "G:\\GitHub\\Coursework\\Back"

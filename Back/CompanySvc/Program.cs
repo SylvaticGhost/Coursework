@@ -1,10 +1,13 @@
+//http://localhost:5271/swagger/index.html
 using System.Data;
 
 using CompanySvc.Data;
 using DefaultNamespace;
+using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
 using MongoDB.Entities;
 
+ConsoleHelpers.WriteStartUpMessage("CompanySvc");
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,6 +15,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddControllers();
 
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
@@ -32,8 +36,29 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-await MongoDbInit.InitDb(app, mongoDbSettings);
+
+app.UseRouting();
+app.MapControllers();
 
 app.UseHttpsRedirection();
 
 app.Run();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

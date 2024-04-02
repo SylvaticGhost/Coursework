@@ -1,6 +1,8 @@
+using VacancyService.Models;
+
 namespace DefaultNamespace;
 
-public class IVacancyRepo
+public interface IVacancyRepo
 {
-    
+    public Task<Vacancy?> GetVacancy(Guid id);
 }

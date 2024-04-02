@@ -1,42 +1,81 @@
-﻿x-environment: 
-  POSTGRES_USER: postgres
-  POSTGRES_PASSWORD: postgres
+﻿#x-environment:
+#    POSTGRES_USER: postgres
+#    POSTGRES_PASSWORD: postgres
 
 services:
-  accountservice:
-    image: accountservice
-    build:
-      context: .
-      dockerfile: AccountService/Dockerfile
-    environment:
-      - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=http://+:80
-      - ConnectionStrings__DefaultConnection=Server=AcountDb;Port=5432;Database=accountdb;Username=postgres;Password=postgres; 
-    ports:
-      - "5239:80"
+    rabbitmq:
+        image: rabbitmq:3-management-alpine
+        ports:
+            - "5672:5672"
+            - "15672:15672"
+        environment:
+            RABBITMQ_DEFAULT_USER: myuser
+            RABBITMQ_DEFAULT_PASS: mypass
+        volumes:
+            - rabbitmq-data:/var/lib/rabbitmq
+    
+    AcountDb:
+        image: postgres
+        environment:
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+        ports:
+            - "5432:5432"
+        volumes:
+            - accountdb:/var/lib/postgresql/data
 
-  AcountDb:
-    image: postgres
-    environment:
-      - POSTGRES_USER=${POSTGRES_USER}
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-    ports:
-      - "5432:5432"
-    volumes:
-      - accountdb:/var/lib/postgresql/data
-          
-  MongoDb:
-    image: mongo
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=admin123
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb:/data/db
+    MongoDb:
+        image: mongo
+
+
+        ports:
+            - "27017:27017"
+        volumes:
+            - mongodb:/data/db
+    
+    
+    accountservice:
+        image: accountservice
+        build:
+            context: .
+            dockerfile: AccountService/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:80
+            - ConnectionStrings__DefaultConnection=Server=AcountDb;Port=5432;Database=accountdb;Username=postgres;Password=postgres;
+            - MongoDbSettings__ConnectionString=mongodb://MongoDb
+        ports:
+            - "5239:80"
+    
+    CompanySvc:
+        image: companysvc
+        build:
+            context: .
+            dockerfile: CompanySvc/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:80
+            - MongoDbSettings__ConnectionString=mongodb://MongoDb
+        ports:
+            - "5240:80"
+    
+    VacancyService:
+        image: vacancyservice
+        build:
+            context: .
+            dockerfile: VacancyService/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:80
+            - MongoDbSettings__ConnectionString=mongodb://MongoDb
+        ports:
+            - "5241:80"
+    
+
 
 
 volumes:
     accountdb:
     mongodb:
+    rabbitmq-data:
     

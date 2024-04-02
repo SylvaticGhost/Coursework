@@ -3448,24 +3448,26 @@
     ]
   },
   "packageFolders": {
-    "/Users/Kostia/.nuget/packages/": {}
+    "C:\\Users\\ktkac\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/CustomExceptions.csproj",
+      "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\CustomExceptions.csproj",
       "projectName": "CustomExceptions",
-      "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/CustomExceptions.csproj",
-      "packagesPath": "/Users/Kostia/.nuget/packages/",
-      "outputPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/",
+      "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\CustomExceptions.csproj",
+      "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
+      "outputPath": "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/Kostia/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3509,7 +3511,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.103/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

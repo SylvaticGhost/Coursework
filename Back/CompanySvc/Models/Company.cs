@@ -6,7 +6,7 @@ namespace CompanySvc.Models;
 public class Company : Entity
 {
     [Required]
-    public Guid Id { get; set; }
+    public Guid CompanyId { get; set; }
     
     [Required]
     public string Name { get; set; }
@@ -29,6 +29,4 @@ public class Company : Entity
     public string Description { get; set; }
     
     public string Industry { get; set; }
-    
-    
 }

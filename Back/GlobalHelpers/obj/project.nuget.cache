@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "jyHzD2wN7ZbaBmeVsscWjzFq0OFQmwrtAep11LoiwDbyrVODIPtH7E1cHaCS8/lolSdSJZH+8A+G0mtW5vEbcg==",
+  "dgSpecHash": "ltXwnRlWhSMPTke4bHtZy9Jeer7+8q5VivkITVw50rVohWLLSPnvAhcPt9ttEEauOr2qwQHvgr5+JG+pvgN4gg==",
   "success": true,
-  "projectFilePath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/GlobalHelpers.csproj",
+  "projectFilePath": "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj",
   "expectedPackageFiles": [
-    "/Users/Kostia/.nuget/packages/microsoft.extensions.configuration/9.0.0-preview.2.24128.5/microsoft.extensions.configuration.9.0.0-preview.2.24128.5.nupkg.sha512",
-    "/Users/Kostia/.nuget/packages/microsoft.extensions.configuration.abstractions/9.0.0-preview.2.24128.5/microsoft.extensions.configuration.abstractions.9.0.0-preview.2.24128.5.nupkg.sha512",
-    "/Users/Kostia/.nuget/packages/microsoft.extensions.primitives/9.0.0-preview.2.24128.5/microsoft.extensions.primitives.9.0.0-preview.2.24128.5.nupkg.sha512"
+    "C:\\Users\\ktkac\\.nuget\\packages\\microsoft.extensions.configuration\\9.0.0-preview.2.24128.5\\microsoft.extensions.configuration.9.0.0-preview.2.24128.5.nupkg.sha512",
+    "C:\\Users\\ktkac\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\9.0.0-preview.2.24128.5\\microsoft.extensions.configuration.abstractions.9.0.0-preview.2.24128.5.nupkg.sha512",
+    "C:\\Users\\ktkac\\.nuget\\packages\\microsoft.extensions.primitives\\9.0.0-preview.2.24128.5\\microsoft.extensions.primitives.9.0.0-preview.2.24128.5.nupkg.sha512"
   ],
   "logs": []
 }

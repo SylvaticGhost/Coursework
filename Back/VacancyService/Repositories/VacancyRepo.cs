@@ -30,4 +30,10 @@ public class VacancyRepo: IVacancyRepo
         return id;
     }
     
+    
+    public async Task<Vacancy?> GetVacancy(Guid id)
+    {
+        return await DB.Find<Vacancy>().OneAsync(id);
+    }
+    
 }

@@ -33,6 +33,17 @@ public class CompanyController : ControllerBase
     }
     
     
+    [HttpGet("GetCompanyByName")]
+    public async Task<IActionResult> GetCompanyByName(string name)
+    {
+        var company = await _companyRepo.GetCompanyByName(name);
+        if (company == null)
+            return NotFound();
+
+        return Ok(company);
+    }
+    
+    
     [HttpGet("GetCompanyShortInfoById")]
     public async Task<IActionResult> GetCompanyShortInfoById(Guid id)
     {

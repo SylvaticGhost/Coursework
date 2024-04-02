@@ -1,19 +1,21 @@
 using System.Data;
 using System.Text;
 using AccountService.Data;
-using AccountService.Models;
-using AccountService.Repositories;
 using AccountService.Repositories.UserProfile;
+using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using MongoDB.Driver;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 #region "Configuration"
+
+ConsoleHelpers.WriteStartUpMessage("AccountService");
+
 // Add services to the container.
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -74,6 +76,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+await MongoDbInit.InitDb(app, mongoDbSettings);
 
 app.UseCors();
 app.UseHttpsRedirection();

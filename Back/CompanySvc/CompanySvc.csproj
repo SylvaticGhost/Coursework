@@ -20,7 +20,9 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\AccountService\AccountService.csproj" />
+      <ProjectReference Include="..\CustomExceptions\CustomExceptions.csproj" />
+      <ProjectReference Include="..\GlobalHelpers\GlobalHelpers.csproj" />
+      <ProjectReference Include="..\GlobalModels\GlobalModels.csproj" />
     </ItemGroup>
 
 </Project>

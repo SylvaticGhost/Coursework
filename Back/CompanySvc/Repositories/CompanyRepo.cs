@@ -15,6 +15,13 @@ public class CompanyRepo : ICompanyRepo
     
     public async Task<Company?> GetCompanyById(Guid id) => 
         await DB.Find<Company>().OneAsync(id);
+    
+    
+    public async Task<Company?> GetCompanyByName(string name)
+    {
+        var collection = DB.Collection<Company>();
+        return await collection.Find(c => c.Name == name).FirstOrDefaultAsync();
+    }
 
 
     public async Task<CompanyShortInfo?> GetCompanyShortInfoById(Guid id)
@@ -23,14 +30,14 @@ public class CompanyRepo : ICompanyRepo
         
         var projection = Builders<Company>.Projection.Expression(c => new CompanyShortInfo
         {
-            CompanyId = c.Id,
+            CompanyId = c.CompanyId,
             Name = c.Name,
             Address = c.Address,
             CompanyEmail = c.Email,
             PhoneNumber = c.PhoneNumber
         });
         
-        return await collection.Find(c => c.Id == id)
+        return await collection.Find(c => c.CompanyId == id)
             .Project(projection)
             .FirstOrDefaultAsync();
     }
@@ -40,7 +47,7 @@ public class CompanyRepo : ICompanyRepo
     {
         var company = new Company
         {
-            Id = Guid.NewGuid(),
+            CompanyId = Guid.NewGuid(),
             Name = companyToAddDto.Name,
             Address = companyToAddDto.Address,
             Email = companyToAddDto.Email,
