@@ -1,6 +1,9 @@
 using System.Data;
-using DefaultNamespace;
+using VacancyService.Repositories;
 using GlobalHelpers.DataHelpers.Models;
+using MassTransit;
+using VacancyService.Consumers;
+using VacancyService.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,25 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+    x.AddConsumer<UpdateCompanyConsumer>();
+    x.AddConsumer<DeleteCompanyConsumer>();
+    
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.ConfigureEndpoints(context);
+        cfg.Host(builder.Configuration["RabbitMq:Host"], "/", h =>
+        {
+            h.Username(builder.Configuration.GetValue("RabbitMq:UserName", "myuser"));
+            h.Password(builder.Configuration.GetValue("RabbitMq:Password", "mypass"));
+        });
+    });
+});
 
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
@@ -19,6 +41,8 @@ builder.Services.AddScoped<IVacancyRepo, VacancyRepo>();
 
 var app = builder.Build();
 
+await MongoDbInit.InitDb(app, mongoDbSettings);
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -26,6 +50,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseRouting();
+app.MapControllers();
 app.UseHttpsRedirection();
 
 

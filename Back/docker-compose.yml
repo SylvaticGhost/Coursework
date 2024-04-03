@@ -56,6 +56,7 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_URLS=http://+:80
             - MongoDbSettings__ConnectionString=mongodb://MongoDb
+            - RabbitMq__Host=rabbitmq
         ports:
             - "5240:80"
     
@@ -68,6 +69,7 @@ services:
             - ASPNETCORE_ENVIRONMENT=Development
             - ASPNETCORE_URLS=http://+:80
             - MongoDbSettings__ConnectionString=mongodb://MongoDb
+            - RabbitMq__Host=rabbitmq
         ports:
             - "5241:80"
     

@@ -8,6 +8,8 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.2.1-develop.1720" />
+        <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.1-develop.1720" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
         <PackageReference Include="MongoDB.Entities" Version="23.1.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
@@ -20,6 +22,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
       <ProjectReference Include="..\CustomExceptions\CustomExceptions.csproj" />
       <ProjectReference Include="..\GlobalHelpers\GlobalHelpers.csproj" />
       <ProjectReference Include="..\GlobalModels\GlobalModels.csproj" />

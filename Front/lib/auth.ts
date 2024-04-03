@@ -28,8 +28,8 @@ export async function UserLogin(userAuth: UserAuth) {
     });
     
     if(response.ok) {
-        Cookies.set('token', await response.text())
-        Cookies.set('logged', 'true')
+        localStorage.setItem('token', await response.text())
+        localStorage.setItem('logged', 'true')
         return response.text();
     }
     //error handling

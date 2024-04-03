@@ -6,7 +6,7 @@ import UserProfileToAddDto from "@/lib/Types/UserProfile/UserProfileToAddDto";
 import {Contact} from "@/lib/Types/Contact";
 
 export default function CreateProfile() { 
-    const token = Cookies.get('token')
+    const token = localStorage.get('token')
     
     if(!token) {
         window.location.href = 'http://localhost:3000/Auth/login'

@@ -12,9 +12,8 @@ internal static class MongoDbInit
         await DB.InitAsync(mongoDbSettings.DatabaseName, 
             MongoClientSettings.FromConnectionString(mongoDbSettings.ConnectionString));
         
-        await DB.Index<Vacancy>().Key(c => c.Id, KeyType.Ascending).CreateAsync();
+        await DB.Index<Vacancy>().Key(c => c.VacancyId, KeyType.Ascending).CreateAsync();
         
-        using var scope = app.Services.CreateScope();
         
     }
 }

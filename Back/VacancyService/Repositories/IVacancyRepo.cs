@@ -1,8 +1,18 @@
 using VacancyService.Models;
 
-namespace DefaultNamespace;
+namespace VacancyService.Repositories;
 
 public interface IVacancyRepo
 {
     public Task<Vacancy?> GetVacancy(Guid id);
+    
+    public Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo);
+
+    public Task UpdateCompanyInfoInVacancies(CompanyShortInfo companyInfo);
+
+    public Task<bool> CheckIfVacancyExists(Guid id);
+
+    public Task DeleteVacancy(Guid id);
+
+    public Task DeleteCompanyVacancies(Guid companyId);
 }

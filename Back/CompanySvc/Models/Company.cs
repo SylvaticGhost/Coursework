@@ -22,7 +22,7 @@ public class Company : Entity
     
     public byte[]? Logo { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; init; }
     
     public int NumberOfEmployees { get; set; }
     

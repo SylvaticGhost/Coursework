@@ -1,6 +1,10 @@
+using AutoMapper;
+using CompanySvc.Helpers;
 using CompanySvc.Models;
 using CustomExceptions;
-using DefaultNamespace;
+using VacancyService.Repositories;
+using MassTransit;
+using MassTransit.RabbitMqTransport;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanySvc.Controllers;
@@ -13,10 +17,12 @@ namespace CompanySvc.Controllers;
 public class CompanyController : ControllerBase
 {
     private readonly ICompanyRepo _companyRepo;
+    private readonly IMapper _mapper;
     
-    public CompanyController()
+    public CompanyController(IMapper mapper, IPublishEndpoint publisher)
     {
-        _companyRepo = new CompanyRepo();
+        _companyRepo = new CompanyRepo(publisher);
+        _mapper = mapper;
     }
     
     
@@ -36,7 +42,7 @@ public class CompanyController : ControllerBase
     [HttpGet("GetCompanyByName")]
     public async Task<IActionResult> GetCompanyByName(string name)
     {
-        var company = await _companyRepo.GetCompanyByName(name);
+        Company? company = await _companyRepo.GetCompanyByName(name);
         if (company == null)
             return NotFound();
 
@@ -60,6 +66,32 @@ public class CompanyController : ControllerBase
     public async Task<IActionResult> CreateCompany(CompanyToAddDto companyToAddDto)
     {
         await _companyRepo.CreateCompany(companyToAddDto);
+        return Ok();
+    }
+
+
+    [HttpPost("UpdateCompany")]
+    public async Task<IActionResult> UpdateCompany(CompanyToUpdateDto company)
+    {
+        LocalValidator localValidator = new LocalValidator(_mapper);
+        
+        if (localValidator.ValidateCompanyForm(company) == false)
+            return BadRequest();
+        
+        await _companyRepo.UpdateCompany(company);
+        
+        return Ok();
+    }
+    
+    
+    [HttpPost("DeleteCompany")]
+    public async Task<IActionResult> DeleteCompany(Guid id)
+    {
+        if (!await _companyRepo.CheckIfCompanyExists(id))
+            return BadRequest("Company with this id aren't exist");
+        
+        await _companyRepo.DeleteCompany(id);
+        
         return Ok();
     }
 }

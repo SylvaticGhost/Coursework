@@ -6,7 +6,7 @@ namespace VacancyService.Models;
 public class Vacancy : Entity
 {
     [Required]
-    public Guid Id { get; set; }
+    public Guid VacancyId { get; set; }
 
     public string Title { get; set; }
     
