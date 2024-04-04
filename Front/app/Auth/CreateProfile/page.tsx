@@ -6,12 +6,16 @@ import UserProfileToAddDto from "@/lib/Types/UserProfile/UserProfileToAddDto";
 import {Contact} from "@/lib/Types/Contact";
 
 export default function CreateProfile() { 
-    const token = localStorage.get('token')
+    const token = localStorage.getItem('token')
+    
+    console.log('token in create profile: ' + token)
     
     if(!token) {
         window.location.href = 'http://localhost:3000/Auth/login'
         return 
     }
+    
+    console.log(token)
     
     const [error, setError] = useState('')
     const [country, setCountry] = useState('')
@@ -40,16 +44,20 @@ export default function CreateProfile() {
                                     <input type="text" placeholder="Country"
                                            className="border-2 rounded-md py-1"
                                            value={country}
-                                           onChange={e =>
-                                               e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, '')}
+                                           onChange={e => {
+                                               const newValue = e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, '');
+                                               setCountry(newValue);
+                                           }}
                                     />
                                 </div>
                                 <div className="py-2">
                                     <input type="text" placeholder="City"
                                            className="border-2 rounded-md py-1"
                                            value={city}
-                                           onChange={e =>
-                                               e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, '')}
+                                           onChange={e => {
+                                               const newValue = e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, '');
+                                               setCity(newValue);
+                                           }}
                                     />
                                 </div>
                                 <div>
@@ -60,8 +68,8 @@ export default function CreateProfile() {
                                                    className="border-2 rounded-md py-1"
                                             />
                                             <select className="border-2 rounded-md py-1 ml-2" onSelect={e => setContactType(e.type)}>
-                                                {GetContactsType().map((type) => (
-                                                    <option value={type}>{type}</option>
+                                                {GetContactsType().map((type, index) => (
+                                                    <option key={index} value={type}>{type}</option>
                                                 ))}
                                             </select>
                                         </div>
@@ -71,8 +79,9 @@ export default function CreateProfile() {
                             </form>
                             <div className="flex justify-center">
                                 <button type="submit"
-                                        className="bg-fuchsia-700 rounded-md p-2 text-amber-50 font-semibold mt-4 flex justify-center
+                                        className="bg-fuchsia-700 rounded-md p-2 text-amber-50 font-semibold mt-4 flex justify-center 
                                         hover:bg-fuchsia-800 transition duration-200 active:scale-90"
+                                        onClick={OnCreate}
                                 >
                                     Create
                                 </button>
@@ -89,16 +98,22 @@ export default function CreateProfile() {
     )
 
     function OnCreate() {
-        let c : Contact[] = []
-
+        const contact : Contact = { Link: contacts, TypeOfContact: contactType, IsVisible: true, DisplayName: contacts }
+        
+        const c : Contact[] = [contact]
+        
         const avatarInput = document.getElementById('input') as HTMLInputElement
         let avatar: Blob | undefined ;
         if (avatarInput.files && avatarInput.files.length > 0) {
             avatar = avatarInput.files[0];
         }
         
+        if(!token)
+            throw new Error('Token is not defined')
         
         const profile : UserProfileToAddDto = new UserProfileToAddDto(token, city, country, c, avatar)
+        
+        console.log('Profile: \n' + profile.toString())
     }
 }
 

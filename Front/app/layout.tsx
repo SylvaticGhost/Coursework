@@ -21,6 +21,7 @@ export default function RootLayout({
 }>) {
   const logged: boolean = Cookies.get('logged') === 'true';
   const id: string | undefined = Cookies.get('id') || undefined;
+  console.log(logged)
     
   return (
       <html lang="en">

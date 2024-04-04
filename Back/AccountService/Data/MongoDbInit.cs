@@ -14,6 +14,6 @@ internal static class MongoDbInit
         await DB.InitAsync(mongoDbSettings.DatabaseName, 
             MongoClientSettings.FromConnectionString(mongoDbSettings.ConnectionString));
         
-        await DB.Index<UserProfile>().Key(c => c.ProfileId, KeyType.Ascending).CreateAsync();
+        await DB.Index<UserProfile>().Key(c => c.UserId, KeyType.Ascending).CreateAsync();
     }
 }

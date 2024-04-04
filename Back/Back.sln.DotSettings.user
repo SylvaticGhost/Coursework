@@ -4,5 +4,9 @@
     &lt;TestId&gt;xUnit::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.Tests&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::9797598F-6997-47CE-830B-522EAB2A1800::net8.0::LocalValidatorTests.ValidateCompanyForm_ReturnsTrue_WhenCompanyToAddDtoIsValid&lt;/TestId&gt;&#xD;
     &lt;TestId&gt;NUnit3x::9797598F-6997-47CE-830B-522EAB2A1800::net8.0::LocalValidatorTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountService.Tests.Helpers.LocalValidatorTests&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.AuthHelperTest.GenerateJwtToken_ReturnsExpectedToken_WhenUserIsValid&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;xUnit::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.AuthHelperTest.GenerateJwtToken_ThrowsException_WhenKeyIsMissing&lt;/TestId&gt;&#xD;
+    &lt;TestId&gt;NUnit3x::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::UserRepositoryTests.RefreshToken_ReturnsToken_WhenUserExists&lt;/TestId&gt;&#xD;
   &lt;/TestAncestor&gt;&#xD;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

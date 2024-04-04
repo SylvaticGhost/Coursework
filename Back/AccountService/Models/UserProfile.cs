@@ -7,16 +7,16 @@ namespace AccountService.Models;
 public class UserProfile : Entity
 {
     [Required]
-    public Guid ProfileId { get; set; }
+    public Guid UserId { get; set; }
     public string? City { get; set; }
     public string Country { get; set; }
     public IEnumerable<Contact>? Contacts { get; set; }
     public string? About { get; set; }
     public byte[]? Avatar { get; set; }
 
-    public UserProfile(UserProfileToAddDto userProfileToAddDto)
+    public UserProfile(UserProfileToAddDto userProfileToAddDto, Guid userId)
     {
-        ProfileId = Guid.NewGuid();
+        UserId = userId;
         City = userProfileToAddDto.City;
         Country = userProfileToAddDto.Country;
         Contacts = userProfileToAddDto.Contacts;

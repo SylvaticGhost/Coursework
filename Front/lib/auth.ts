@@ -27,11 +27,16 @@ export async function UserLogin(userAuth: UserAuth) {
         }),
     });
     
+    const token: string = await response.text()
+    console.log('token: ' + token)
     if(response.ok) {
-        localStorage.setItem('token', await response.text())
-        localStorage.setItem('logged', 'true')
-        return response.text();
+        Cookies.set('token', token, {expires: 7, secure: true})
+        Cookies.set('logged', 'true')
+        console.log('Logged in')
+        console.log('token from cookie: '+Cookies.get('token'))
+        return token;
     }
+    console.log("Response is not ok")
     //error handling
     const contentType = response.headers.get('content-type');
     if(contentType && contentType.includes('application/json')) {

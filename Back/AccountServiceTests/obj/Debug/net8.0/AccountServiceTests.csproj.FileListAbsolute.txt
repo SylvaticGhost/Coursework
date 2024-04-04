@@ -155,3 +155,5 @@ G:\GitHub\Coursework\Back\AccountServiceTests\bin\Debug\net8.0\CustomExceptions.
 G:\GitHub\Coursework\Back\AccountServiceTests\bin\Debug\net8.0\GlobalModels.dll
 G:\GitHub\Coursework\Back\AccountServiceTests\bin\Debug\net8.0\CustomExceptions.pdb
 G:\GitHub\Coursework\Back\AccountServiceTests\bin\Debug\net8.0\GlobalModels.pdb
+G:\GitHub\Coursework\Back\AccountServiceTests\bin\Debug\net8.0\Castle.Core.dll
+G:\GitHub\Coursework\Back\AccountServiceTests\bin\Debug\net8.0\Moq.dll

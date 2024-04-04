@@ -87,14 +87,23 @@ public class UserAuth : ControllerBase
     [HttpGet("RefreshToken")]
     public async Task<IActionResult> RefreshToken()
     {
-        Guid id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        try
+        {
+            Guid id = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
         
-        if(id == Guid.Empty)
-            return new BadRequestObjectResult("Invalid user");
+            if(id == Guid.Empty)
+                return new BadRequestObjectResult("Invalid user");
+            Console.WriteLine("id: " + id);
+            
+            string newToken = await _userRepository.RefreshToken(id);
+            Console.WriteLine("newToken: " + newToken);
         
-        string newToken = await _userRepository.RefreshToken(id);
-        
-        return new OkObjectResult(newToken);
+            return new OkObjectResult(newToken);
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
     }
     
     
@@ -102,7 +111,7 @@ public class UserAuth : ControllerBase
     [HttpPost("DeleteAccount")]
     public async Task<IActionResult> DeleteAccount()
     {
-        Guid id = Guid.Parse(User.FindFirst(ClaimTypes.NameIdentifier)?.Value!);
+        Guid id = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
         
         if(id == Guid.Empty)
             return new BadRequestObjectResult("Invalid user");
@@ -111,5 +120,21 @@ public class UserAuth : ControllerBase
             return new OkObjectResult("Account deleted");
         
         return StatusCode(StatusCodes.Status500InternalServerError, "Account not deleted");
+    }
+    
+    
+    [Authorize]
+    [HttpGet("TestAuth")]
+    public IActionResult TestAuth()
+    {
+        try
+        {
+            Guid id = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
+            return new OkObjectResult("You are authorized, id " + id);
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
     }
 }

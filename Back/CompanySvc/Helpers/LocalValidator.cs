@@ -4,7 +4,7 @@ using GlobalHelpers;
 
 namespace CompanySvc.Helpers;
 
-public class LocalValidator
+public class LocalValidator : Validation
 {
     private readonly IMapper _mapper;
     
@@ -15,10 +15,10 @@ public class LocalValidator
     
     public static bool ValidateCompanyForm(CompanyToAddDto company)
     {
-        if (Validation.ValidateEmail(company.Email) == false)
+        if (ValidateEmail(company.Email) == false)
             return false;
         
-        if (Validation.ValidatePhoneNumber(company.PhoneNumber) == false)
+        if (ValidatePhoneNumber(company.PhoneNumber) == false)
             return false;
         
         if (string.IsNullOrEmpty(company.Website) || string.IsNullOrEmpty(company.Name))

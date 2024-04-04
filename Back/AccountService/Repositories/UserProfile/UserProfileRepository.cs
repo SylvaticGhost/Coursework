@@ -1,10 +1,12 @@
 ﻿using AccountService.Models;
+using MongoDB.Driver;
 using MongoDB.Entities;
 
 namespace AccountService.Repositories.UserProfile;
 
 public class UserProfileRepository : IUserProfileRepository
 {
+    private readonly IMongoCollection<Models.UserProfile> _collection = DB.Collection<Models.UserProfile>();
     public UserProfileRepository()
     {
         
@@ -18,9 +20,17 @@ public class UserProfileRepository : IUserProfileRepository
     }
     
     
-    public async Task UpdateUserProfile(Guid id, Models.UserProfile updatedUserProfile)
+    public async Task<Guid> CreateUserProfile(UserProfileToAddDto userProfileToAddDto, Guid userId)
     {
-        var userProfile = await DB.Find<Models.UserProfile>().OneAsync(id);
+        var userProfile = new Models.UserProfile(userProfileToAddDto, userId);
+        await DB.InsertAsync(userProfile);
+        return userProfile.UserId;
+    }
+    
+    
+    public async Task UpdateUserProfile(Models.UserProfile updatedUserProfile)
+    {
+        var userProfile = await DB.Find<Models.UserProfile>().OneAsync(updatedUserProfile.ID);
         if (userProfile != null)
         {
             userProfile.City = updatedUserProfile.City;
@@ -40,7 +50,7 @@ public class UserProfileRepository : IUserProfileRepository
     
     public async Task<Models.UserProfile?> GetUserProfile(Guid id)
     {
-        return await DB.Find<Models.UserProfile>().OneAsync(id);
+        return  _collection.Find(x => x.UserId == id).FirstOrDefault();
     }
     
     

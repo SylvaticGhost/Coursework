@@ -20,6 +20,7 @@ export default function Login() {
 
         try {
             const response = await UserLogin(userAuth);
+            const clonedResponse = response.clone();
             console.log(response);
             
             Cookies.set('token', response, { expires: 7, secure: true });
@@ -63,7 +64,7 @@ export default function Login() {
                     <div className="py-3">
                         <button
                             className="my-2 flex justify-center items-center bg-fuchsia-500 p-2 rounded-xl text-amber-50 font-semibold
-                            hover:bg-fuchsia-800 transition duration-200 active:scale-90"
+                            hover:bg-fuchsia-800 transition duration-200 active:scale-90 "
                             onClick={login}>Login
                         </button>
                         <br/>

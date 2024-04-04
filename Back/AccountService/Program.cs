@@ -22,15 +22,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 
-string? tokenKeyString = builder.Configuration.GetSection("JWT:Key").Value;
+string? tokenKeyString = builder.Configuration.GetSection("Jwt:Key").Value;
+Console.WriteLine($"Token key: {tokenKeyString}");
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
-        options.TokenValidationParameters = new TokenValidationParameters()
+        options.TokenValidationParameters = new TokenValidationParameters
         {
-            ValidateIssuer = true,
-            ValidateAudience = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
             ValidateLifetime = true,
             ValidateIssuerSigningKey = true,
             ValidIssuer = builder.Configuration.GetSection("Auth:Issuer").Value,
@@ -80,9 +81,13 @@ if (app.Environment.IsDevelopment())
 await MongoDbInit.InitDb(app, mongoDbSettings);
 
 app.UseCors();
-app.UseHttpsRedirection();
-app.UseRouting();
+
+
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 app.MapControllers();
+app.UseHttpsRedirection();
 app.Run();
 

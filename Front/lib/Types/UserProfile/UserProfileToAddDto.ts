@@ -19,8 +19,10 @@ export default class UserProfileToAddDto implements IUserProfile {
         this.Contact = contact;
         this.Avatar = avatar;
     }
-
     
-
+    //for debugging
+    toString(): string {
+        return `Token: ${this._token}\n, City: ${this.City}\n, Country: ${this.Country}\n, Contacts: ${this.Contact}\n, Avatar: ${this.Avatar}`;
+    }
     
 }
