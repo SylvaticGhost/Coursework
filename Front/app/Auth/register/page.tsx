@@ -5,7 +5,9 @@
 import {useState} from "react";
 import {UserRegister} from "@/lib/Types/UserRegister";
 import {ValidRegistrationForm} from "@/lib/Helpers/authHelpers";
-import {UserRegistration} from "@/lib/auth";
+import {UserLogin, UserRegistration} from "@/lib/auth";
+import { UserAuth } from "@/lib/Types/UserAuth";
+import Cookies from "js-cookie";
 
 
 
@@ -22,7 +24,7 @@ export default function Register() {
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     
-    function CreateAccount(event: any) {
+    async function CreateAccount(event: any) {
         event.preventDefault();
         if(!terms) {
             setError('You must accept terms')
@@ -51,11 +53,15 @@ export default function Register() {
         }
         
         
-            const response = UserRegistration(user)
+            const response =await UserRegistration(user)
             console.log(response)
+
+            
            
-            window.location.href = 'http://localhost:3000/Auth/CreateProfile'
-        
+           if(Cookies.get('token') !== undefined && Cookies.get('token') !== null)
+                window.location.href = 'http://localhost:3000/Auth/CreateProfile'
+            else
+            console.log('trouble with token')
     }
     
     return (

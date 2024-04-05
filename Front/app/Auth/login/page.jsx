@@ -23,7 +23,7 @@ export default function Login() {
             const clonedResponse = response.clone();
             console.log(response);
             
-            Cookies.set('token', response, { expires: 7, secure: true });
+            //Cookies.set('token', response, { expires: 7, secure: true });
         } catch (error) {
             setError(error.message);
             console.log(error.message);

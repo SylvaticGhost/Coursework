@@ -4,24 +4,23 @@ import {useState} from "react";
 import Cookies from "js-cookie";
 import UserProfileToAddDto from "@/lib/Types/UserProfile/UserProfileToAddDto";
 import {Contact} from "@/lib/Types/Contact";
+import { CreateProfile } from "@/lib/Profile";
 
-export default function CreateProfile() { 
-    const token = localStorage.getItem('token')
+export default function CreateProfilePage() { 
+    const token = Cookies.get('token')
     
-    console.log('token in create profile: ' + token)
     
     if(!token) {
         window.location.href = 'http://localhost:3000/Auth/login'
         return 
     }
     
-    console.log(token)
     
     const [error, setError] = useState('')
     const [country, setCountry] = useState('')
     const [city, setCity] = useState('')
     const [contacts, setContacts] = useState('')
-    const [contactType, setContactType] = useState('')
+    let [contactType, setContactType] = useState(GetContactsType()[0])
     
     return(
         <div>
@@ -66,8 +65,22 @@ export default function CreateProfile() {
                                         <div className="flex-row">
                                             <input type="text" placeholder="Contact"
                                                    className="border-2 rounded-md py-1"
+                                                    value={contacts}
+                                                    onChange={e => {
+                                                        let newValue: string;
+                                                        if(contactType !== 'PhoneNumber')
+                                                            newValue = e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ0-9\s@.:/]/g, '');
+                                                        else 
+                                                            newValue = e.target.value.replace(/[^0-9]/g, '');
+                                                        setContacts(newValue);
+                                                    }}
                                             />
-                                            <select className="border-2 rounded-md py-1 ml-2" onSelect={e => setContactType(e.type)}>
+                                           <select className="border-2 rounded-md py-1 ml-2" onChange={e => {
+                                            setContactType(e.target.value)
+                                                console.log('Contact type: ' + contactType)
+                                            }
+                                            
+                                            }>
                                                 {GetContactsType().map((type, index) => (
                                                     <option key={index} value={type}>{type}</option>
                                                 ))}
@@ -97,8 +110,8 @@ export default function CreateProfile() {
         </div>
     )
 
-    function OnCreate() {
-        const contact : Contact = { Link: contacts, TypeOfContact: contactType, IsVisible: true, DisplayName: contacts }
+    async function OnCreate() {
+        const contact : Contact = { Link: contacts, TypeOfContact: contactType, IsVerified: true, DisplayName: contacts }
         
         const c : Contact[] = [contact]
         
@@ -110,10 +123,14 @@ export default function CreateProfile() {
         
         if(!token)
             throw new Error('Token is not defined')
+
+        //const fileByBytes = await blobToByteArray(avatar);
         
         const profile : UserProfileToAddDto = new UserProfileToAddDto(token, city, country, c, avatar)
         
         console.log('Profile: \n' + profile.toString())
+
+        await CreateProfile(profile, token);
     }
 }
 

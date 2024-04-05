@@ -1,4 +1,6 @@
-﻿**/.dockerignore
+﻿!AccountService/Media/
+
+**/.dockerignore
 **/.env
 **/.git
 **/.gitignore

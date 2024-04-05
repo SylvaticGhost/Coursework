@@ -1,5 +1,6 @@
 ﻿using AccountService.Helpers;
 using AccountService.Models;
+using GlobalModels;
 
 namespace AccountServiceTests.HelpersTest;
 
@@ -12,6 +13,22 @@ public class LocalValidatorTests
         // Arrange
         var validProfile = 
             new UserProfileToAddDto(City: "New York", Country: "USA", Contacts: null, About: "desc", Avatar: null);
+
+        // Act
+        var result = LocalValidator.ValidateProfile(validProfile);
+
+        // Assert
+        Assert.IsTrue(result);
+    }
+    
+    [Test]
+    public void ValidateProfile_ReturnsUndef_WhenProfileIsValid()
+    {
+        var contact = new Contact()
+            { Link = "e", TypeOfContact = TypeOfContacts.Discord, DisplayName = "e", IsVerified = true };
+        // Arrange
+        var validProfile = 
+            new UserProfileToAddDto(City: "e", Country: "e", Contacts: [contact], About: "desc", Avatar: null);
 
         // Act
         var result = LocalValidator.ValidateProfile(validProfile);
