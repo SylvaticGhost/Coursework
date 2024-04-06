@@ -50,6 +50,23 @@ public class Profile : ControllerBase
         
         return new OkObjectResult(userProfile);
     }
+    
+    
+    [Authorize]
+    [HttpGet("GetOwnProfile")]
+    public async Task<IActionResult> GetOwnProfile()
+    {
+        Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
+        if(userId == Guid.Empty)
+            return new BadRequestObjectResult("Invalid user id");
+        
+        UserProfile? userProfile = await _userProfileRepository.GetUserProfile(userId);
+        
+        if(userProfile == null)
+            return new NotFoundObjectResult("User not found");
+        
+        return new OkObjectResult(userProfile);
+    }
 
     
     [Authorize]
@@ -103,5 +120,6 @@ public class Profile : ControllerBase
             return new BadRequestObjectResult(e.Message);
         }
     }
+    
     
 }
