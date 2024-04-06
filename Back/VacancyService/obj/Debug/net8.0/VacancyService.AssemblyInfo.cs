@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VacancyService")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+80427d6958239f96a0b1d07bad1a2f608c5d5f7f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+911f106fbc303bc108c0d40afd5d4888619eddf9")]
 [assembly: System.Reflection.AssemblyProductAttribute("VacancyService")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VacancyService")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -10,7 +10,7 @@ public class UserProfile : Entity
     public Guid UserId { get; set; }
     public string? City { get; set; }
     public string Country { get; set; }
-    public IEnumerable<Contact>? Contacts { get; set; }
+    public List<Contact>? Contacts { get; set; }
     public string? About { get; set; }
     public byte[]? Avatar { get; set; }
 
@@ -19,7 +19,7 @@ public class UserProfile : Entity
         UserId = userId;
         City = userProfileToAddDto.City;
         Country = userProfileToAddDto.Country;
-        Contacts = userProfileToAddDto.Contacts;
+        Contacts = userProfileToAddDto.Contacts ?? new List<Contact>();
         About = userProfileToAddDto.About;
         Avatar = userProfileToAddDto.Avatar ?? GetDefaultAvatar();
     }

@@ -50,14 +50,10 @@ export default function Register() {
         if(valid !== '') {
             setError(valid)
             return
-        }
-        
-        
-            const response =await UserRegistration(user)
+        }  
+            const response = await UserRegistration(user)
             console.log(response)
 
-            
-           
            if(Cookies.get('token') !== undefined && Cookies.get('token') !== null)
                 window.location.href = 'http://localhost:3000/Auth/CreateProfile'
             else

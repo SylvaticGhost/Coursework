@@ -4,10 +4,6 @@
 import {useState} from "react";
 import {UserLogin} from "../../../lib/auth";
 import {UserAuth} from "../../../lib/Types/UserAuth";
-import {Route, Router, useNavigate} from "react-router-dom";
-import Home from "../../page";
-import {useRouter} from "next/router";
-import Cookies from "js-cookie";
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -20,7 +16,7 @@ export default function Login() {
 
         try {
             const response = await UserLogin(userAuth);
-            const clonedResponse = response.clone();
+            //const clonedResponse = response.clone();
             console.log(response);
             
             //Cookies.set('token', response, { expires: 7, secure: true });

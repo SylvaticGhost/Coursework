@@ -3,6 +3,7 @@ using AccountService.Helpers;
 using AccountService.Models;
 using AccountService.Repositories.UserProfile;
 using CustomExceptions;
+using GlobalModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -62,6 +63,30 @@ public class Profile : ControllerBase
         {
             await _userProfileRepository.CreateUserProfile(userProfile, userId);
             return new OkObjectResult(userId);
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
+    }
+    
+    
+    [Authorize]
+    [HttpPost("AddContact")]
+    public async Task<IActionResult> AddContact([FromBody] Contact contacts)
+    {
+        Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
+        if(userId == Guid.Empty)
+            return new BadRequestObjectResult("Invalid user id");
+        
+        // if (!LocalValidator.ValidateContact(contact))
+        //     throw new BadRequestException("Invalid input");
+
+        try
+        {
+            await _userProfileRepository.AddContacts(userId, [contacts]);
+        
+            return new OkResult();
         }
         catch (Exception e)
         {

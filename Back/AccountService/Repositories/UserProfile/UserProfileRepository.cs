@@ -56,4 +56,19 @@ public class UserProfileRepository : IUserProfileRepository
     
     public async Task DeleteUserProfile(Guid id) => 
         await DB.DeleteAsync<Models.UserProfile>(id);
+    
+    
+    public async Task AddContacts(Guid userId, IEnumerable<GlobalModels.Contact> contacts)
+    {
+        Models.UserProfile? userProfile = _collection.Find(p => p.UserId == userId).FirstOrDefault();
+        if (userProfile != null)
+        {
+            userProfile.Contacts!.AddRange(contacts);
+            await DB.SaveAsync(userProfile);
+        }
+        else
+        {
+            throw new Exception("User profile not found");
+        }
+    }
 }

@@ -5,7 +5,7 @@ namespace AccountService.Models;
 public record UserProfileToAddDto(
     string? City,
     string Country,
-    IEnumerable<Contact>? Contacts,
+    List<Contact>? Contacts,
     string? About,
     byte[]? Avatar
     );

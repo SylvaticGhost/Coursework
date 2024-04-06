@@ -13,4 +13,6 @@ public interface IUserProfileRepository
     public Task DeleteUserProfile(Guid id);
 
     public Task<Guid> CreateUserProfile(UserProfileToAddDto userProfileToAddDto, Guid userId);
+
+    public Task AddContacts(Guid userId, IEnumerable<GlobalModels.Contact> contacts);
 }

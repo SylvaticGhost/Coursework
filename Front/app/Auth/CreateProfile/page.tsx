@@ -68,6 +68,7 @@ export default function CreateProfilePage() {
                                                     value={contacts}
                                                     onChange={e => {
                                                         let newValue: string;
+                                                        // @ts-ignore
                                                         if(contactType !== 'PhoneNumber')
                                                             newValue = e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ0-9\s@.:/]/g, '');
                                                         else 
@@ -76,7 +77,8 @@ export default function CreateProfilePage() {
                                                     }}
                                             />
                                            <select className="border-2 rounded-md py-1 ml-2" onChange={e => {
-                                            setContactType(e.target.value)
+                                            // @ts-ignore
+                                               setContactType(e.target.value)
                                                 console.log('Contact type: ' + contactType)
                                             }
                                             
@@ -111,7 +113,7 @@ export default function CreateProfilePage() {
     )
 
     async function OnCreate() {
-        const contact : Contact = { Link: contacts, TypeOfContact: contactType, IsVerified: true, DisplayName: contacts }
+        const contact : Contact = new Contact(contacts, contactType, contacts, false)
         
         const c : Contact[] = [contact]
         
@@ -126,7 +128,7 @@ export default function CreateProfilePage() {
 
         //const fileByBytes = await blobToByteArray(avatar);
         
-        const profile : UserProfileToAddDto = new UserProfileToAddDto(token, city, country, c, avatar)
+        const profile : UserProfileToAddDto = new UserProfileToAddDto(city, country, c, avatar)
         
         console.log('Profile: \n' + profile.toString())
 
