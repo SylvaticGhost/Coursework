@@ -10,9 +10,7 @@ export default function Home() {
   return (
     <main>
       <h1>Home</h1>
-      <a>token: {token}</a>
-        <br/>
-        <a>logged: {logged}</a>
+      
     </main>
   );
 }

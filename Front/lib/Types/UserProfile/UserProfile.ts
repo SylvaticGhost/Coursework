@@ -5,11 +5,12 @@ export default class UserProfile implements IUserProfile {
     Avatar?: Blob | undefined;
     City: string;
     Country: string;
-    Contact: Contact[];
-    constructor(id: string, city: string, country: string, contact: Contact[]) {
+    Contacts: Contact[];
+    constructor(id: string, city: string, country: string, contact: Contact[], avatar?: Blob | undefined) {
         this.Id = id;
         this.City = city;
         this.Country = country;
-        this.Contact = contact;
+        this.Contacts = contact;
+        this.Avatar = avatar;
     }
 }

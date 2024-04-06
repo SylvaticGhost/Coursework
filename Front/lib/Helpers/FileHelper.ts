@@ -1,4 +1,4 @@
-﻿function blobToByteArray(blob: Blob | undefined) {
+﻿async function blobToByteArray(blob: Blob | undefined) {
     if (!blob) {
         return null;
     }

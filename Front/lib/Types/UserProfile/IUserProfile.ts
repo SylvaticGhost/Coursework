@@ -4,5 +4,5 @@ export default interface IUserProfile {
     Avatar?: Blob;
     City: string;
     Country: string;
-    Contact: Contact[];
+    Contacts: Contact[];
 }

@@ -5,7 +5,7 @@ import Cookies from "js-cookie";
 const url : string = 'http://localhost:5239/UserAuth'
 
 export async function UserLogin(userAuth: UserAuth) { 
-    
+    console.log('UserLogin')
     let typeLogin : string;
     if(userAuth.email.includes("@"))
         typeLogin  = "email";
@@ -33,7 +33,7 @@ export async function UserLogin(userAuth: UserAuth) {
         Cookies.set('token', token, {expires: 7, secure: true})
         Cookies.set('logged', 'true')
         console.log('Logged in')
-        console.log('token from cookie: '+Cookies.get('token'))
+        console.log('token from cookie: '+ Cookies.get('token'))
         return token;
     }
     console.log("Response is not ok")
@@ -73,16 +73,18 @@ export async function UserRegistration(userRegister: UserRegister) {
     console.log(response)
     
     if(response.ok)
-        return response.json();
+        response.json();
+    else
+        console.log("Response is not ok in registration endpoint")
     
     console.log(response.text())
     
     //Perform first login
     try {
         const user = new UserAuth(userRegister.email, userRegister.password)
-        return UserLogin(user)
+        return await UserLogin(user)
     }
     catch (e) {
-        console.log(e)
+        console.log('error: ' + e)
     }
 }
