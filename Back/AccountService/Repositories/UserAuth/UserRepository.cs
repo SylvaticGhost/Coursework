@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AccountService.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository : IUserRepository, IUserRepositoryBasic
 {
     private readonly DataContextNpgEf _dataContextNpgEf;
     private readonly AuthHelpers _authHelpers;
@@ -107,4 +107,13 @@ public class UserRepository : IUserRepository
     
     public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber) =>
         await _dataContextNpgEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
+
+    public Task<(string FirstName, string? LastName)> GetNameAndSurname(Guid id)
+    {
+        return _dataContextNpgEf.UserAccount
+            .Where(x => x.Id == id)
+            .Select(x => new {x.FirstName, x.LastName})
+            .FirstOrDefaultAsync()
+            .ContinueWith(x => (x.Result!.FirstName, x.Result.LastName));
+    }
 }

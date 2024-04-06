@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import Link from "next/link";
 import Cookies from "js-cookie";
+import LoginOrProfileButton from "@/Components/LoginOrProfileButton";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,8 +20,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+    console.log("RootLayout");
   const logged: boolean = Cookies.get('logged') === 'true';
-  const id: string | undefined = Cookies.get('id') || undefined;
+  //const id: string | undefined = Cookies.get('id') || undefined;
   
     
   return (
@@ -28,13 +30,12 @@ export default function RootLayout({
       <body>
       <header className="py-2 border-b-4 border-b-fuchsia-600 px-1 flex justify-between">
           <Link href="http://localhost:3000" className="font-semibold flex shrink "><h3>WORKLY</h3> </Link>
-          {logged && id ?
-              <a>Profile</a>:
-              <a href="http://localhost:3000/Auth/login" className="flex ">Login</a> 
-          }
+          <LoginOrProfileButton />
       </header>
-      <main>{children}</main>
-      <footer></footer>
+      <main className="my-2" style={{flexGrow: 1}}>{children}</main>
+      <footer className="py-2 my-2 border-t-4 border-t-fuchsia-600 px-1 flex justify-between">
+          <a href="http://localhost:3000/AppPages/AboutUs">About Us</a>
+      </footer>
       </body>
       </html>
   );

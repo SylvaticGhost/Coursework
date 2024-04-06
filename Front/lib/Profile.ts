@@ -49,3 +49,9 @@ async function AddContact(contacts: Contact[], token:string) {
     });
     console.log(response)
 }
+
+
+async function GetProfile(token: string) {
+    const response = await fetch('http://localhost:5239/Profile/GetProfile', {
+        method: 'GET',
+        headers: { },

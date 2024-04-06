@@ -1,6 +1,8 @@
 ﻿using System.Security.Claims;
+using AccountService.Data;
 using AccountService.Helpers;
 using AccountService.Models;
+using AccountService.Repositories;
 using AccountService.Repositories.UserProfile;
 using CustomExceptions;
 using GlobalModels;
@@ -15,9 +17,12 @@ namespace AccountService.Controllers;
 public class Profile : ControllerBase
 {
     private readonly IUserProfileRepository _userProfileRepository;
-    public Profile()
+    private readonly IUserRepositoryBasic _userBasicInfoRepository;
+    
+    public Profile(DataContextNpgEf dataContextNpgEf)
     {
         _userProfileRepository = new UserProfileRepository();
+        _userBasicInfoRepository = new UserProfileBasicInfoRepo(dataContextNpgEf);
     }
 
     
@@ -61,7 +66,12 @@ public class Profile : ControllerBase
 
         try
         {
-            await _userProfileRepository.CreateUserProfile(userProfile, userId);
+            var nameAndSurname = await _userBasicInfoRepository.GetNameAndSurname(userId);
+            
+            if(nameAndSurname.FirstName == null || nameAndSurname.LastName == null)
+                return new BadRequestObjectResult("User not found");
+            
+            await _userProfileRepository.CreateUserProfile(userProfile,nameAndSurname! , userId);
             return new OkObjectResult(userId);
         }
         catch (Exception e)
