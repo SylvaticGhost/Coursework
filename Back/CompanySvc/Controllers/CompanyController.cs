@@ -1,6 +1,7 @@
 using AutoMapper;
 using CompanySvc.Helpers;
 using CompanySvc.Models;
+using CompanySvc.Repositories;
 using CustomExceptions;
 using VacancyService.Repositories;
 using MassTransit;
@@ -17,11 +18,13 @@ namespace CompanySvc.Controllers;
 public class CompanyController : ControllerBase
 {
     private readonly ICompanyRepo _companyRepo;
+    private readonly ICompanyRepoAuth _companyRepoAuth;
     private readonly IMapper _mapper;
     
     public CompanyController(IMapper mapper, IPublishEndpoint publisher)
     {
         _companyRepo = new CompanyRepo(publisher);
+        _companyRepoAuth = new CompanyRepoAuth();
         _mapper = mapper;
     }
     
@@ -65,8 +68,18 @@ public class CompanyController : ControllerBase
     [HttpPost("CreateCompany")]
     public async Task<IActionResult> CreateCompany(CompanyToAddDto companyToAddDto)
     {
-        await _companyRepo.CreateCompany(companyToAddDto);
-        return Ok();
+        Guid companyId = await _companyRepo.CreateCompany(companyToAddDto);
+
+        if (_companyRepoAuth.CheckIfCompanyHasAuth(companyId))
+            return new BadRequestObjectResult("Company is registered");
+
+        Guid key = await _companyRepoAuth.AddCompanyAuth(companyId);
+        
+        return Ok(new
+        {
+            CompanyId = companyId,
+            Key = key
+        });
     }
 
 
@@ -79,7 +92,7 @@ public class CompanyController : ControllerBase
             return BadRequest();
         
         await _companyRepo.UpdateCompany(company);
-        
+
         return Ok();
     }
     

@@ -11,7 +11,7 @@ public interface ICompanyRepo
 
     public Task<CompanyShortInfo?> GetCompanyShortInfoById(Guid id);
     
-    public Task CreateCompany(CompanyToAddDto companyToAddDto);
+    public Task<Guid> CreateCompany(CompanyToAddDto companyToAddDto);
 
     public Task UpdateCompany(CompanyToUpdateDto company);
 

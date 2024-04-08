@@ -53,11 +53,12 @@ public class CompanyRepo : ICompanyRepo
     }
     
     
-    public async Task CreateCompany(CompanyToAddDto companyToAddDto)
+    public async Task<Guid> CreateCompany(CompanyToAddDto companyToAddDto)
     {
+        var companyId = Guid.NewGuid();
         var company = new Company
         {
-            CompanyId = Guid.NewGuid(),
+            CompanyId = companyId,
             Name = companyToAddDto.Name,
             Address = companyToAddDto.Address,
             Email = companyToAddDto.Email,
@@ -70,7 +71,11 @@ public class CompanyRepo : ICompanyRepo
         };
         
         await company.SaveAsync();
+
+        return companyId;
     }
+    
+    
 
 
     public async Task UpdateCompany(CompanyToUpdateDto company)

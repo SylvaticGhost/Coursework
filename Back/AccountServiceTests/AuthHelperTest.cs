@@ -1,6 +1,6 @@
 using AccountService.Helpers;
 using AccountService.Models;
-using AccountService.Models.HelpersModels;
+using GlobalHelpers.Models;
 using Microsoft.Extensions.Configuration;
 using Moq;
 using Xunit;

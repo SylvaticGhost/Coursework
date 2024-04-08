@@ -1,5 +1,3 @@
-using Contracts;
-using MassTransit;
 using MongoDB.Driver;
 using MongoDB.Entities;
 using VacancyService.Models;

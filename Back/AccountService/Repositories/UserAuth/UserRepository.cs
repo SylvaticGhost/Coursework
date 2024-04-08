@@ -1,7 +1,7 @@
 ﻿using AccountService.Data;
 using AccountService.Helpers;
 using AccountService.Models;
-using AccountService.Models.HelpersModels;
+using GlobalHelpers.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountService.Repositories;
