@@ -1,12 +1,13 @@
 ﻿using AccountService.Data;
 using AccountService.Helpers;
 using AccountService.Models;
-using AccountService.Models.HelpersModels;
+using GlobalHelpers;
+using GlobalHelpers.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountService.Repositories;
 
-public class UserRepository : IUserRepository
+public class UserRepository : IUserRepository, IUserRepositoryBasic
 {
     private readonly DataContextNpgEf _dataContextNpgEf;
     private readonly AuthHelpers _authHelpers;
@@ -20,7 +21,7 @@ public class UserRepository : IUserRepository
 
     public async Task<Guid> AddUser(UserAccountToAddDto userAccountToAddDto)
     {
-        HashedPasswords password = AuthHelpers.CreatePasswordHash(userAccountToAddDto.Password);
+        HashedPasswords password = GlobalAuthHelpers.CreatePasswordHash(userAccountToAddDto.Password);
         
         UserAccount userAccount = new()
         {
@@ -64,7 +65,7 @@ public class UserRepository : IUserRepository
         if(string.IsNullOrWhiteSpace(password))
             throw new ArgumentException("Password is required");
         
-        if (!AuthHelpers.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+        if (!GlobalAuthHelpers.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             throw new ArgumentException("Invalid password");
         
         string token = _authHelpers.GenerateJwtToken(user);
@@ -107,4 +108,13 @@ public class UserRepository : IUserRepository
     
     public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber) =>
         await _dataContextNpgEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
+
+    public Task<(string FirstName, string? LastName)> GetNameAndSurname(Guid id)
+    {
+        return _dataContextNpgEf.UserAccount
+            .Where(x => x.Id == id)
+            .Select(x => new {x.FirstName, x.LastName})
+            .FirstOrDefaultAsync()
+            .ContinueWith(x => (x.Result!.FirstName, x.Result.LastName));
+    }
 }

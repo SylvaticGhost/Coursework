@@ -16,8 +16,10 @@ internal class MongoDbInit
         await DB.Index<Company>()
             .Key(c => c.CompanyId, KeyType.Ascending)
             .CreateAsync();
-        
-        //using var scope = app.Services.CreateScope();
+
+        await DB.Index<CompanyAuthCrypted>()
+            .Key(c => c.CompanyId, KeyType.Ascending)
+            .CreateAsync();
         
     }
 }

@@ -1,13 +1,12 @@
 using CompanySvc.Models;
 using Contracts;
 using MassTransit;
-using MassTransit.RabbitMqTransport;
 using MongoDB.Driver;
 using MongoDB.Entities;
 using VacancyService.Models;
 using Guid = System.Guid;
 
-namespace VacancyService.Repositories;
+namespace CompanySvc.Repositories;
 
 public class CompanyRepo : ICompanyRepo
 {
@@ -34,6 +33,14 @@ public class CompanyRepo : ICompanyRepo
         await _collection.Find(c => c.CompanyId == id).AnyAsync();
 
 
+    public async Task<bool> CheckIfCompanyExists(CompanyUniqueDataDto company) =>
+        await _collection.Find(c => c.Name == company.Name || 
+                                    c.Email == company.Email ||
+                                    c.PhoneNumber == company.PhoneNumber || 
+                                    c.Website == company.WebSite)
+                                    .AnyAsync();
+
+
     public async Task<CompanyShortInfo?> GetCompanyShortInfoById(Guid id)
     {
         var collection = DB.Collection<Company>();
@@ -53,24 +60,29 @@ public class CompanyRepo : ICompanyRepo
     }
     
     
-    public async Task CreateCompany(CompanyToAddDto companyToAddDto)
+    public async Task<Guid> CreateCompany(CompanyToAddDto companyToAddDto)
     {
+        var companyId = Guid.NewGuid();
         var company = new Company
         {
-            CompanyId = Guid.NewGuid(),
+            CompanyId = companyId,
             Name = companyToAddDto.Name,
-            Address = companyToAddDto.Address,
+            Address = companyToAddDto.Address ?? "",
             Email = companyToAddDto.Email,
             PhoneNumber = companyToAddDto.PhoneNumber,
-            Website = companyToAddDto.Website,
+            Website = companyToAddDto.Website ?? "",
             Logo = companyToAddDto.Logo,
             CreatedAt = DateTime.Now,
             Description = companyToAddDto.Description,
-            Industry = companyToAddDto.Industry
+            Industry = companyToAddDto.Industry ?? "",
         };
         
         await company.SaveAsync();
+
+        return companyId;
     }
+    
+    
 
 
     public async Task UpdateCompany(CompanyToUpdateDto company)

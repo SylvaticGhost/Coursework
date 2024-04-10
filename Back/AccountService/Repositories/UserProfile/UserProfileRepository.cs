@@ -20,9 +20,9 @@ public class UserProfileRepository : IUserProfileRepository
     }
     
     
-    public async Task<Guid> CreateUserProfile(UserProfileToAddDto userProfileToAddDto, Guid userId)
+    public async Task<Guid> CreateUserProfile(UserProfileToAddDto userProfileToAddDto, (string, string) names, Guid userId)
     {
-        var userProfile = new Models.UserProfile(userProfileToAddDto, userId);
+        var userProfile = new Models.UserProfile(userProfileToAddDto,names, userId);
         await DB.InsertAsync(userProfile);
         return userProfile.UserId;
     }
@@ -56,7 +56,6 @@ public class UserProfileRepository : IUserProfileRepository
     
     public async Task DeleteUserProfile(Guid id) => 
         await DB.DeleteAsync<Models.UserProfile>(id);
-    
     
     public async Task AddContacts(Guid userId, IEnumerable<GlobalModels.Contact> contacts)
     {

@@ -13,8 +13,12 @@ public class UserProfile : Entity
     public List<Contact>? Contacts { get; set; }
     public string? About { get; set; }
     public byte[]? Avatar { get; set; }
+    
+    public string? FirstName { get; set; }
+    
+    public string? LastName { get; set; }
 
-    public UserProfile(UserProfileToAddDto userProfileToAddDto, Guid userId)
+    public UserProfile(UserProfileToAddDto userProfileToAddDto,(string?, string?) names ,Guid userId)
     {
         UserId = userId;
         City = userProfileToAddDto.City;
@@ -22,6 +26,8 @@ public class UserProfile : Entity
         Contacts = userProfileToAddDto.Contacts ?? new List<Contact>();
         About = userProfileToAddDto.About;
         Avatar = userProfileToAddDto.Avatar ?? GetDefaultAvatar();
+        FirstName = names.Item1 ?? "";
+        LastName = names.Item2 ?? "";
     }
     
     public static byte[] GetDefaultAvatar() => File.ReadAllBytes("Media/UserDefaultAvatar.png");

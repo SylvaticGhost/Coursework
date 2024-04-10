@@ -13,7 +13,7 @@ export function ValidRegistrationForm(userRegister: UserRegister): string {
         return 'Password is required'
     }
     
-    if(userRegister.name === '') {
+    if(userRegister.firstName === '') {
         return 'Name is required'
     }
     

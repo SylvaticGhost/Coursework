@@ -1,6 +1,6 @@
 ﻿import UserProfileToAddDto from "@/lib/Types/UserProfile/UserProfileToAddDto";
-import { use } from "react";
-import { Contact } from "./Types/Contact";
+import {Contact} from "./Types/Contact";
+import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 
 
 export async function CreateProfile(profile: UserProfileToAddDto, token: string) {
@@ -31,7 +31,7 @@ export async function CreateProfile(profile: UserProfileToAddDto, token: string)
 }
 
 
-async function AddContact(contacts: Contact[], token:string) {
+export async function AddContact(contacts: Contact[], token:string) {
     
     console.log('Contacts to send: ' + contacts);
     const content = JSON.stringify(contacts[0]);
@@ -48,4 +48,45 @@ async function AddContact(contacts: Contact[], token:string) {
         body: content
     });
     console.log(response)
+}
+
+export async function GetProfile(id: string) {
+  const response = await fetch(`http://localhost:5239/Profile/GetProfile?id=${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': '*/*',
+      'AcceptEncoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive'},
+    },
+  );
+
+  if (response.ok) {
+    const data = await response.json();
+      return new UserProfile(data.id, data.city, data.country, data.contacts, data.avatar, data.firstName, data.lastName);
+  } else {
+    console.log('Profile not found');
+  }
+}
+
+
+export async function GetOwnProfile(token: string) {
+  const response = await fetch('http://localhost:5239/Profile/GetOwnProfile', {
+    method: 'GET',
+    headers: {
+      'Authorization': 'Bearer ' + token,
+      'Content-Type': 'application/json',
+      'Accept': '*/*',
+      'AcceptEncoding': 'gzip, deflate, br',
+      'Connection': 'keep-alive'},
+     },
+    );
+
+  if (response.ok) {
+    const data = await response.json();
+    return new UserProfile(data.id, data.city, data.country, data.contacts, data.avatar, data.firstName, data.lastName);
+  } else {
+    console.log('Profile not found');
+  }
+
 }

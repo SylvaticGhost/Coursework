@@ -30,7 +30,9 @@ export async function UserLogin(userAuth: UserAuth) {
     const token: string = await response.text()
     console.log('token: ' + token)
     if(response.ok) {
-        Cookies.set('token', token, {expires: 7, secure: true})
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        Cookies.set('token', token, {expires: 7, secure: isProduction})
         Cookies.set('logged', 'true')
         console.log('Logged in')
         console.log('token from cookie: '+ Cookies.get('token'))
@@ -71,11 +73,13 @@ export async function UserRegistration(userRegister: UserRegister) {
         }),
     });
     console.log(response)
-    
+    let data;
     if(response.ok)
-        response.json();
-    else
+        data = await response.json();
+    else {
         console.log("Response is not ok in registration endpoint")
+        return 
+    }
     
     console.log(response.text())
     

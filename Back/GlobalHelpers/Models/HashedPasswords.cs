@@ -1,3 +1,3 @@
-﻿namespace AccountService.Models.HelpersModels;
+﻿namespace GlobalHelpers.Models;
 
 public record HashedPasswords(byte[] PasswordHash, byte[] PasswordSalt);

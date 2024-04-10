@@ -2,11 +2,11 @@
 using System.Data;
 using CompanySvc.Consumers;
 using CompanySvc.Data;
-using VacancyService.Repositories;
+using CompanySvc.Repositories;
 using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
-using MongoDB.Entities;
+
 
 ConsoleHelpers.WriteStartUpMessage("CompanySvc");
 
@@ -35,6 +35,16 @@ builder.Services.AddMassTransit(x =>
     });
 });
 
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        b => b.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+    );
+});
+
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
 
@@ -56,7 +66,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-
+app.UseCors();
 app.UseRouting();
 app.MapControllers();
 
