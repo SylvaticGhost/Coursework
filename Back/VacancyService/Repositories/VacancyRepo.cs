@@ -1,3 +1,4 @@
+using GlobalModels.Vacancy;
 using MongoDB.Driver;
 using MongoDB.Entities;
 using VacancyService.Models;
@@ -12,18 +13,24 @@ public class VacancyRepo : IVacancyRepo
     }
 
 
-    public async Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo)
+    public async Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo, DateTime time = default)
     {
         Guid id = Guid.NewGuid();
+        
+        if(time == default)
+            time = DateTime.UtcNow;
 
         var vacancyToAdd = new Vacancy
         {
             VacancyId = id,
             Title = vacancy.Title,
             Description = vacancy.Description,
-            CreatedAt = DateTime.Now,
-            UpdatedAt = DateTime.Now,
-            CompanyInfo = companyInfo
+            CreatedAt = time,
+            UpdatedAt = time,
+            CompanyInfo = companyInfo,
+            Experience = vacancy.Experience,
+            Salary = vacancy.Salary,
+            Specialization = vacancy.Specialization
         };
 
         await vacancyToAdd.SaveAsync();

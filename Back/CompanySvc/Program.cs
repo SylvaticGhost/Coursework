@@ -1,11 +1,15 @@
 //http://localhost:5240/swagger/index.html
 using System.Data;
+using System.Text;
 using CompanySvc.Consumers;
 using CompanySvc.Data;
 using CompanySvc.Repositories;
 using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 
 
 ConsoleHelpers.WriteStartUpMessage("CompanySvc");
@@ -24,6 +28,7 @@ builder.Services.AddMassTransit(x =>
     x.SetKebabCaseEndpointNameFormatter();
     
     x.AddConsumer<GetCompanyShortInfo>();
+    
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.ConfigureEndpoints(context);
@@ -44,6 +49,19 @@ builder.Services.AddCors(options =>
             .AllowCredentials()
     );
 });
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(
+        options =>
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+            }
+        );
 
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));
@@ -69,7 +87,8 @@ if (app.Environment.IsDevelopment())
 app.UseCors();
 app.UseRouting();
 app.MapControllers();
-
+app.UseAuthentication();
+app.UseAuthorization();
 app.UseHttpsRedirection();
 
 app.Run();

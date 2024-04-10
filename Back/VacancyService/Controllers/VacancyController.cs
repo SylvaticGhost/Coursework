@@ -1,10 +1,12 @@
 using Contracts;
 using CustomExceptions;
+using GlobalModels.Vacancy;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using VacancyService.Models;
+using VacancyService.Repositories;
 
-namespace VacancyService.Repositories;
+namespace VacancyService.Controllers;
 
 [ApiController]
 [Route("Vacancy")]
@@ -36,18 +38,6 @@ public class VacancyController : ControllerBase
         return Ok(vacancy);
     }
     
-    
-    [HttpPost("AddVacancy")]
-    public async Task<IActionResult> AddVacancy(VacancyToAddDto vacancy)
-    {
-        var response = await _requestClient.GetResponse<CompanyShortInfo>(new GetCompanyShortInfoEvent(vacancy.CompanyId));
-        
-        var companyInfo = response.Message;
-        
-        var id = await _vacancyRepo.AddVacancy(vacancy, companyInfo);
-        
-        return Ok(id);
-    }
     
     
     [HttpPost("DeleteVacancy")]

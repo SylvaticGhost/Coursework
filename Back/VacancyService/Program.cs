@@ -17,8 +17,10 @@ builder.Services.AddControllers();
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
+    
     x.AddConsumer<UpdateCompanyConsumer>();
     x.AddConsumer<DeleteCompanyConsumer>();
+    x.AddConsumer<AddVacancyConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {

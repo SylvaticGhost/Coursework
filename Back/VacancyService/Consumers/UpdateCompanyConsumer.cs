@@ -5,7 +5,7 @@ using VacancyService.Models;
 
 namespace VacancyService.Consumers;
 
-public class UpdateCompanyConsumer : IConsumer<UpdateCompanyEvent>
+public sealed class UpdateCompanyConsumer : IConsumer<UpdateCompanyEvent>
 {
     private readonly IVacancyRepo _vacancyRepo;
 
