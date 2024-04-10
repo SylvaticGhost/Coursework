@@ -11,5 +11,6 @@ internal class MappingProfiles : Profile
         CreateMap<CompanyToAddDto, Company>();
         CreateMap<Company, CompanyShortInfo>();
         CreateMap<CompanyToAddDto, CompanyToUpdateDto>();
+        CreateMap<CompanyToAddDto, CompanyUniqueDataDto>();
     }
 }

@@ -1,13 +1,5 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/Highlighting/HighlightingSourceSnapshotLocation/@EntryValue">/Users/Kostia/Library/Caches/JetBrains/Rider2024.1/resharper-host/temp/Rider/vAny/CoverageData/_Back.-1382529095/Snapshot/snapshot.utdcvr</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=90dfc259_002D5b51_002D4ff3_002Db19d_002D541fd39b14a4/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="Tests" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;TestAncestor&gt;
-    &lt;TestId&gt;xUnit::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.Tests&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9797598F-6997-47CE-830B-522EAB2A1800::net8.0::LocalValidatorTests.ValidateCompanyForm_ReturnsTrue_WhenCompanyToAddDtoIsValid&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::9797598F-6997-47CE-830B-522EAB2A1800::net8.0::LocalValidatorTests&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountService.Tests.Helpers.LocalValidatorTests&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.AuthHelperTest.GenerateJwtToken_ReturnsExpectedToken_WhenUserIsValid&lt;/TestId&gt;
-    &lt;TestId&gt;xUnit::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.AuthHelperTest.GenerateJwtToken_ThrowsException_WhenKeyIsMissing&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::UserRepositoryTests.RefreshToken_ReturnsToken_WhenUserExists&lt;/TestId&gt;
-    &lt;TestId&gt;NUnit3x::8AA0BB27-3399-412F-9765-05D96037C202::net8.0::AccountServiceTests.HelpersTest.LocalValidatorTests.ValidateProfile_ReturnsUndef_WhenProfileIsValid&lt;/TestId&gt;
-  &lt;/TestAncestor&gt;
+  &lt;Solution /&gt;
 &lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>

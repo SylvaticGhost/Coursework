@@ -1,6 +1,7 @@
 ﻿using AccountService.Data;
 using AccountService.Helpers;
 using AccountService.Models;
+using GlobalHelpers;
 using GlobalHelpers.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,7 +21,7 @@ public class UserRepository : IUserRepository, IUserRepositoryBasic
 
     public async Task<Guid> AddUser(UserAccountToAddDto userAccountToAddDto)
     {
-        HashedPasswords password = AuthHelpers.CreatePasswordHash(userAccountToAddDto.Password);
+        HashedPasswords password = GlobalAuthHelpers.CreatePasswordHash(userAccountToAddDto.Password);
         
         UserAccount userAccount = new()
         {
@@ -64,7 +65,7 @@ public class UserRepository : IUserRepository, IUserRepositoryBasic
         if(string.IsNullOrWhiteSpace(password))
             throw new ArgumentException("Password is required");
         
-        if (!AuthHelpers.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
+        if (!GlobalAuthHelpers.VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
             throw new ArgumentException("Invalid password");
         
         string token = _authHelpers.GenerateJwtToken(user);

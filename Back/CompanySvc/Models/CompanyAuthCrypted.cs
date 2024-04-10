@@ -1,19 +1,33 @@
+using MongoDB.Bson;
 using MongoDB.Entities;
 
 namespace CompanySvc.Models;
 
 public class CompanyAuthCrypted : Entity
 {
-    public Guid CompanyId { get; set; }
+    public Guid CompanyId { get; init; }
     
-    public byte[] KeyCrypted { get; set; }
+    public byte[]? KeyHash { get; init; }
 
-    public byte[] KeySalt { get; set; }
+    public byte[]? KeySalt { get; init; }
     
-    public CompanyAuthCrypted(Guid companyId, byte[] keyCrypted, byte[] keySalt)
+    public CompanyAuthCrypted(Guid companyId, byte[] keyHash, byte[] keySalt)
     {
+        ID = ObjectId.GenerateNewId().ToString();
         CompanyId = companyId;
-        KeyCrypted = keyCrypted;
+        KeyHash = keyHash;
         KeySalt = keySalt;
+    }
+
+
+    public override string ToString()
+    {
+        return $"CompanyId: {CompanyId}, KeyHash: {KeyHash}, KeySalt: {KeySalt}";
+    }
+    
+    
+    public bool HasNullProperties()
+    {
+        return CompanyId == Guid.Empty || KeyHash == null || KeySalt == null;
     }
 }

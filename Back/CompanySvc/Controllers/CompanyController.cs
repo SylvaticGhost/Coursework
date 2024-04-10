@@ -3,9 +3,7 @@ using CompanySvc.Helpers;
 using CompanySvc.Models;
 using CompanySvc.Repositories;
 using CustomExceptions;
-using VacancyService.Repositories;
 using MassTransit;
-using MassTransit.RabbitMqTransport;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CompanySvc.Controllers;
@@ -20,12 +18,14 @@ public class CompanyController : ControllerBase
     private readonly ICompanyRepo _companyRepo;
     private readonly ICompanyRepoAuth _companyRepoAuth;
     private readonly IMapper _mapper;
+    private readonly LocalAuthHelpers _localAuthHelpers;
     
-    public CompanyController(IMapper mapper, IPublishEndpoint publisher)
+    public CompanyController(IMapper mapper, IPublishEndpoint publisher, IConfiguration configuration)
     {
         _companyRepo = new CompanyRepo(publisher);
         _companyRepoAuth = new CompanyRepoAuth();
         _mapper = mapper;
+        _localAuthHelpers = new LocalAuthHelpers(configuration);
     }
     
     
@@ -66,20 +66,42 @@ public class CompanyController : ControllerBase
     
     //in future should be created a passing to admin controller to check
     [HttpPost("CreateCompany")]
-    public async Task<IActionResult> CreateCompany(CompanyToAddDto companyToAddDto)
+    public async Task<IActionResult> CreateCompany(CompanyToAddDto? companyToAddDto)
     {
-        Guid companyId = await _companyRepo.CreateCompany(companyToAddDto);
-
-        if (_companyRepoAuth.CheckIfCompanyHasAuth(companyId))
-            return new BadRequestObjectResult("Company is registered");
-
-        Guid key = await _companyRepoAuth.AddCompanyAuth(companyId);
-        
-        return Ok(new
+        try
         {
-            CompanyId = companyId,
-            Key = key
-        });
+            if(companyToAddDto == null)
+                return BadRequest("Company data is empty");
+
+            CompanyUniqueDataDto? c = _mapper.Map<CompanyToAddDto, CompanyUniqueDataDto>(companyToAddDto);
+            if(c is null)
+                return BadRequest("Company data is empty");
+            if(await _companyRepo.CheckIfCompanyExists(c))
+                return new BadRequestObjectResult("Company with this data already exists");
+            
+            Guid? companyId = await _companyRepo.CreateCompany(companyToAddDto);
+            
+            if(companyId is null || companyId == Guid.Empty)
+                return new BadRequestObjectResult("Company wasn't created");
+            
+            if (_companyRepoAuth.CheckIfCompanyHasAuth(companyId ?? throw new ArgumentException("CompanyId is null")))
+                return new BadRequestObjectResult("Company is registered");
+
+            Guid? key = await _companyRepoAuth.AddCompanyAuth(companyId ?? throw new ArgumentException("CompanyId is null"));
+            
+            if(key == null || key == Guid.Empty)
+                return new BadRequestObjectResult("Company wasn't registered");
+
+            return Ok(new
+            {
+                CompanyId = companyId,
+                Key = key
+            });
+        }
+        catch(Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
     }
 
 
@@ -106,5 +128,34 @@ public class CompanyController : ControllerBase
         await _companyRepo.DeleteCompany(id);
         
         return Ok();
+    }
+
+
+    [HttpPost("CompanyHubLogin")]
+    public async Task<IActionResult> CompanyHubLogin(CompanyToLoginDto? company)
+    {
+        Console.WriteLine("Executing CompanyHubLogin method in CompanyController");
+        Console.WriteLine("Company id: " + company.CompanyId + ", key: " + company.Key);
+        try
+        {
+            if(company is null)
+                return BadRequest("Company data is empty");
+            
+            if(company.CompanyId == Guid.Empty || company.Key == Guid.Empty)
+                return BadRequest("Company id or key is empty");
+        
+            bool result = await _companyRepoAuth.CompanyLogin(company);
+        
+            if (!result)
+                return BadRequest("Company with this id and key aren't exist");
+        
+            string token = _localAuthHelpers.GenerateJwtToken(company.CompanyId);
+        
+            return Ok(token);
+        }
+        catch(Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
     }
 }

@@ -39,7 +39,7 @@ export default function RootLayout({
           <div className="flex justify-between  font-semibold text-xl">
               <a href="http://localhost:3000/AppPages/AboutUs">About Us</a>
               <a href={url + '/CompanyHub/CompanyLogin'}>Company Hub</a>
-              <a href="http://localhost:3000/Companies/CreateCompany">Want to create company?</a>
+              <a href="http://localhost:3000/CompanyHub/CreateCompany">Want to create company?</a>
           </div>
           <br/>
           <div>

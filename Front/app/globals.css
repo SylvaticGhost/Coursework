@@ -31,3 +31,17 @@ body {
     text-wrap: balance;
   }
 }
+
+/* styles.css */
+.large-checkbox {
+    width: 25px;
+    height: 25px;
+}
+
+.button-press {
+  transition: transform 0.1s ease-in-out;
+}
+
+.button-press:active {
+  transform: scale(0.95);
+}

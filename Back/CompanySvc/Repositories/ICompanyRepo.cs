@@ -1,7 +1,7 @@
 using CompanySvc.Models;
 using VacancyService.Models;
 
-namespace VacancyService.Repositories;
+namespace CompanySvc.Repositories;
 
 public interface ICompanyRepo
 {
@@ -18,4 +18,6 @@ public interface ICompanyRepo
     public Task DeleteCompany(Guid id);
 
     public Task<bool> CheckIfCompanyExists(Guid id);
+    
+    public Task<bool> CheckIfCompanyExists(CompanyUniqueDataDto company);
 }

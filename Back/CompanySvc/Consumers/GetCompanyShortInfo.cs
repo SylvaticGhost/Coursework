@@ -1,5 +1,5 @@
-﻿using Contracts;
-using VacancyService.Repositories;
+﻿using CompanySvc.Repositories;
+using Contracts;
 using MassTransit;
 
 namespace CompanySvc.Consumers;

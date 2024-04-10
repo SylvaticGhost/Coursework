@@ -39,11 +39,15 @@ public class GlobalAuthHelpers
     /// <exception cref="ArgumentException">Thrown when password is empty or whitespace, or when storedHash or storedSalt have invalid lengths.</exception>
     public static bool VerifyPasswordHash(string password, byte[] storedHash, byte[] storedSalt)
     {
-        if (password == null) throw new ArgumentNullException(nameof(password));
+        if (password == null) 
+            throw new ArgumentNullException(nameof(password));
+        
         if (string.IsNullOrWhiteSpace(password))
             throw new ArgumentException("Value cannot be empty or whitespace only string.", nameof(password));
+        
         if (storedHash.Length != 64)
             throw new ArgumentException("Invalid length of password hash (64 bytes expected).", nameof(storedHash));
+        
         if (storedSalt.Length != 128)
             throw new ArgumentException("Invalid length of password salt (128 bytes expected).",
                 nameof(storedSalt));

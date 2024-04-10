@@ -18,8 +18,18 @@ public class CompanyRepoAuth : ICompanyRepoAuth
         CompanyAuthCrypted companyAuthCrypted =
             new CompanyAuthCrypted(companyId, hashedPasswords.PasswordHash, hashedPasswords.PasswordSalt);
         
-        await DB.Collection<CompanyAuthCrypted>().InsertOneAsync(companyAuthCrypted);
-
+        if(companyAuthCrypted.HasNullProperties())
+            throw new Exception("Company auth crypted has null properties");
+        
+        try
+        {
+            await companyAuthCrypted.SaveAsync();
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+       
         return key;
     }
 
@@ -28,4 +38,21 @@ public class CompanyRepoAuth : ICompanyRepoAuth
         DB.Collection<CompanyAuthCrypted>().Find(c => c.CompanyId == companyId).Any();
 
     
+    public async Task<bool> CompanyLogin(CompanyToLoginDto company)
+    {
+        CompanyAuthCrypted companyAuthCrypted = await DB.Collection<CompanyAuthCrypted>()
+            .Find(c => c.CompanyId == company.CompanyId).FirstOrDefaultAsync();
+
+        Console.WriteLine("companyAuthCrypted: " + companyAuthCrypted);
+        if (companyAuthCrypted == null)
+        {
+            throw new Exception("Company auth crypted is null");
+            return false;
+        }
+        
+        if (company.Key == null)
+            return false;
+        //Console.WriteLine("company.Key: " + company.Key, "len of salt: " + companyAuthCrypted.KeySalt.Length, "len of hash: " + companyAuthCrypted.KeyHash.Length);
+        return GlobalAuthHelpers.VerifyPasswordHash(company.Key.ToString(), companyAuthCrypted.KeyHash, companyAuthCrypted.KeySalt);
+    }
 }
