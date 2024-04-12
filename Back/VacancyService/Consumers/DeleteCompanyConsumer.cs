@@ -4,7 +4,7 @@ using VacancyService.Repositories;
 
 namespace VacancyService.Consumers;
 
-public class DeleteCompanyConsumer : IConsumer<DeleteCompanyEvent>
+public sealed class DeleteCompanyConsumer : IConsumer<DeleteCompanyEvent>
 {
     private readonly IVacancyRepo _vacancyRepo;
 

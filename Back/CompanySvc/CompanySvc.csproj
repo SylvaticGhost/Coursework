@@ -11,6 +11,7 @@
         <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.2.1-develop.1720" />
         <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.1-develop.1720" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
         <PackageReference Include="Microsoft.IdentityModel.Tokens" Version="7.0.3" />
         <PackageReference Include="MongoDB.Entities" Version="23.1.0" />

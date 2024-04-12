@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "rZ1bdxXL+83/MDukfecCfmF0nOOFGAlnRRydy9l1GSOg4SfF16mzwd/+mQhgHCJka8zOSzHavMPu9qBlu3/7qQ==",
+  "dgSpecHash": "ujJNeLwibyFM+BFUmGShS51X6FIYjXCdJG/yPsOlaG+fulh/f4Uw5J+597iKlZi2xXmssTcTjG17oE0ri4fF7w==",
   "success": true,
   "projectFilePath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CompanySvc/CompanySvc.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "/Users/Kostia/.nuget/packages/masstransit.rabbitmq/8.2.1-develop.1720/masstransit.rabbitmq.8.2.1-develop.1720.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.aspnetcore.authentication.abstractions/2.1.1/microsoft.aspnetcore.authentication.abstractions.2.1.1.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.aspnetcore.authentication.core/2.1.1/microsoft.aspnetcore.authentication.core.2.1.1.nupkg.sha512",
+    "/Users/Kostia/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/8.0.0/microsoft.aspnetcore.authentication.jwtbearer.8.0.0.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.aspnetcore.authorization/2.1.1/microsoft.aspnetcore.authorization.2.1.1.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.aspnetcore.authorization.policy/2.1.1/microsoft.aspnetcore.authorization.policy.2.1.1.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.aspnetcore.hosting.abstractions/2.1.1/microsoft.aspnetcore.hosting.abstractions.2.1.1.nupkg.sha512",
@@ -58,6 +59,8 @@
     "/Users/Kostia/.nuget/packages/microsoft.identitymodel.abstractions/7.0.3/microsoft.identitymodel.abstractions.7.0.3.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.identitymodel.jsonwebtokens/7.0.3/microsoft.identitymodel.jsonwebtokens.7.0.3.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.identitymodel.logging/7.0.3/microsoft.identitymodel.logging.7.0.3.nupkg.sha512",
+    "/Users/Kostia/.nuget/packages/microsoft.identitymodel.protocols/7.0.3/microsoft.identitymodel.protocols.7.0.3.nupkg.sha512",
+    "/Users/Kostia/.nuget/packages/microsoft.identitymodel.protocols.openidconnect/7.0.3/microsoft.identitymodel.protocols.openidconnect.7.0.3.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.identitymodel.tokens/7.0.3/microsoft.identitymodel.tokens.7.0.3.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.net.http.headers/2.1.1/microsoft.net.http.headers.2.1.1.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/microsoft.netcore.platforms/5.0.0/microsoft.netcore.platforms.5.0.0.nupkg.sha512",

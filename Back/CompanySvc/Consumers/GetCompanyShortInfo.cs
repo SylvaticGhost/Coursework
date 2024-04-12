@@ -1,22 +1,17 @@
 ﻿using CompanySvc.Repositories;
 using Contracts;
 using MassTransit;
+using VacancyService.Models;
 
 namespace CompanySvc.Consumers;
 
-public sealed class GetCompanyShortInfo : IConsumer<GetCompanyShortInfoEvent>
+// ReSharper disable once ClassNeverInstantiated.Global
+public sealed class GetCompanyShortInfo(ICompanyRepo companyRepo) : IConsumer<GetCompanyShortInfoEvent>
 {
-    private readonly ICompanyRepo _companyRepo;
-
-    public GetCompanyShortInfo(ICompanyRepo companyRepo)
-    {
-        _companyRepo = companyRepo;
-    }
-
     public async Task Consume(ConsumeContext<GetCompanyShortInfoEvent> context)
     {
-        var c =await _companyRepo.GetCompanyShortInfoById(context.Message.CompanyId);
+        CompanyShortInfo? c = await companyRepo.GetCompanyShortInfoById(context.Message.CompanyId);
         
-        await context.RespondAsync(c);
+        await context.RespondAsync(c!);
     }
 }

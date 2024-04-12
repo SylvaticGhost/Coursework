@@ -1796,11 +1796,27 @@
       "Contracts/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "GlobalModels": "1.0.0"
+        },
         "compile": {
           "bin/placeholder/Contracts.dll": {}
         },
         "runtime": {
           "bin/placeholder/Contracts.dll": {}
+        }
+      },
+      "CustomAtributtes/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.1.2"
+        },
+        "compile": {
+          "bin/placeholder/CustomAtributtes.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CustomAtributtes.dll": {}
         }
       },
       "CustomExceptions/1.0.0": {
@@ -1833,6 +1849,9 @@
       "GlobalModels/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "MongoDB.Entities": "23.1.0"
+        },
         "compile": {
           "bin/placeholder/GlobalModels.dll": {}
         },
@@ -5611,6 +5630,11 @@
       "path": "../Contracts/Contracts.csproj",
       "msbuildProject": "../Contracts/Contracts.csproj"
     },
+    "CustomAtributtes/1.0.0": {
+      "type": "project",
+      "path": "../CustomAtributtes/CustomAtributtes.csproj",
+      "msbuildProject": "../CustomAtributtes/CustomAtributtes.csproj"
+    },
     "CustomExceptions/1.0.0": {
       "type": "project",
       "path": "../CustomExceptions/CustomExceptions.csproj",
@@ -5630,6 +5654,7 @@
   "projectFileDependencyGroups": {
     "net8.0": [
       "Contracts >= 1.0.0",
+      "CustomAtributtes >= 1.0.0",
       "CustomExceptions >= 1.0.0",
       "GlobalHelpers >= 1.0.0",
       "GlobalModels >= 1.0.0",
@@ -5667,6 +5692,9 @@
           "projectReferences": {
             "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj": {
               "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj"
+            },
+            "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAtributtes/CustomAtributtes.csproj": {
+              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAtributtes/CustomAtributtes.csproj"
             },
             "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/CustomExceptions.csproj": {
               "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/CustomExceptions.csproj"

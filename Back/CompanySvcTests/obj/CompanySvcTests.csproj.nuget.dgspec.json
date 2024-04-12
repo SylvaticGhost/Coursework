@@ -63,6 +63,10 @@
               "target": "Package",
               "version": "[8.2.1-develop.1720, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.0.0, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[8.0.3, )"
@@ -211,7 +215,11 @@
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj": {
+                "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -398,6 +406,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MongoDB.Entities": {
+              "target": "Package",
+              "version": "[23.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

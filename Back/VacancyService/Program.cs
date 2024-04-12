@@ -4,6 +4,7 @@ using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using VacancyService.Consumers;
 using VacancyService.Data;
+using VacancyService.SearchContext;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +18,14 @@ builder.Services.AddControllers();
 builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
+    
     x.AddConsumer<UpdateCompanyConsumer>();
     x.AddConsumer<DeleteCompanyConsumer>();
+    
+    x.AddConsumer<AddVacancyConsumer>();
+    x.AddConsumer<DeleteVacancyConsumer>();
+    
+    x.AddConsumer<GetCompanyVacanciesConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -38,6 +45,7 @@ if (mongoDbSettings is null)
     throw new DataException("MongoDbSettings not found in appsettings.json");
 
 builder.Services.AddScoped<IVacancyRepo, VacancyRepo>();
+builder.Services.AddScoped<ISearchVacancyContext, SearchVacancyContext>();
 
 var app = builder.Build();
 

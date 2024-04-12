@@ -1,10 +1,12 @@
 using Contracts;
-using CustomExceptions;
+using CustomAtributtes;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using VacancyService.Models;
+using VacancyService.Repositories;
+using VacancyService.SearchContext;
 
-namespace VacancyService.Repositories;
+namespace VacancyService.Controllers;
 
 [ApiController]
 [Route("Vacancy")]
@@ -37,18 +39,6 @@ public class VacancyController : ControllerBase
     }
     
     
-    [HttpPost("AddVacancy")]
-    public async Task<IActionResult> AddVacancy(VacancyToAddDto vacancy)
-    {
-        var response = await _requestClient.GetResponse<CompanyShortInfo>(new GetCompanyShortInfoEvent(vacancy.CompanyId));
-        
-        var companyInfo = response.Message;
-        
-        var id = await _vacancyRepo.AddVacancy(vacancy, companyInfo);
-        
-        return Ok(id);
-    }
-    
     
     [HttpPost("DeleteVacancy")]
     public async Task<IActionResult> DeleteVacancy(Guid id)
@@ -59,5 +49,17 @@ public class VacancyController : ControllerBase
         await _vacancyRepo.DeleteVacancy(id);
         
         return Ok();
+    }
+    
+    
+    [CheckHasNotNullParam<SearchVacancyParams>]
+    [HttpPost("SearchVacancy")]
+    public IActionResult SearchVacancy([FromBody] SearchVacancyParams searchVacancyParams)
+    {
+        ISearchVacancyContext searchVacancyContext = new SearchVacancyContext();
+        
+        var vacancies = searchVacancyContext.SearchVacancy(searchVacancyParams);
+        
+        return Ok(vacancies);
     }
 }

@@ -1,10 +1,15 @@
 'use client'
 
 import {useState} from "react";
+import {LoginCompanyReq} from "@/lib/CompanyRequests";
+import Cookies from "js-cookie";
+
+const url = 'http://localhost:3000'
 
 export default function CompanyLogin() {
     const [companyId, setCompanyId] = useState<string>('');
     const [companyToken, setCompanyToken] = useState<string>('');
+    
     
     return (
         <div className="flex justify-center my-8">
@@ -26,7 +31,8 @@ export default function CompanyLogin() {
                 </div>
                 <div className="my-4 flex justify-center items-center">
                     <button className="button-press rounded-2xl font-semibold p-3 text-lg bg-fuchsia-600 text-white shadow-xl
-                        hover:bg-fuchsia-700">
+                        hover:bg-fuchsia-700"
+                    onClick={onLogin}>
                         Login
                     </button>
 
@@ -34,8 +40,18 @@ export default function CompanyLogin() {
             </div>
         </div>
     )
-}
 
-function onLogin() {
-    
+    async function onLogin() {
+        const company : CompanyToLoginDto = {companyId: companyId, key: companyToken};
+        
+        try {
+            await LoginCompanyReq(company);
+        } catch (e) {
+            console.log(e);
+        }
+        
+        if(Cookies.get('companyToken')) {
+            window.location.href=url + '/CompanyHub/Company';
+        }
+    }
 }
