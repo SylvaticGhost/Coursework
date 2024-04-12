@@ -10,6 +10,8 @@ public interface IVacancyRepo
     public Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo, DateTime time = default);
 
     public Task UpdateCompanyInfoInVacancies(CompanyShortInfo companyInfo);
+    
+    public Task UpdateVacancy(VacancyToUpdateDto vacancy, DateTime time = default);
 
     public Task<bool> CheckIfVacancyExists(Guid id);
     

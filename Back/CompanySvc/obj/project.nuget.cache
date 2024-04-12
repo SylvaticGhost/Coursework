@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "ujJNeLwibyFM+BFUmGShS51X6FIYjXCdJG/yPsOlaG+fulh/f4Uw5J+597iKlZi2xXmssTcTjG17oE0ri4fF7w==",
+  "dgSpecHash": "L7Yv3HvWtBfy2d9/z+vySRaMJy1Gtb6fWJMMSQDP2xYvRo6YILED/TN6a2ZZKLm9d6FunIwp4O7cDwYKwujTOA==",
   "success": true,
   "projectFilePath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CompanySvc/CompanySvc.csproj",
   "expectedPackageFiles": [
@@ -127,16 +127,6 @@
       "level": "Warning",
       "warningLevel": 1,
       "message": "Package 'System.IdentityModel.Tokens.Jwt' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-59j7-ghrg-fj52",
-      "libraryId": "System.IdentityModel.Tokens.Jwt",
-      "targetGraphs": [
-        "net8.0"
-      ]
-    },
-    {
-      "code": "NU1902",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'System.IdentityModel.Tokens.Jwt' 7.0.3 has a known moderate severity vulnerability, https://github.com/advisories/GHSA-8g9c-28fc-mcx2",
       "libraryId": "System.IdentityModel.Tokens.Jwt",
       "targetGraphs": [
         "net8.0"

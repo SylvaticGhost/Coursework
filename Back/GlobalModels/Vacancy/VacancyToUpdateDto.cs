@@ -1,6 +1,7 @@
 namespace GlobalModels.Vacancy;
 
-public record VacancyToAddDto (
+public record VacancyToUpdateDto(
+    Guid VacancyId,
     string Title,
     string Description,
     string Salary,

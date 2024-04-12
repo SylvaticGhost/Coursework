@@ -24,3 +24,6 @@ G:/GitHub/Coursework/Back/GlobalHelpers/obj/Debug/net8.0/GlobalHelpers.csproj.As
 /Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/obj/Debug/net8.0/refint/GlobalHelpers.dll
 /Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/obj/Debug/net8.0/GlobalHelpers.pdb
 /Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/obj/Debug/net8.0/ref/GlobalHelpers.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/bin/Debug/net8.0/GlobalModels.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/bin/Debug/net8.0/GlobalModels.pdb
+/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/obj/Debug/net8.0/GlobalHelpers.csproj.CopyComplete

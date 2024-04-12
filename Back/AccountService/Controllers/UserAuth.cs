@@ -39,7 +39,7 @@ public class UserAuth : ControllerBase
         if(await _userRepository.CheckIfPhoneNumberExists(userAccountToAddDto.PhoneNumber))
             validationResult.AddError("Phone number already exists");
         
-        if(!validationResult.Result)
+        if(!validationResult.IsValid)
             return new BadRequestObjectResult("Invalid input");
         
         Guid id = await _userRepository.AddUser(userAccountToAddDto);
