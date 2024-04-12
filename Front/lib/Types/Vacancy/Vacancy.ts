@@ -1,15 +1,20 @@
+import {CompanyShortInfo} from "@/lib/Types/Companies/CompanyShortInfo";
+
 export default class Vacancy {
-    VacancyId: number;
-    CreatedAt: Date;
+    vacancyId: string;
+    createdAt: Date;
+    updatedAt?: Date;
     title: string;
     description?: string;
     salary?: string;
     specialization?: string;
     experience?: string;
+    companyShortInfo? : CompanyShortInfo
     
-    constructor(VacancyId: number, CreatedAt: Date, title: string, description?: string, salary?: string, specialization?: string, experience?: string) {
-        this.VacancyId = VacancyId;
-        this.CreatedAt = CreatedAt;
+    
+    constructor(VacancyId: string, CreatedAt: Date, title: string, description?: string, salary?: string, specialization?: string, experience?: string) {
+        this.vacancyId = VacancyId;
+        this.createdAt = CreatedAt;
         this.title = title;
         this.description = description;
         this.salary = salary;
@@ -17,3 +22,4 @@ export default class Vacancy {
         this.experience = experience;
     }
 }
+
