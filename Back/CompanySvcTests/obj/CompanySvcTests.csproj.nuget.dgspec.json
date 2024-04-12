@@ -406,6 +406,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "MongoDB.Entities": {
+              "target": "Package",
+              "version": "[23.1.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

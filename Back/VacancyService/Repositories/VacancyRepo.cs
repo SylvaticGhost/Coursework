@@ -47,6 +47,10 @@ public class VacancyRepo : IVacancyRepo
 
     public async Task<bool> CheckIfVacancyExists(Guid id) =>
         await _collection.Find(v => v.VacancyId == id).AnyAsync();
+    
+    
+    public async Task<bool> CheckIfCompanyOwnVacancy(Guid companyId, Guid vacancyId) =>
+        await _collection.Find(v => v.CompanyInfo.CompanyId == companyId && v.VacancyId == vacancyId).AnyAsync();
    
     
     public async Task UpdateCompanyInfoInVacancies(CompanyShortInfo companyInfo)

@@ -1,7 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using MongoDB.Entities;
+using VacancyService.Models;
 
-namespace VacancyService.Models;
+namespace GlobalModels.Vacancy;
 
 public class Vacancy : Entity
 {

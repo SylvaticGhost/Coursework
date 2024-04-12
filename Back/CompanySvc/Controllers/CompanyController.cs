@@ -76,6 +76,7 @@ public class CompanyController : ControllerBase
             CompanyUniqueDataDto? c = _mapper.Map<CompanyToAddDto, CompanyUniqueDataDto>(companyToAddDto);
             if(c is null)
                 return BadRequest("Company data is empty");
+            
             if(await _companyRepo.CheckIfCompanyExists(c))
                 return new BadRequestObjectResult("Company with this data already exists");
             

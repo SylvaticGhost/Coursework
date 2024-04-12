@@ -5,13 +5,20 @@ export default function CompanyPage() {
     
     return(
         <div className="flex justify-center">
-            <div className="my-8 flex-row">
+            <div className="my-8 flex-column">
                 <h1 className="text-xl text-purple-600 font-semibold pb-6">Company Page</h1>
-                <button className="button-press rounded-2xl font-semibold p-3 text-lg bg-fuchsia-600 text-white shadow-xl
+                <div className="">
+                    <button className="button-press rounded-2xl font-semibold p-3 text-lg bg-fuchsia-600 text-white shadow-xl
                         hover:bg-fuchsia-700"
-                        onClick={e => window.location.href=url + '/CompanyHub/CreateVacancy'}>
-                    Create vacancy
-                </button>
+                            onClick={e => window.location.href=url + '/CompanyHub/CreateVacancy'}>
+                        Create vacancy
+                    </button>
+                    <br/>
+                    <button className="button-press rounded-2xl font-semibold p-3 my-5 text-lg bg-fuchsia-600 text-white shadow-xl
+                        hover:bg-fuchsia-700"
+                            onClick={e => window.location.href=url + '/CompanyHub/CompanyVacancies'}>
+                        Vacancies</button>
+                </div>
             </div>
         </div>
     )

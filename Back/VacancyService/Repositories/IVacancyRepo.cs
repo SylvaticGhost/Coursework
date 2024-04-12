@@ -12,6 +12,8 @@ public interface IVacancyRepo
     public Task UpdateCompanyInfoInVacancies(CompanyShortInfo companyInfo);
 
     public Task<bool> CheckIfVacancyExists(Guid id);
+    
+    public Task<bool> CheckIfCompanyOwnVacancy(Guid companyId, Guid vacancyId);
 
     public Task DeleteVacancy(Guid id);
 

@@ -8,7 +8,6 @@ using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 
@@ -92,22 +91,5 @@ app.UseAuthorization();
 app.UseHttpsRedirection();
 
 app.Run();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 

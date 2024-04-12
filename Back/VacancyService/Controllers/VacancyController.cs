@@ -1,10 +1,10 @@
 using Contracts;
-using CustomExceptions;
-using GlobalModels.Vacancy;
+using CustomAtributtes;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
 using VacancyService.Models;
 using VacancyService.Repositories;
+using VacancyService.SearchContext;
 
 namespace VacancyService.Controllers;
 
@@ -49,5 +49,17 @@ public class VacancyController : ControllerBase
         await _vacancyRepo.DeleteVacancy(id);
         
         return Ok();
+    }
+    
+    
+    [CheckHasNotNullParam<SearchVacancyParams>]
+    [HttpPost("SearchVacancy")]
+    public IActionResult SearchVacancy([FromBody] SearchVacancyParams searchVacancyParams)
+    {
+        ISearchVacancyContext searchVacancyContext = new SearchVacancyContext();
+        
+        var vacancies = searchVacancyContext.SearchVacancy(searchVacancyParams);
+        
+        return Ok(vacancies);
     }
 }

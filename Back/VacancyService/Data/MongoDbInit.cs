@@ -1,7 +1,7 @@
 ﻿using GlobalHelpers.DataHelpers.Models;
+using GlobalModels.Vacancy;
 using MongoDB.Driver;
 using MongoDB.Entities;
-using VacancyService.Models;
 
 namespace VacancyService.Data;
 
