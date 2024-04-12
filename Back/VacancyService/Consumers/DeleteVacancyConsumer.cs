@@ -16,6 +16,9 @@ public sealed class DeleteVacancyConsumer(IVacancyRepo vacancyRepo) : IConsumer<
             bool companyCanDeleteVacancy = 
                 await vacancyRepo.CheckIfCompanyOwnVacancy(context.Message.CompanyId, context.Message.VacancyId);
             
+            Console.WriteLine($"Was checking if company owns vacancy. Result: {companyCanDeleteVacancy}, " +
+                              $"companyId: {context.Message.CompanyId}, vacancyId: {context.Message.VacancyId}");
+            
             if(!companyCanDeleteVacancy)
                 throw new ForbiddenException("Company does not own this vacancy");
         

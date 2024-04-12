@@ -45,3 +45,11 @@ body {
 .button-press:active {
   transform: scale(0.95);
 }
+
+.min-width-content {
+  width: min-content;
+}
+
+.max-width-content {
+  width: max-content;
+}

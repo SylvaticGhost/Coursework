@@ -4,6 +4,9 @@ import {useState} from "react";
 import MainHead from "@/Components/MainHead";
 import {VacancyToAddDto} from "@/lib/Types/Vacancy/VacancyToAddDto";
 import {CreateVacancyReq} from "@/lib/VacancyReqByCompany";
+import ToCompanyHubComponent from "@/app/CompanyHub/Components/ToCompanyHubComponent";
+
+const url = 'http://localhost:3000'
 
 export default function CreateVacancy() {
 
@@ -23,10 +26,21 @@ export default function CreateVacancy() {
         
         try { 
             await CreateVacancyReq(vacancy);
+            resetFields()
         }
         catch(e) {
             console.log(e);}
     }
+
+    //region resetFields
+    const resetFields = () => {
+        setTittle('');
+        setDescription('');
+        setSalary('');
+        setSpecialization('');
+        setExperience('');
+    }
+    //endregion
     
     return(
         <div className="flex justify-center items-center h-screen">
@@ -64,12 +78,15 @@ export default function CreateVacancy() {
                            placeholder=" expirience"
                            onChange={e => setExperience(e.target.value)}/>
                 </div>
-                <div className="my-7">
+                <div className="mt-3 mb-5">
                     <button className="button-press rounded-2xl font-semibold p-3 text-lg bg-fuchsia-600 text-white shadow-xl
                             hover:bg-fuchsia-700"
                     onClick={onCreate}>
                         Create
                     </button>
+                </div>
+                <div className="mb-7">
+                    <ToCompanyHubComponent url={url}/>
                 </div>
             </div>
         </div>

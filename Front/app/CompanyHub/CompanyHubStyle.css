@@ -1,0 +1,7 @@
+.btnOnVacancy {
+    @apply my-1 mx-3 border-2 p-1 border-amber-50 rounded-xl bg-white hover:bg-amber-50
+}
+
+.propInVacancyList {
+    @apply px-1 
+}

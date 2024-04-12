@@ -47,7 +47,7 @@ public class VacancyByCompanyController(
     {
         Guid companyId = GetCompanyId();
         
-        DeleteVacancyEvent @event = new DeleteVacancyEvent(companyId, id, DateTime.UtcNow);
+        DeleteVacancyEvent @event = new DeleteVacancyEvent(VacancyId: id,CompanyId: companyId, DateTime.UtcNow);
 
         try
         {
@@ -56,15 +56,18 @@ public class VacancyByCompanyController(
             var result = await requestDeleteVacancyClient.GetResponse<IServiceBusResult<bool>>(@event);
             if (result.Message.IsSuccess)
                 return Ok(result.Message.Result);
-
+            
+            Console.WriteLine("Get an error in DeleteVacancy method from request result to delete vacancy consumer");
             return new BadRequestObjectResult(result.Message.ErrorMessage);
         }
         catch (ForbiddenException ex)
         {
+            Console.WriteLine("Catched an error in DeleteVacancy method ForbiddenException");
             return new BadRequestObjectResult(ex.Message);
         }
         catch (RequestTimeoutException)
         {
+            Console.WriteLine("Catched an error in DeleteVacancy method RequestTimeoutException");
             return new BadRequestObjectResult("Request timeout");
         }
     }

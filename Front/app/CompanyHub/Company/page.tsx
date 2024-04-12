@@ -16,7 +16,7 @@ export default function CompanyPage() {
                     <br/>
                     <button className="button-press rounded-2xl font-semibold p-3 my-5 text-lg bg-fuchsia-600 text-white shadow-xl
                         hover:bg-fuchsia-700"
-                            onClick={e => window.location.href=url + '/CompanyHub/CompanyVacancies'}>
+                            onClick={e => window.location.href=url + '/CompanyHub/VacancyList'}>
                         Vacancies</button>
                 </div>
             </div>
