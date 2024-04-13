@@ -3,6 +3,7 @@ using VacancyService.Repositories;
 using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using VacancyService.Consumers;
+using VacancyService.Consumers.UserConsumers;
 using VacancyService.Data;
 using VacancyService.SearchContext;
 
@@ -28,6 +29,9 @@ builder.Services.AddMassTransit(x =>
     
     x.AddConsumer<GetCompanyVacanciesConsumer>();
     
+    x.AddConsumer<ResponseOnVacancyConsumer>();
+    x.AddConsumer<GetResponsesOnVacancyConsumer>();
+    
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.ConfigureEndpoints(context);
@@ -47,6 +51,7 @@ if (mongoDbSettings is null)
 
 builder.Services.AddScoped<IVacancyRepo, VacancyRepo>();
 builder.Services.AddScoped<ISearchVacancyContext, SearchVacancyContext>();
+builder.Services.AddScoped<IVacancyResponseRepo, VacancyResponseRepo>();
 
 var app = builder.Build();
 
@@ -62,8 +67,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.MapControllers();
 app.UseHttpsRedirection();
-
-
 
 app.Run();
 

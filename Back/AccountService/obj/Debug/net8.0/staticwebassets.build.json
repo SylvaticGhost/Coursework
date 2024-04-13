@@ -1,11 +1,23 @@
 {
   "Version": 1,
-  "Hash": "9EFwGxrIuFdTMVnOzx9J9VJB56g2VXSVrESkw7ztbsU=",
+  "Hash": "rqtehl+rJ/6447q9eeGEoIFiXqhleggHg2aSlJ/Wguw=",
   "Source": "AccountService",
   "BasePath": "_content/AccountService",
   "Mode": "Default",
   "ManifestType": "Build",
-  "ReferencedProjectsConfiguration": [],
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "/Users/Kostia/Documents/GitHub/Coursework/Back/VacancyService/VacancyService.csproj",
+      "Version": 2,
+      "Source": "VacancyService",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework"
+    }
+  ],
   "DiscoveryPatterns": [],
   "Assets": []
 }

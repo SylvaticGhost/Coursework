@@ -2,6 +2,7 @@
 using GlobalModels.Vacancy;
 using MongoDB.Driver;
 using MongoDB.Entities;
+using VacancyService.Models;
 
 namespace VacancyService.Data;
 
@@ -14,6 +15,6 @@ internal static class MongoDbInit
         
         await DB.Index<Vacancy>().Key(c => c.VacancyId, KeyType.Ascending).CreateAsync();
         
-        
+        await DB.Index<VacancyResponses>().Key(v => v.VacancyId, KeyType.Ascending).CreateAsync();
     }
 }
