@@ -44,6 +44,7 @@ services:
             - ASPNETCORE_URLS=http://+:80
             - ConnectionStrings__DefaultConnection=Server=AcountDb;Port=5432;Database=accountdb;Username=postgres;Password=postgres;
             - MongoDbSettings__ConnectionString=mongodb://MongoDb
+            - RabbitMq__Host=rabbitmq
         ports:
             - "5239:80"
     

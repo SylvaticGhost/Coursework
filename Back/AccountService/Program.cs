@@ -4,6 +4,7 @@ using AccountService.Data;
 using AccountService.Repositories.UserProfile;
 using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -62,6 +63,24 @@ builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nam
 
 if (mongoDbSettings is null)
    throw new DataException("MongoDbSettings not found in appsettings.json");
+
+//To ensure that rabbitmq will be up and is running
+await Task.Delay(1000);
+
+builder.Services.AddMassTransit(x =>
+{
+    x.SetKebabCaseEndpointNameFormatter();
+
+    x.UsingRabbitMq((context, cfg) =>
+    {
+        cfg.ConfigureEndpoints(context);
+        cfg.Host(builder.Configuration["RabbitMq:Host"], "/", h =>
+        {
+            h.Username(builder.Configuration.GetValue("RabbitMq:UserName", "myuser"));
+            h.Password(builder.Configuration.GetValue("RabbitMq:Password", "mypass"));
+        });
+    });
+});
 
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
