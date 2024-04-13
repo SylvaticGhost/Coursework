@@ -53,3 +53,20 @@ body {
 .max-width-content {
   width: max-content;
 }
+
+.bordered-table th, .bordered-table td {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+.bordered-table {
+  border-collapse: collapse;
+}
+
+.center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  flex-direction: column;
+}

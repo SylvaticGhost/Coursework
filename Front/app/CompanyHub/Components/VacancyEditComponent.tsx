@@ -5,6 +5,8 @@ import '../CompanyHubStyle.css';
 import DeleteVacancyReq from "@/lib/VacancyReqByCompany";
 import {Component} from "react";
 
+const url = 'http://localhost:3000';
+
 type VacancyEditComponentProps = { 
     vacancy: Vacancy
     refreshVacancies: () => void
@@ -25,6 +27,17 @@ export default class VacancyEditComponent extends Component<VacancyEditComponent
             await DeleteVacancyReq(id);
             this.props.refreshVacancies();
         }
+        
+        const editVacancy = async () => {
+            localStorage.setItem('vacancy', JSON.stringify(vacancy));
+            window.location.href = url + '/CompanyHub/VacancyList/UpdateVacancy';
+        }
+        
+        const viewVacancy = async () => { 
+            localStorage.setItem('vacancy', JSON.stringify(vacancy));
+            window.location.href = url + '/CompanyHub/VacancyList/ViewVacancy';
+        }
+        
 
         return (
             <div className="m-1 py-2 px-5 rounded-xl bg-gray-200 border-4 border-gray-300 flex flex-row shrink">
@@ -32,8 +45,8 @@ export default class VacancyEditComponent extends Component<VacancyEditComponent
                 <span className="propInVacancyList mr-2">{"Created: " + vacancy.createdAt}</span>
                 <span
                     className='propInVacancyList mr-1'>{"Specialization: " + vacancy.specialization ?? "undefined"}</span>
-                <button className="btnOnVacancy button-press">View</button>
-                <button className="btnOnVacancy button-press">Edit</button>
+                <button className="btnOnVacancy button-press" onClick={viewVacancy}>View</button>
+                <button className="btnOnVacancy button-press" onClick={editVacancy}>Edit</button>
                 <button className="btnOnVacancy button-press" onClick={deleteVacancy}>Delete</button>
             </div>
         )

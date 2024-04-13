@@ -2,10 +2,21 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import Link from "next/link";
+import ReactDOM from 'react-dom';
 import Cookies from "js-cookie";
 import LoginOrProfileButton from "@/Components/LoginOrProfileButton";
 import WorklyTittle from "@/Components/WorklyTittle";
+import App from "next/app";
+import {BrowserRouter} from "react-router-dom";
+
+// ReactDOM.render(
+//     <React.StrictMode>
+//         <BrowserRouter>
+//             <App />
+//         </BrowserRouter>
+//     </React.StrictMode>,
+//     document.getElementById('root')
+// );
 
 const url = 'http://localhost:3000';
 const inter = Inter({ subsets: ["latin"] });
