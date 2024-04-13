@@ -1,7 +1,10 @@
 using System.Security.Claims;
 using CompanySvc.Repositories;
 using Contracts;
+using Contracts.VacancyEvent;
 using CustomExceptions._400s;
+using GlobalHelpers;
+using GlobalHelpers.Models;
 using GlobalModels.Vacancy;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
@@ -10,16 +13,18 @@ using VacancyService.Models;
 
 namespace CompanySvc.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("VacancyByCompany")]
 public class VacancyByCompanyController(
     IPublishEndpoint publisher,
     ICompanyRepo companyRepo,
     IRequestClient<GetCompanyVacanciesEvent> requestGetVacancyClient,
-    IRequestClient<DeleteVacancyEvent> requestDeleteVacancyClient)
+    IRequestClient<DeleteVacancyEvent> requestDeleteVacancyClient,
+    IRequestClient<UpdateVacancyEvent> requestUpdateVacancyClient)
     : ControllerBase
 {
-    [Authorize]
+ 
     [HttpPost("PublishVacancy")]
     public async Task<IActionResult> PublishVacancy([FromBody] VacancyToAddDto vacancy)
     {
@@ -27,6 +32,11 @@ public class VacancyByCompanyController(
         
         if (companyId == Guid.Empty)
             return Unauthorized();
+
+        ValidationResults results = VacancyValidation.ValidateVacancyInputFields(vacancy);
+        
+        if (!results.IsValid)
+            return new BadRequestObjectResult(results.ToString());
         
         CompanyShortInfo? companyShortInfo = await companyRepo.GetCompanyShortInfoById(companyId);
         
@@ -41,7 +51,6 @@ public class VacancyByCompanyController(
     }
 
 
-    [Authorize]
     [HttpPost("DeleteVacancy")]
     public async Task<IActionResult> DeleteVacancy(Guid id)
     {
@@ -73,7 +82,6 @@ public class VacancyByCompanyController(
     }
 
 
-    [Authorize]
     [HttpGet("GetCompanyVacancies")]
     public async Task<IActionResult> GetCompanyVacancies()
     {
@@ -97,6 +105,26 @@ public class VacancyByCompanyController(
         }
     }
     
+    
+    [HttpPost("UpdateVacancy")]
+    public async Task<IActionResult> UpdateVacancy([FromBody] VacancyToUpdateDto vacancy)
+    {
+        Guid companyId = GetCompanyId();
+        
+        ValidationResults results = VacancyValidation.ValidateVacancyInputFields(vacancy);
+        
+        if (!results.IsValid)
+            return new BadRequestObjectResult(results.ToString());
+        
+        UpdateVacancyEvent @event = new UpdateVacancyEvent(companyId, vacancy, DateTime.UtcNow);
+        
+        var response = await requestUpdateVacancyClient.GetResponse<IServiceBusResult<bool>>(@event);
+
+        if(response.Message.IsSuccess)
+            return Ok(response.Message.Result);
+        
+        return new BadRequestObjectResult(response.Message.ErrorMessage);
+    }
     
     private Guid GetCompanyId() =>
         Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);

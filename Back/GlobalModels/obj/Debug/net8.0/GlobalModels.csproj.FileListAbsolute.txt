@@ -22,3 +22,4 @@ G:/GitHub/Coursework/Back/GlobalModels/obj/Debug/net8.0/ref/GlobalModels.dll
 /Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/obj/Debug/net8.0/refint/GlobalModels.dll
 /Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/obj/Debug/net8.0/GlobalModels.pdb
 /Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/obj/Debug/net8.0/ref/GlobalModels.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/obj/Debug/net8.0/GlobalModels.csproj.AssemblyReference.cache

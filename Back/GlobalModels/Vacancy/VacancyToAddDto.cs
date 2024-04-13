@@ -1,9 +1,9 @@
 namespace GlobalModels.Vacancy;
 
-public record VacancyToAddDto(
+public record VacancyToAddDto (
     string Title,
     string Description,
     string Salary,
     string Experience,
     string Specialization
-    );
+    ) : IVacancyInputFields;

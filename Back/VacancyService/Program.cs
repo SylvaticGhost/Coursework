@@ -24,6 +24,7 @@ builder.Services.AddMassTransit(x =>
     
     x.AddConsumer<AddVacancyConsumer>();
     x.AddConsumer<DeleteVacancyConsumer>();
+    x.AddConsumer<UpdateVacancyConsumer>();
     
     x.AddConsumer<GetCompanyVacanciesConsumer>();
     

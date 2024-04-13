@@ -1,6 +1,7 @@
 import {VacancyToAddDto} from "@/lib/Types/Vacancy/VacancyToAddDto";
 import Cookies from "js-cookie";
 import Vacancy from "@/lib/Types/Vacancy/Vacancy";
+import {VacancyToUpdateDto} from "@/lib/Types/Vacancy/VacancyToUpdateDto";
 
 const CompanySvcUrl = 'http://localhost:5240'
 
@@ -103,4 +104,33 @@ export default async function DeleteVacancyReq(vacancyId: string) {
         
         console.log('Vacancy deleted');
         alert('Vacancy deleted')
+}
+
+
+export async function UpdateVacancyReq(vacancy: VacancyToUpdateDto)  {
+        
+        const companyToken = Cookies.get('companyToken');
+        
+        if(!companyToken)
+            throw new Error('Company token not found');
+        
+        const response = fetch(CompanySvcUrl + '/VacancyByCompany/UpdateVacancy',
+            {
+                method: 'POST',
+                headers: {
+                    'Authorization': 'Bearer ' + companyToken,
+                    'Content-Type': 'application/json',
+                    'Accept': '*/*',
+                    'AcceptEncoding': 'gzip, deflate, br',
+                },
+                body: JSON.stringify(vacancy)
+            })
+        
+        const result = await response;
+        
+        if(!result.ok)
+            throw new Error('Failed to update vacancy');
+        
+        console.log('Vacancy updated');
+        alert('Vacancy updated')
 }

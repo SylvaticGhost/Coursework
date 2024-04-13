@@ -8,10 +8,6 @@ namespace VacancyService.Repositories;
 public class VacancyRepo : IVacancyRepo
 {
     private readonly IMongoCollection<Vacancy> _collection = DB.Collection<Vacancy>();
-    public VacancyRepo()
-    {
-    }
-
 
     public async Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo, DateTime time = default)
     {
@@ -59,6 +55,24 @@ public class VacancyRepo : IVacancyRepo
         var update = Builders<Vacancy>.Update.Set(v => v.CompanyInfo, companyInfo);
 
         await _collection.UpdateManyAsync(filter, update);
+    }
+    
+    
+    public async Task UpdateVacancy(VacancyToUpdateDto vacancy, DateTime time = default)
+    {
+        if(time == default)
+            time = DateTime.UtcNow;
+        
+        var filter = Builders<Vacancy>.Filter.Eq(v => v.VacancyId, vacancy.VacancyId);
+        var update = Builders<Vacancy>.Update
+            .Set(v => v.Title, vacancy.Title)
+            .Set(v => v.Description, vacancy.Description)
+            .Set(v => v.Salary, vacancy.Salary)
+            .Set(v => v.Experience, vacancy.Experience)
+            .Set(v => v.Specialization, vacancy.Specialization)
+            .Set(v => v.UpdatedAt, time);
+
+        await _collection.UpdateOneAsync(filter, update);
     }
 
 
