@@ -30,6 +30,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<GetCompanyVacanciesConsumer>();
     
     x.AddConsumer<ResponseOnVacancyConsumer>();
+    x.AddConsumer<GetResponsesOnVacancyConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -66,8 +67,6 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 app.MapControllers();
 app.UseHttpsRedirection();
-
-
 
 app.Run();
 

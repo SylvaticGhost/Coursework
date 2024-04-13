@@ -21,4 +21,11 @@ public class VacancyResponseRepo : IVacancyResponseRepo
         await vacancyResponses.SaveAsync();
     }
     
+    
+    public async Task<IEnumerable<ResponseOnVacancy>?> GetResponses(Guid vacancyId)
+    {
+        var vacancyResponses = await _vacancyResponses.Find(v => v.VacancyId == vacancyId).FirstOrDefaultAsync();
+        return vacancyResponses?.Responses;
+    }
+    
 }
