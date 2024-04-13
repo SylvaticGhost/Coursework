@@ -10,9 +10,15 @@ export default function LoginOrProfileButton() {
   useEffect(() => {
     setLogged(Cookies.get('logged') === 'true');
     setToken(Cookies.get('token'));
+    
     function handleCookieChange() {
       setLogged(Cookies.get('logged') === 'true');
       setToken(Cookies.get('token'));
+      
+      if(!token)
+        throw new Error('Token is not set')
+      
+      console.log('token: ' + token)
     }
 
     window.addEventListener('storage', handleCookieChange); // Listen for changes in the storage
@@ -24,8 +30,8 @@ export default function LoginOrProfileButton() {
   }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
 
   return (
-    <a href={logged ? 'http://localhost:3000/Profile/MyProfile' : 'http://localhost:3000/Auth/login'} className="flex ">
-      {logged ? 'Profile' : 'Login'}
+    <a href={token ? 'http://localhost:3000/Profile/MyProfile' : 'http://localhost:3000/Auth/login'} className="flex ">
+      {token ? 'Profile' : 'Login'}
     </a>
   );
 }

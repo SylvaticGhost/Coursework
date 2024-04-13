@@ -2,12 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import React from "react";
-import ReactDOM from 'react-dom';
-import Cookies from "js-cookie";
 import LoginOrProfileButton from "@/Components/LoginOrProfileButton";
 import WorklyTittle from "@/Components/WorklyTittle";
-import App from "next/app";
-import {BrowserRouter} from "react-router-dom";
 
 // ReactDOM.render(
 //     <React.StrictMode>
@@ -34,8 +30,6 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
     console.log("RootLayout");
-  const logged: boolean = Cookies.get('logged') === 'true';
-  //const id: string | undefined = Cookies.get('id') || undefined;
   
     
   return (

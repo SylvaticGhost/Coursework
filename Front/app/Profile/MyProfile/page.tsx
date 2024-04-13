@@ -1,20 +1,50 @@
-﻿import Cookies from "js-cookie";
-import React from "react";
+﻿'use client'
+
+import Cookies from "js-cookie";
+import React, {useEffect, useState} from "react";
 import {LogOut} from "@/Components/LogOut";
 import { GetOwnProfile } from "@/lib/Profile";
 import ProfileComponent from "@/Components/ProfileComponent";
+// @ts-ignore
+import UserProfile from "@/lib/Types/UserProfile/UserProfile";
+import MainHead from "@/Components/MainHead";
 
 
-export default async function UserProfile() {
+export default function UserProfile() {
+    const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
     const token = Cookies.get('token')
-    const profile = await GetOwnProfile(token ?? '');
-    
+
+    useEffect(() => {
+        async function fetchProfile() {
+            if (token) {
+                const profileData = await GetOwnProfile(token);
+                setProfile(profileData);
+            }
+        }
+
+        fetchProfile();
+    }, [token]);
+
+    if(!token)
+        return <div className="center-content">Not logged in</div>
 
     return(
-        <div>
-            <p>MyProfile</p>
-            <LogOut/>
-            <ProfileComponent profile={profile}/>
+        <div className="flex justify-center my-10">
+            <div className="mx-10 mt-8 pr-10 text-xl text-purple-500 text-center font-semibold">
+                <LogOut/>
+                <p className="mt-10">
+                    <a>Edit</a>
+                </p>
+                <br/>
+                <p>
+                    <a>Settings</a>
+                </p>
+            </div>
+            <div className="text-center">
+                <MainHead text="My Profile"/>
+
+                <ProfileComponent profile={profile}/>
+            </div>
         </div>
     )
 }

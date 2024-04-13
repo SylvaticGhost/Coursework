@@ -4,6 +4,7 @@
 import {useState} from "react";
 import {UserLogin} from "../../../lib/auth";
 import {UserAuth} from "../../../lib/Types/UserAuth";
+import Cookies from "js-cookie";
 
 export default function Login() {
     const [email, setEmail] = useState('');
@@ -19,11 +20,12 @@ export default function Login() {
             //const clonedResponse = response.clone();
             console.log(response);
             
-            //Cookies.set('token', response, { expires: 7, secure: true });
+            Cookies.set('token', response, { expires: 7, secure: true });
         } catch (error) {
             setError(error.message);
             console.log(error.message);
         }
+        //window.location.href = "http://localhost:3000/";
     } 
 
 
