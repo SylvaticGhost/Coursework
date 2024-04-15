@@ -6,7 +6,7 @@ public interface IUserProfileRepository
 {
     public Task AddUserProfile(Models.UserProfile userProfile);
     
-    public Task UpdateUserProfile(Models.UserProfile updatedUserProfile);
+    public Task UpdateUserProfile(UserProfileToUpdateDto updatedUserProfile, Guid userId);
     
     public Task<Models.UserProfile?> GetUserProfile(Guid id);
     

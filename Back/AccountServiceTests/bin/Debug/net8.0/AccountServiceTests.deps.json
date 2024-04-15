@@ -21,6 +21,17 @@
           "AccountServiceTests.dll": {}
         }
       },
+      "AutoMapper/13.0.1": {
+        "dependencies": {
+          "Microsoft.Extensions.Options": "9.0.0-preview.3.24172.9"
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.1.0"
+          }
+        }
+      },
       "AWSSDK.Core/3.7.100.14": {
         "runtime": {
           "lib/netcoreapp3.1/AWSSDK.Core.dll": {
@@ -95,18 +106,6 @@
       "MassTransit.Abstractions/8.2.1": {
         "runtime": {
           "lib/net8.0/MassTransit.Abstractions.dll": {
-            "assemblyVersion": "8.2.1.0",
-            "fileVersion": "8.2.1.0"
-          }
-        }
-      },
-      "MassTransit.EntityFrameworkCore/8.2.1-develop.1720": {
-        "dependencies": {
-          "MassTransit": "8.2.1",
-          "Microsoft.EntityFrameworkCore.Relational": "9.0.0-preview.3.24172.4"
-        },
-        "runtime": {
-          "lib/net8.0/MassTransit.EntityFrameworkCoreIntegration.dll": {
             "assemblyVersion": "8.2.1.0",
             "fileVersion": "8.2.1.0"
           }
@@ -1398,6 +1397,8 @@
       },
       "AccountService/1.0.0": {
         "dependencies": {
+          "AutoMapper": "13.0.1",
+          "Contracts": "1.0.0",
           "CustomExceptions": "1.0.0",
           "EFCore.NamingConventions": "8.0.3",
           "GlobalHelpers": "1.0.0",
@@ -1407,8 +1408,7 @@
           "Microsoft.AspNetCore.OpenApi": "8.0.3",
           "MongoDB.Entities": "23.1.0",
           "Npgsql.EntityFrameworkCore.PostgreSQL": "9.0.0-preview.3",
-          "Swashbuckle.AspNetCore": "6.4.0",
-          "VacancyService": "1.0.0"
+          "Swashbuckle.AspNetCore": "6.4.0"
         },
         "runtime": {
           "AccountService.dll": {}
@@ -1420,14 +1420,6 @@
         },
         "runtime": {
           "Contracts.dll": {}
-        }
-      },
-      "CustomAtributtes/1.0.0": {
-        "dependencies": {
-          "Microsoft.AspNetCore.Mvc.Core": "2.1.2"
-        },
-        "runtime": {
-          "CustomAtributtes.dll": {}
         }
       },
       "CustomExceptions/1.0.0": {
@@ -1455,23 +1447,6 @@
         "runtime": {
           "GlobalModels.dll": {}
         }
-      },
-      "VacancyService/1.0.0": {
-        "dependencies": {
-          "Contracts": "1.0.0",
-          "CustomAtributtes": "1.0.0",
-          "CustomExceptions": "1.0.0",
-          "GlobalHelpers": "1.0.0",
-          "GlobalModels": "1.0.0",
-          "MassTransit.EntityFrameworkCore": "8.2.1-develop.1720",
-          "MassTransit.RabbitMQ": "8.2.1",
-          "Microsoft.AspNetCore.OpenApi": "8.0.3",
-          "MongoDB.Entities": "23.1.0",
-          "Swashbuckle.AspNetCore": "6.4.0"
-        },
-        "runtime": {
-          "VacancyService.dll": {}
-        }
       }
     }
   },
@@ -1480,6 +1455,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "AutoMapper/13.0.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "path": "automapper/13.0.1",
+      "hashPath": "automapper.13.0.1.nupkg.sha512"
     },
     "AWSSDK.Core/3.7.100.14": {
       "type": "package",
@@ -1536,13 +1518,6 @@
       "sha512": "sha512-9dk3hcAlXXXEVPZC+5UPJnYnQ9Hcv71kXtkHL85w5wtQ43go1Ieso6QJYvCVj++mq61LCjnhJSPlN/eWgScbkw==",
       "path": "masstransit.abstractions/8.2.1",
       "hashPath": "masstransit.abstractions.8.2.1.nupkg.sha512"
-    },
-    "MassTransit.EntityFrameworkCore/8.2.1-develop.1720": {
-      "type": "package",
-      "serviceable": true,
-      "sha512": "sha512-wnsjLFyC6wBPfvrnl5SiYgK81k1bZlykht6WyMXHzQ8URAog3GFFJDBqfPC7PgnVjrC+A+gsrEMAWeKLpuEo4Q==",
-      "path": "masstransit.entityframeworkcore/8.2.1-develop.1720",
-      "hashPath": "masstransit.entityframeworkcore.8.2.1-develop.1720.nupkg.sha512"
     },
     "MassTransit.RabbitMQ/8.2.1": {
       "type": "package",
@@ -2457,11 +2432,6 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CustomAtributtes/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
     "CustomExceptions/1.0.0": {
       "type": "project",
       "serviceable": false,
@@ -2473,11 +2443,6 @@
       "sha512": ""
     },
     "GlobalModels/1.0.0": {
-      "type": "project",
-      "serviceable": false,
-      "sha512": ""
-    },
-    "VacancyService/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

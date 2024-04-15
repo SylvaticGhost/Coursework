@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "3BrceMYDnBvVyBETrvobKJpkSHP59w9o56DbpKFaPEwW0vlRFKB8ycc2izWnEgam+IZDUSRLMq0vHwbzznve1g==",
+  "dgSpecHash": "wVX9dFk1dJsKK2C+W5mgIQbw7tS2HJK2EkJ1JTdVC1RJk1rt25fedozs0yLGTc2o6ZsWAGnVqyVyU979UVGbhg==",
   "success": true,
   "projectFilePath": "/Users/Kostia/Documents/GitHub/Coursework/Back/AccountService/AccountService.csproj",
   "expectedPackageFiles": [
+    "/Users/Kostia/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/dnsclient/1.6.1/dnsclient.1.6.1.nupkg.sha512",

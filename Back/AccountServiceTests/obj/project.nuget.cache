@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "BnGe9iXDlC62D3k9uuOjL/xhKtVGi0MMHk8j2IKzcDCZskxg8EN5Y8pftGqpIdTjQNgRXRrPNcSkyO8UVSrEaA==",
+  "dgSpecHash": "BnOe2nwISQK1L3aSwkLzVpKJtpYNuLh9ct3WL4pIYbIkYEur/LMEqXthc+dWjZ0oHqzUcCHi3/Kj6meE8D3/Eg==",
   "success": true,
   "projectFilePath": "/Users/Kostia/Documents/GitHub/Coursework/Back/AccountServiceTests/AccountServiceTests.csproj",
   "expectedPackageFiles": [
+    "/Users/Kostia/.nuget/packages/automapper/13.0.1/automapper.13.0.1.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/awssdk.core/3.7.100.14/awssdk.core.3.7.100.14.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/awssdk.securitytoken/3.7.100.14/awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "/Users/Kostia/.nuget/packages/castle.core/5.1.1/castle.core.5.1.1.nupkg.sha512",

@@ -28,4 +28,7 @@ public class ValidationResults
     
     
     public bool ContainsError(string error) => Errors.Contains(error);
+    
+    public int ErrorCount => Errors.Count;
+    
 }

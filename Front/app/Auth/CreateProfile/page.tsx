@@ -41,7 +41,7 @@ export default function CreateProfilePage() {
                                 </div>
                                 <div className="py-2">
                                     <input type="text" placeholder="Country"
-                                           className="border-2 rounded-md py-1"
+                                           className="default-text-input"
                                            value={country}
                                            onChange={e => {
                                                const newValue = e.target.value.replace(/[^a-zA-Zа-яёА-ЯЁіІєЄїЇґҐ\s]/g, '');

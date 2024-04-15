@@ -76,3 +76,7 @@ body {
   @apply button-press rounded-2xl font-semibold p-3 text-lg bg-fuchsia-600 text-white shadow-xl
   hover:bg-fuchsia-700
 }
+
+.default-text-input {
+  @apply border-2 rounded-md py-1
+}

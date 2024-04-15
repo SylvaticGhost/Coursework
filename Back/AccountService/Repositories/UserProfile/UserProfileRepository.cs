@@ -28,9 +28,9 @@ public class UserProfileRepository : IUserProfileRepository
     }
     
     
-    public async Task UpdateUserProfile(Models.UserProfile updatedUserProfile)
+    public async Task UpdateUserProfile(UserProfileToUpdateDto updatedUserProfile, Guid userId)
     {
-        var userProfile = await DB.Find<Models.UserProfile>().OneAsync(updatedUserProfile.ID);
+        var userProfile = await _collection.Find(v => v.UserId == userId).FirstOrDefaultAsync();
         if (userProfile != null)
         {
             userProfile.City = updatedUserProfile.City;

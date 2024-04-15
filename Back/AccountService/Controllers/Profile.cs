@@ -4,7 +4,10 @@ using AccountService.Helpers;
 using AccountService.Models;
 using AccountService.Repositories;
 using AccountService.Repositories.UserProfile;
+using AutoMapper;
 using CustomExceptions;
+using CustomExceptions._400s;
+using GlobalHelpers.Models;
 using GlobalModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -18,11 +21,13 @@ public class Profile : ControllerBase
 {
     private readonly IUserProfileRepository _userProfileRepository;
     private readonly IUserRepositoryBasic _userBasicInfoRepository;
+    private readonly IMapper _mapper;
     
-    public Profile(DataContextNpgEf dataContextNpgEf)
+    public Profile(DataContextNpgEf dataContextNpgEf, IMapper mapper)
     {
         _userProfileRepository = new UserProfileRepository();
         _userBasicInfoRepository = new UserProfileBasicInfoRepo(dataContextNpgEf);
+        _mapper = mapper;
     }
 
     
@@ -99,6 +104,33 @@ public class Profile : ControllerBase
     
     
     [Authorize]
+    [HttpPost("UpdateUserProfile")]
+    public async Task <IActionResult> UpdateUserProfile([FromBody] UserProfileToUpdateDto userProfile)
+    {
+        Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
+        if(userId == Guid.Empty)
+            return new BadRequestObjectResult("Invalid user id");
+        
+        LocalValidator localValidator = new(_mapper);
+        
+        ValidationResults validationResult = localValidator.ValidateProfileToUpdate(userProfile);
+        
+        if(!validationResult.IsValid)
+            return new BadRequestObjectResult(validationResult.ToString());
+
+        try
+        {
+            await _userProfileRepository.UpdateUserProfile(userProfile, userId);
+            return new OkResult();
+        }
+        catch (Exception e)
+        {
+            return new BadRequestObjectResult(e.Message);
+        }
+    }
+    
+    
+    [Authorize]
     [HttpPost("AddContact")]
     public async Task<IActionResult> AddContact([FromBody] Contact contacts)
     {
@@ -106,9 +138,11 @@ public class Profile : ControllerBase
         if(userId == Guid.Empty)
             return new BadRequestObjectResult("Invalid user id");
         
-        // if (!LocalValidator.ValidateContact(contact))
-        //     throw new BadRequestException("Invalid input");
+        ValidationResults validationResult = LocalValidator.ValidateContact(contacts);
 
+        if(!validationResult.IsValid)
+            return new BadRequestObjectResult(validationResult.ToString());
+        
         try
         {
             await _userProfileRepository.AddContacts(userId, [contacts]);
