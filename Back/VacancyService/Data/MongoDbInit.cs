@@ -1,4 +1,5 @@
 ﻿using GlobalHelpers.DataHelpers.Models;
+using GlobalModels;
 using GlobalModels.Vacancy;
 using MongoDB.Driver;
 using MongoDB.Entities;
@@ -14,7 +15,5 @@ internal static class MongoDbInit
             MongoClientSettings.FromConnectionString(mongoDbSettings.ConnectionString));
         
         await DB.Index<Vacancy>().Key(c => c.VacancyId, KeyType.Ascending).CreateAsync();
-        
-        await DB.Index<VacancyResponses>().Key(v => v.VacancyId, KeyType.Ascending).CreateAsync();
     }
 }

@@ -9,6 +9,16 @@ public sealed class AddVacancyConsumer(IVacancyRepo vacancyRepo) : IConsumer<Add
 {
     public async Task Consume(ConsumeContext<AddVacancyEvent> context)
     {
-        await vacancyRepo.AddVacancy(context.Message.Vacancy, context.Message.CompanyShortInfo, context.Message.Time);
+        try
+        {
+            Guid vacancyId = await vacancyRepo.AddVacancy(context.Message.Vacancy, context.Message.CompanyShortInfo, context.Message.Time);
+            var result = ServiceBusResultBuilder.Success(vacancyId);
+            await context.RespondAsync(result);
+        }
+        catch (Exception e)
+        {
+            var result = ServiceBusResultBuilder.Fail<Guid>(e.Message);
+            await context.RespondAsync(result);
+        }
     }
 }

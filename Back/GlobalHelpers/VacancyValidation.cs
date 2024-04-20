@@ -1,4 +1,5 @@
 using GlobalHelpers.Models;
+using GlobalModels;
 using GlobalModels.Vacancy;
 
 namespace GlobalHelpers;
@@ -32,4 +33,5 @@ public class VacancyValidation : Validation
 
         return validationResults;
     }
+    
 }

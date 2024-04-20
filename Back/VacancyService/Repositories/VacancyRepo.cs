@@ -31,9 +31,6 @@ public class VacancyRepo : IVacancyRepo
 
         await vacancyToAdd.SaveAsync();
         
-        VacancyResponses vacancyResponses = new(id);
-        
-        await vacancyResponses.SaveAsync();
 
         return id;
     }

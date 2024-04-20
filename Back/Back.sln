@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalHelpersTests", "Globa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAtributtes", "CustomAtributtes\CustomAtributtes.csproj", "{5DCDD271-EC2D-4656-B82E-BA9FEDC6A247}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSvc", "MessageSvc\MessageSvc.csproj", "{F931C38D-BA97-48C1-9855-5A0E529F2ED5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -80,6 +82,10 @@ Global
 		{5DCDD271-EC2D-4656-B82E-BA9FEDC6A247}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DCDD271-EC2D-4656-B82E-BA9FEDC6A247}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DCDD271-EC2D-4656-B82E-BA9FEDC6A247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F931C38D-BA97-48C1-9855-5A0E529F2ED5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F931C38D-BA97-48C1-9855-5A0E529F2ED5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F931C38D-BA97-48C1-9855-5A0E529F2ED5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F931C38D-BA97-48C1-9855-5A0E529F2ED5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{8AA0BB27-3399-412F-9765-05D96037C202} = {8C2F7376-11E1-4F27-A8A4-0D58F51A65CA}

@@ -1,33 +1,35 @@
 {
   "format": 1,
   "restore": {
-    "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj": {}
+    "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj": {}
   },
   "projects": {
-    "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj": {
+    "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj",
+        "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj",
-        "packagesPath": "/Users/Kostia/.nuget/packages/",
-        "outputPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/obj/",
+        "projectPath": "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
+        "outputPath": "G:\\GitHub\\Coursework\\Back\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/Kostia/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj": {
-                "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj"
+              "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj": {
+                "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj"
               }
             }
           }
@@ -57,26 +59,28 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj": {
+    "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj",
+        "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj",
         "projectName": "GlobalModels",
-        "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj",
-        "packagesPath": "/Users/Kostia/.nuget/packages/",
-        "outputPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/obj/",
+        "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj",
+        "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
+        "outputPath": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/Kostia/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -116,7 +120,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
