@@ -2,5 +2,5 @@
 
 public interface IVacancyMessageBoxRepo
 {
-    public Task CreateMessageBox(Guid companyId);
+    public Task CreateMessageBox(Guid vacancyId, Guid companyId);
 }

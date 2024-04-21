@@ -5,9 +5,9 @@ namespace MessageSvc.Repositories.VacancyMessageBoxRepo;
 
 public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
 {
-    public async Task CreateMessageBox(Guid companyId)
+    public async Task CreateMessageBox(Guid vacancyId, Guid companyId)
     {
-        VacancyApplicationsBox box = new(companyId);
+        VacancyApplicationsBox box = new(vacancyId, companyId);
 
         await box.SaveAsync();
     }

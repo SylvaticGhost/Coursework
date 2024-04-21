@@ -5,10 +5,12 @@ using System.Security.Claims;
 using AccountService.Data;
 using AccountService.Models;
 using AccountService.Repositories;
+using Contracts.Events.Messages.CreatingBoxEvents;
 using CustomExceptions;
 using CustomExceptions._500s_exceptions;
 using GlobalHelpers;
 using GlobalHelpers.Models;
+using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
@@ -18,15 +20,13 @@ namespace AccountService.Controllers;
 [ApiController]
 [Route("[controller]")]
 [DefaultExceptionFilter]
-public class UserAuth : ControllerBase
+public class UserAuth(DataContextNpgEf dataContextNpgEf, 
+    IConfiguration configuration,
+    IRequestClient<CreateUserMessageBoxEvent> createBoxRequestClient)
+    : ControllerBase
 {
-    private readonly IUserRepository _userRepository;
-    
-    public UserAuth(DataContextNpgEf dataContextNpgEf, IConfiguration configuration)
-    {
-        _userRepository = new UserRepository(dataContextNpgEf, configuration);
-    }
-    
+    private readonly IUserRepository _userRepository = new UserRepository(dataContextNpgEf, configuration);
+
     [AllowAnonymous]
     [HttpPost("Register")]
     public async Task<IActionResult> Register([FromBody] UserAccountToAddDto userAccountToAddDto)
@@ -43,6 +43,10 @@ public class UserAuth : ControllerBase
             return new BadRequestObjectResult("Invalid input");
         
         Guid id = await _userRepository.AddUser(userAccountToAddDto);
+
+        CreateUserMessageBoxEvent createUserMessageBoxEvent = new(id);
+        
+        await createBoxRequestClient.GetResponse<CreateUserMessageBoxEvent>(createUserMessageBoxEvent);
         
         return new OkObjectResult(id);
     }

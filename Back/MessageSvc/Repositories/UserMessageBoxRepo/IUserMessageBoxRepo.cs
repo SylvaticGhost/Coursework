@@ -2,5 +2,7 @@
 
 public interface IUserMessageBoxRepo
 {
-    public Task CreateUserMessageRepoBox(Guid userId);
+    public Task CreateUserMessageBox(Guid userId);
+    
+    public Task<bool> UserMessageBoxExists(Guid userId);
 }

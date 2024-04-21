@@ -1,7 +1,9 @@
 using System.Data;
+using Contracts.Events.Messages.CreatingBoxEvents;
 using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using MessageSvc;
+using MessageSvc.Consumers;
 using MessageSvc.Data;
 using MessageSvc.Repositories.UserMessageBoxRepo;
 using MessageSvc.Repositories.VacancyMessageBoxRepo;
@@ -15,6 +17,8 @@ builder.Services.AddScoped<IVacancyMessageBoxRepo, VacancyMessageBoxRepo>();
 builder.Services.AddMassTransit(x => 
 {
     x.SetKebabCaseEndpointNameFormatter();
+
+    x.AddConsumer<CreatingVacancyMessageBoxConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {

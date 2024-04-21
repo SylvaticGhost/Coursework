@@ -12,12 +12,12 @@ public sealed class AddVacancyConsumer(IVacancyRepo vacancyRepo) : IConsumer<Add
         try
         {
             Guid vacancyId = await vacancyRepo.AddVacancy(context.Message.Vacancy, context.Message.CompanyShortInfo, context.Message.Time);
-            var result = ServiceBusResultBuilder.Success(vacancyId);
+            var result = ServiceBusResultFactory.SuccessResult(vacancyId);
             await context.RespondAsync(result);
         }
         catch (Exception e)
         {
-            var result = ServiceBusResultBuilder.Fail<Guid>(e.Message);
+            var result = ServiceBusResultFactory.FailResult<Guid>(e.Message);
             await context.RespondAsync(result);
         }
     }

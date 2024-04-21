@@ -1,6 +1,6 @@
 ﻿namespace GlobalModels.Messages.CompanyResponse;
 
-public class CompanyResponse
+public record AnswerOnApplication
 {
     public Guid VacancyId { get; init; }
     public Guid UserApplicationId { get; init; }

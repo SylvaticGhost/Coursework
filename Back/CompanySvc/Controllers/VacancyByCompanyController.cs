@@ -7,7 +7,7 @@ using Contracts.VacancyEvent;
 using CustomExceptions._400s;
 using GlobalHelpers;
 using GlobalHelpers.Models;
-using GlobalModels;
+using GlobalModels.Messages.CompanyResponse;
 using GlobalModels.Vacancy;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
@@ -26,9 +26,8 @@ public class VacancyByCompanyController(
     IRequestClient<CreateVacancyMessageBoxEvent> requestCreateMessageBoxClient,
     IRequestClient<GetCompanyVacanciesEvent> requestGetVacancyClient,
     IRequestClient<DeleteVacancyEvent> requestDeleteVacancyClient,
-    IRequestClient<UpdateVacancyEvent> requestUpdateVacancyClient,
-    IRequestClient<GetVacancyResponsesEvent> requestGetResponsesOnVacancyClient,
-    IRequestClient<FeedbackOnResponseEvent> requestFeedbackOnResponseClient)
+    IRequestClient<UpdateVacancyEvent> requestUpdateVacancyClient
+    )
     : ControllerBase
 {
  
@@ -145,43 +144,6 @@ public class VacancyByCompanyController(
             return Ok(response.Message.Result);
         
         return new BadRequestObjectResult(response.Message.ErrorMessage);
-    }
-    
-    
-    [HttpGet("GetResponsesOnVacancy")]
-    public async Task<IActionResult> GetResponsesOnVacancy(Guid vacancyId)
-    {
-        Guid companyId = GetCompanyId();
-        
-        GetVacancyResponsesEvent @event = new GetVacancyResponsesEvent(vacancyId, companyId);
-        
-        var response = await requestGetResponsesOnVacancyClient.GetResponse<IServiceBusResult<IEnumerable<ResponseOnVacancy>>>(@event);
-        
-        if (response.Message.IsSuccess)
-            return Ok(response.Message.Result);
-        
-        return new BadRequestObjectResult(response.Message.ErrorMessage);
-    }
-    
-    
-    [HttpPost("MakeFeedbackOnApplication")]
-    public async Task<IActionResult> MakeFeedbackOnResponse([FromBody] ResponseByCompanyToAddDto feedback)
-    {
-        ValidationResults results = VacancyValidation.ValidateResponseByCompany(feedback);
-        
-        if (!results.IsValid)
-            return new BadRequestObjectResult(results.ToString());
-        
-        Guid companyId = GetCompanyId();
-        
-        FeedbackOnResponseEvent @event = new FeedbackOnResponseEvent(feedback, companyId, DateTime.UtcNow);
-        
-        var result = await requestFeedbackOnResponseClient.GetResponse<IServiceBusResult<bool>>(@event);
-        
-        if(result.Message.IsSuccess)
-            return Ok(result.Message.Result);
-        
-        return new BadRequestObjectResult(result.Message.ErrorMessage);
     }
     
     

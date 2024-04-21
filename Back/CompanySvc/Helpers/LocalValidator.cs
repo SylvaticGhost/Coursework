@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using CompanySvc.Models;
 using GlobalHelpers;
+using GlobalHelpers.Models;
+using GlobalModels.Messages.CompanyResponse;
 
 namespace CompanySvc.Helpers;
 
@@ -41,5 +43,22 @@ public class LocalValidator : Validation
         CompanyToAddDto companyToAddDto = _mapper.Map<CompanyToAddDto>(company);
 
         return ValidateCompanyForm(companyToAddDto);
+    }
+    
+    
+    public static ValidationResults ValidateAnswerOnApplication(AnswerOnApplicationToAddDto answer)
+    {
+        ValidationResults validationResults = new();
+        
+        if (answer.UserApplicationId == Guid.Empty)
+        {
+            validationResults.AddError("ApplicationId is required");
+        }
+        if (answer.Text == null)
+        {
+            validationResults.AddError("Answer is required");
+        }
+        
+        return validationResults;
     }
 }
