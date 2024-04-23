@@ -4,6 +4,7 @@ using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using MessageSvc;
 using MessageSvc.Consumers;
+using MessageSvc.Consumers.ApplicationOnVacancy;
 using MessageSvc.Data;
 using MessageSvc.Repositories.UserMessageBoxRepo;
 using MessageSvc.Repositories.VacancyMessageBoxRepo;
@@ -18,7 +19,12 @@ builder.Services.AddMassTransit(x =>
 {
     x.SetKebabCaseEndpointNameFormatter();
 
+    x.AddConsumer<CreatingUserMessageBoxConsumer>();
     x.AddConsumer<CreatingVacancyMessageBoxConsumer>();
+    
+    x.AddConsumer<ApplicationForVacancyPostConsumer>();
+    
+    x.AddConsumer<GetUserApplicationsConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {

@@ -8,7 +8,10 @@ import ProfileComponent from "@/Components/ProfileComponent";
 // @ts-ignore
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import MainHead from "@/Components/MainHead";
+import ToMainPageBtn from "@/Components/ToMainPageBtn";
+import FailedToLoadProfileComponent from "@/app/Profile/Components/FailedToLoadProfileComponent";
 
+const url : string = 'http://localhost:3000'
 
 export default function UserProfile() {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
@@ -18,22 +21,27 @@ export default function UserProfile() {
         async function fetchProfile() {
             if (token) {
                 const profileData = await GetOwnProfile(token);
+                
                 setProfile(profileData);
             }
         }
 
-        fetchProfile();
+        fetchProfile().then(r => {});
     }, [token]);
 
     if(!token)
         return <div className="center-content">Not logged in</div>
+
+    if (!profile) 
+        return <FailedToLoadProfileComponent/>
+    
 
     return(
         <div className="flex justify-center my-10">
             <div className="mx-10 mt-8 pr-10 text-xl text-purple-500 text-center font-semibold">
                 <LogOut/>
                 <p className="mt-10">
-                    <a>Edit</a>
+                    <a href={url + '/Profile/MyProfile/EditProfile'}>Edit</a>
                 </p>
                 <br/>
                 <p>

@@ -7,12 +7,7 @@ namespace AccountService.Repositories.UserProfile;
 public class UserProfileRepository : IUserProfileRepository
 {
     private readonly IMongoCollection<Models.UserProfile> _collection = DB.Collection<Models.UserProfile>();
-    public UserProfileRepository()
-    {
-        
-    }
-
-
+    
     public async Task AddUserProfile(Models.UserProfile userProfile)
     {
         await DB.InsertAsync(userProfile);
@@ -33,13 +28,8 @@ public class UserProfileRepository : IUserProfileRepository
         var userProfile = await _collection.Find(v => v.UserId == userId).FirstOrDefaultAsync();
         if (userProfile != null)
         {
-            userProfile.City = updatedUserProfile.City;
-            userProfile.Country = updatedUserProfile.Country;
-            userProfile.Contacts = updatedUserProfile.Contacts;
-            userProfile.About = updatedUserProfile.About;
-            userProfile.Avatar = updatedUserProfile.Avatar;
-
-            await DB.SaveAsync(userProfile);
+            userProfile.UpdateProfile(updatedUserProfile);
+            await userProfile.SaveAsync();
         }
         else
         {
@@ -48,10 +38,8 @@ public class UserProfileRepository : IUserProfileRepository
     }
     
     
-    public async Task<Models.UserProfile?> GetUserProfile(Guid id)
-    {
-        return  _collection.Find(x => x.UserId == id).FirstOrDefault();
-    }
+    public async Task<Models.UserProfile?> GetUserProfile(Guid id) =>
+        await _collection.Find(x => x.UserId == id).FirstOrDefaultAsync();
     
     
     public async Task DeleteUserProfile(Guid id) => 

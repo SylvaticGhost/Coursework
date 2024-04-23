@@ -42,6 +42,14 @@ public class VacancyRepo : IVacancyRepo
     }
 
 
+    public async Task<Guid> GetOwnerOfVacancy(Guid vacancyId) =>
+        await GetVacancy(vacancyId) switch
+        {
+            null => Guid.Empty,
+            { } vacancy => vacancy.CompanyInfo.CompanyId
+        };
+
+
     public async Task<bool> CheckIfVacancyExists(Guid id) =>
         await _collection.Find(v => v.VacancyId == id).AnyAsync();
     

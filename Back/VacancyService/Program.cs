@@ -28,6 +28,8 @@ builder.Services.AddMassTransit(x =>
     
     x.AddConsumer<GetCompanyVacanciesConsumer>();
     
+    x.AddConsumer<CheckIfVacancyExistConsumer>();
+    x.AddConsumer<GetOwnerOfVacancyConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {

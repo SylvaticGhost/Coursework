@@ -5,11 +5,13 @@ import {useState} from "react";
 import {UserLogin} from "../../../lib/auth";
 import {UserAuth} from "../../../lib/Types/UserAuth";
 import Cookies from "js-cookie";
+import ToMainPageBtn from "../../../Components/ToMainPageBtn";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
    
 
     async function login() {
@@ -21,12 +23,22 @@ export default function Login() {
             console.log(response);
             
             Cookies.set('token', response, { expires: 7, secure: true });
+            setLoggedIn(true);
         } catch (error) {
             setError(error.message);
             console.log(error.message);
         }
         //window.location.href = "http://localhost:3000/";
     } 
+    
+    if (loggedIn) { 
+        return (
+            <div className="center-content">
+                <h1 className="text-3xl font-semibold text-purple-500 mb-3 ">You are logged in</h1>
+                <ToMainPageBtn/>
+            </div>
+        )
+    }
 
 
     return (

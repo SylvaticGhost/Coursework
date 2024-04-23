@@ -10,18 +10,22 @@ public class UserAccount
     
     [Required]
     [Length(2, 30)]
+    [MaxLength(30)]
     public string FirstName { get; set; }
     
     [Length(2, 30)]
+    [MaxLength(30)]
     public string? LastName { get; set; }
     
     [Required]
     [EmailAddress]
     [Length(3, 50)]
+    [MaxLength(50)]
     public string Email { get; set; }
     
     [Required]
     [Length(5, 15)]
+    [MaxLength(15)]
     public string PhoneNumber { get; set; }
     
     [Required]
@@ -42,18 +46,12 @@ public class UserAccount
         Id = Guid.NewGuid();
         CreatedAt = DateTime.UtcNow;
         
-        Init();
-    }
-
-
-    private void Init()
-    {
         FirstName ??= string.Empty;
         LastName ??= string.Empty;
         Email ??= string.Empty;
         PhoneNumber ??= string.Empty;
         
-        PasswordHash = Array.Empty<byte>();
-        PasswordSalt = Array.Empty<byte>();
+        PasswordHash = [];
+        PasswordSalt = [];
     }
 }
