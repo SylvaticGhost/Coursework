@@ -1,24 +1,20 @@
 ﻿using AccountService.Data;
 using AccountService.Helpers;
 using AccountService.Models;
+using Contracts.Events.Messages.CreatingBoxEvents;
 using GlobalHelpers;
 using GlobalHelpers.Models;
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
 
 namespace AccountService.Repositories;
 
-public class UserRepository : IUserRepository, IUserRepositoryBasic
+public class UserRepository(DataContextNpgEf dataContextNpgEf, 
+    IConfiguration configuration)
+    : IUserRepository, IUserRepositoryBasic
 {
-    private readonly DataContextNpgEf _dataContextNpgEf;
-    private readonly AuthHelpers _authHelpers;
-
-    public UserRepository(DataContextNpgEf dataContextNpgEf, IConfiguration configuration)
-    {
-        _dataContextNpgEf = dataContextNpgEf;
-        _authHelpers = new AuthHelpers(configuration);
-    }
-
-
+    private readonly AuthHelpers _authHelpers = new(configuration);
+    
     public async Task<Guid> AddUser(UserAccountToAddDto userAccountToAddDto)
     {
         HashedPasswords password = GlobalAuthHelpers.CreatePasswordHash(userAccountToAddDto.Password);
@@ -34,21 +30,21 @@ public class UserRepository : IUserRepository, IUserRepositoryBasic
             PasswordSalt = password.PasswordSalt
         };
         
-        await _dataContextNpgEf.UserAccount.AddAsync(userAccount);
-        await _dataContextNpgEf.SaveChangesAsync();
+        await dataContextNpgEf.UserAccount.AddAsync(userAccount);
+        await dataContextNpgEf.SaveChangesAsync();
 
         return userAccount.Id;
     }
     
     
     public async Task<UserAccount?> GetUserByEmail(string email) => 
-        await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Email == email);
+        await dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Email == email);
     
     public async Task<UserAccount?> GetUserById(Guid id) =>
-        await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
+        await dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
     
     public async Task<UserAccount?> GetUserByPhoneNumber(string phoneNumber) =>
-        await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
+        await dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.PhoneNumber == phoneNumber);
     
     
     public async Task<string> Login(string credential, string password, TypeOfLogin typeOfLogin)
@@ -76,7 +72,7 @@ public class UserRepository : IUserRepository, IUserRepositoryBasic
     
     public async Task<string> RefreshToken(Guid id)
     {
-        UserAccount? user = await _dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
+        UserAccount? user = await dataContextNpgEf.UserAccount.FirstOrDefaultAsync(x => x.Id == id);
         
         if (user == null)
             throw new ArgumentException("User not found");
@@ -94,24 +90,24 @@ public class UserRepository : IUserRepository, IUserRepositoryBasic
         if (user == null)
             throw new ArgumentException("User not found");
         
-        _dataContextNpgEf.UserAccount.Remove(user);
+        dataContextNpgEf.UserAccount.Remove(user);
         
-        await _dataContextNpgEf.SaveChangesAsync();
+        await dataContextNpgEf.SaveChangesAsync();
         
         return true;
     }
     
     
     public async Task<bool> CheckIfEmailExists(string email) =>
-        await _dataContextNpgEf.UserAccount.AnyAsync(x => x.Email == email);
+        await dataContextNpgEf.UserAccount.AnyAsync(x => x.Email == email);
     
     
     public async Task<bool> CheckIfPhoneNumberExists(string phoneNumber) =>
-        await _dataContextNpgEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
+        await dataContextNpgEf.UserAccount.AnyAsync(x => x.PhoneNumber == phoneNumber);
 
     public Task<(string FirstName, string? LastName)> GetNameAndSurname(Guid id)
     {
-        return _dataContextNpgEf.UserAccount
+        return dataContextNpgEf.UserAccount
             .Where(x => x.Id == id)
             .Select(x => new {x.FirstName, x.LastName})
             .FirstOrDefaultAsync()

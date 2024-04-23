@@ -1,12 +1,13 @@
 using System.Security.Claims;
 using CompanySvc.Repositories;
 using Contracts;
+using Contracts.Events.Messages.CreatingBoxEvents;
 using Contracts.Events.ResponseOnVacancyEvents;
 using Contracts.VacancyEvent;
 using CustomExceptions._400s;
 using GlobalHelpers;
 using GlobalHelpers.Models;
-using GlobalModels;
+using GlobalModels.Messages.CompanyResponse;
 using GlobalModels.Vacancy;
 using MassTransit;
 using Microsoft.AspNetCore.Authorization;
@@ -21,10 +22,12 @@ namespace CompanySvc.Controllers;
 public class VacancyByCompanyController(
     IPublishEndpoint publisher,
     ICompanyRepo companyRepo,
+    IRequestClient<AddVacancyEvent> requestAddVacancyClient,
+    IRequestClient<CreateVacancyMessageBoxEvent> requestCreateMessageBoxClient,
     IRequestClient<GetCompanyVacanciesEvent> requestGetVacancyClient,
     IRequestClient<DeleteVacancyEvent> requestDeleteVacancyClient,
-    IRequestClient<UpdateVacancyEvent> requestUpdateVacancyClient,
-    IRequestClient<GetVacancyResponsesEvent> requestGetResponsesOnVacancyClient)
+    IRequestClient<UpdateVacancyEvent> requestUpdateVacancyClient
+    )
     : ControllerBase
 {
  
@@ -45,12 +48,26 @@ public class VacancyByCompanyController(
         
         if (companyShortInfo is null)
             throw new Exception("Company not found");
-
+        
         AddVacancyEvent @event = new AddVacancyEvent(DateTime.UtcNow, companyShortInfo, vacancy);
+        CancellationTokenSource tokenSource = new();
         
-        await publisher.Publish(@event);
+        var response = await requestAddVacancyClient.GetResponse<IServiceBusResult<Guid>>(@event, tokenSource.Token);
+
+        if (!response.Message.IsSuccess)
+        {
+            await tokenSource.CancelAsync();
+            return new BadRequestObjectResult(response.Message.ErrorMessage);
+        }
         
-        return Ok();
+        var createMessageBoxEvent = new CreateVacancyMessageBoxEvent(response.Message.Result, companyId);
+        
+        var responseCreateMessageBox = await requestCreateMessageBoxClient.GetResponse<IServiceBusResult<bool>>(createMessageBoxEvent);
+        
+        if (!responseCreateMessageBox.Message.IsSuccess)
+            return new BadRequestObjectResult(responseCreateMessageBox.Message.ErrorMessage);
+        
+        return Ok(response.Message.Result);
     }
 
 
@@ -129,21 +146,6 @@ public class VacancyByCompanyController(
         return new BadRequestObjectResult(response.Message.ErrorMessage);
     }
     
-    
-    [HttpGet("GetResponsesOnVacancy")]
-    public async Task<IActionResult> GetResponsesOnVacancy(Guid vacancyId)
-    {
-        Guid companyId = GetCompanyId();
-        
-        GetVacancyResponsesEvent @event = new GetVacancyResponsesEvent(vacancyId, companyId);
-        
-        var response = await requestGetResponsesOnVacancyClient.GetResponse<IServiceBusResult<IEnumerable<ResponseOnVacancy>>>(@event);
-        
-        if (response.Message.IsSuccess)
-            return Ok(response.Message.Result);
-        
-        return new BadRequestObjectResult(response.Message.ErrorMessage);
-    }
     
     private Guid GetCompanyId() =>
         Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);

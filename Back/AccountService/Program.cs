@@ -84,6 +84,8 @@ builder.Services.AddMassTransit(x =>
 
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
 
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 #endregion
 
 var app = builder.Build();

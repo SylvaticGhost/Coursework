@@ -1,0 +1,13 @@
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/bin/Release/net8.0/CustomExceptions.deps.json
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/bin/Release/net8.0/CustomExceptions.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/bin/Release/net8.0/CustomExceptions.pdb
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.csproj.AssemblyReference.cache
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.AssemblyInfoInputs.cache
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.AssemblyInfo.cs
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.csproj.CoreCompileInputs.cache
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.sourcelink.json
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/refint/CustomExceptions.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/CustomExceptions.pdb
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Release/net8.0/ref/CustomExceptions.dll

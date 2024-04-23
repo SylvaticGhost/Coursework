@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net8.0": {
+      "AutoMapper/13.0.1": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "6.0.0"
+        },
+        "compile": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net6.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "AWSSDK.Core/3.7.100.14": {
         "type": "package",
         "compile": {
@@ -1976,6 +1992,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/13.0.1": {
+      "sha512": "/Fx1SbJ16qS7dU4i604Sle+U9VLX+WSNVJggk6MupKVkYvvBm4XqYaeFuf67diHefHKHs50uQIS2YEDFhPCakQ==",
+      "type": "package",
+      "path": "automapper/13.0.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.13.0.1.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net6.0/AutoMapper.dll",
+        "lib/net6.0/AutoMapper.xml"
+      ]
+    },
     "AWSSDK.Core/3.7.100.14": {
       "sha512": "gnEgxBlk4PFEfdPE8Lkf4+D16MZFYSaW7/o6Wwe5e035QWUkTJX0Dn4LfTCdV5QSEL/fOFxu+yCAm55eIIBgog==",
       "type": "package",
@@ -5864,6 +5895,7 @@
   },
   "projectFileDependencyGroups": {
     "net8.0": [
+      "AutoMapper >= 13.0.1",
       "Contracts >= 1.0.0",
       "CustomExceptions >= 1.0.0",
       "EFCore.NamingConventions >= 8.0.3",
@@ -5878,41 +5910,43 @@
     ]
   },
   "packageFolders": {
-    "/Users/Kostia/.nuget/packages/": {}
+    "C:\\Users\\ktkac\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/Kostia/Documents/GitHub/Coursework/Back/AccountService/AccountService.csproj",
+      "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\AccountService\\AccountService.csproj",
       "projectName": "AccountService",
-      "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/AccountService/AccountService.csproj",
-      "packagesPath": "/Users/Kostia/.nuget/packages/",
-      "outputPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/AccountService/obj/",
+      "projectPath": "G:\\GitHub\\Coursework\\Back\\AccountService\\AccountService.csproj",
+      "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
+      "outputPath": "G:\\GitHub\\Coursework\\Back\\AccountService\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "/Users/Kostia/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj": {
-              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj"
+            "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj": {
+              "projectPath": "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj"
             },
-            "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/CustomExceptions.csproj": {
-              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/CustomExceptions.csproj"
+            "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\CustomExceptions.csproj": {
+              "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\CustomExceptions.csproj"
             },
-            "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/GlobalHelpers.csproj": {
-              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalHelpers/GlobalHelpers.csproj"
+            "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj": {
+              "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalHelpers\\GlobalHelpers.csproj"
             },
-            "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj": {
-              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj"
+            "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj": {
+              "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj"
             }
           }
         }
@@ -5927,6 +5961,10 @@
       "net8.0": {
         "targetAlias": "net8.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[13.0.1, )"
+          },
           "EFCore.NamingConventions": {
             "target": "Package",
             "version": "[8.0.3, )"
@@ -5975,7 +6013,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

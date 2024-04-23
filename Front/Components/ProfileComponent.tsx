@@ -17,21 +17,31 @@ export default function ProfileComponent({profile}: ProfileComponentProps) {
         return
     }
     
+    console.log(profile)
+    
     if(profile === null || profile === undefined) {
         //window.location.href = 'http://localhost:3000/Auth/login'
         console.log('profile is null')
         return
     }
+    //profile.Avatar ? URL.createObjectURL(profile.Avatar) : undefined
     return (
         <div className="m-5 flex justify-center">
             <div className="m-3 p-2">
-                <img src={profile.Avatar ? URL.createObjectURL(profile.Avatar) : undefined}
+                
+                <img src="/Media/UserDefaultAvatar.png"
                      alt="Avatar"
                      className="rounded-full h-32 w-32"/>
             </div>
-            <div className="m-3 p-2">
-                <p className="rounded-xl bg-gray-200 text-xl flex text-center m-3">
+            <div className="m-3 p-3">
+                <p className="rounded-2xl bg-gray-200 text-xl flex text-center m-3 p-3">
                     {profile.FirstName + ' ' + profile.LastName}
+                </p>
+                <p className="rounded-2xl bg-gray-200 flex text-center m-3 p-2">
+                    {profile.Country + ', ' + profile.City}
+                </p>
+                <p className="rounded-2xl bg-gray-200 flex text-center m-3 p-2">
+                    About me: {profile.About ? profile.About : 'No information'}
                 </p>
             </div>
         </div>
