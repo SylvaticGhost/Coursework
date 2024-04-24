@@ -45,7 +45,7 @@ export default function UserProfile() {
                 </p>
                 <br/>
                 <p>
-                    <a>Settings</a>
+                    <a href={url + '/Profile/MyProfile/Settings'}>Settings</a>
                 </p>
             </div>
             <div className="text-center">

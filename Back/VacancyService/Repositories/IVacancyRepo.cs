@@ -22,4 +22,8 @@ public interface IVacancyRepo
     public Task DeleteVacancy(Guid id);
 
     public Task DeleteCompanyVacancies(Guid companyId);
+    
+    public Task<IEnumerable<Vacancy>> GetLatestVacancies(int count);
+    
+    public Task<IEnumerable<Vacancy>> GetCompanyVacancies(Guid companyId);
 }

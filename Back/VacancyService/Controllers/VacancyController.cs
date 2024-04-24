@@ -39,16 +39,13 @@ public class VacancyController : ControllerBase
     }
     
     
-    
-    [HttpPost("DeleteVacancy")]
-    public async Task<IActionResult> DeleteVacancy(Guid id)
+    [HttpGet("GetLatestVacancies")]
+    public async Task<IActionResult> GetLatestVacancies(uint count)
     {
-        if (!await _vacancyRepo.CheckIfVacancyExists(id))
-            return BadRequest("Vacancy with this id aren't exist");
+        int c = (int)count;
+        var vacancies = await _vacancyRepo.GetLatestVacancies(c);
         
-        await _vacancyRepo.DeleteVacancy(id);
-        
-        return Ok();
+        return Ok(vacancies);
     }
     
     

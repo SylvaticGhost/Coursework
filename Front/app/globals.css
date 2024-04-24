@@ -26,11 +26,6 @@ body {
   /*  rgb(var(--background-start-rgb));*/
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
 
 /* styles.css */
 .large-checkbox {
@@ -79,4 +74,12 @@ body {
 
 .default-text-input {
   @apply border-2 rounded-md py-1
+}
+
+.vacancies-block{
+  @apply rounded-xl m-4 p-3
+}
+
+.vacancy-container{
+  @apply flex  
 }
