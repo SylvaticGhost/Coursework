@@ -1,5 +1,12 @@
-import Image from "next/image";
+'use client';
+
 import Cookies from "js-cookie";
+import MainHead from "@/Components/MainHead";
+import Vacancy from "@/lib/Types/Vacancy/Vacancy";
+import {useEffect, useState} from "react";
+import GetLatestVacancy from "@/lib/VacancySearch";
+import {returnStatement} from "@babel/types";
+import VacancyPreviewComponent from "@/Components/VacancyPreviewComponent";
 
 export default function Home() {
     console.log("Home");
@@ -7,10 +14,64 @@ export default function Home() {
     const logged = Cookies.get('logged') === 'true';
     console.log(token);
     
+    const [latestVacancies, setLatestVacancies] = useState<Vacancy[] | null>(null);
+
+    useEffect(() => {
+        async function fetchLatestVacancies() {
+            const v = await GetLatestVacancy(3);
+            setLatestVacancies(v);
+        }
+        fetchLatestVacancies();
+    }, [latestVacancies]);
+    
   return (
     <main>
-      <h1>Home</h1>
-      
+        <div className="vacancies-block">
+            <MainHead text="Popular vacancy"/>
+            <div className="vacancy-container">
+                {latestVacancies ? latestVacancies.map((vacancy) => {
+                    return (
+                        <VacancyPreviewComponent title={vacancy.title}
+                                                 company={vacancy.companyShortInfo?.name ?? 'undef'}
+                                                 specialization={vacancy.specialization ?? ''} id={vacancy.vacancyId}/>
+                    )
+                }) : null}
+            </div>
+        </div>
+
+        {
+            logged ? (
+                    <div className="vacancies-block">
+                        <MainHead text="Recommended vacancy"/>
+                        <div className="vacancy-container">
+                            {latestVacancies ? latestVacancies.map((vacancy) => {
+                                return (
+                                    <VacancyPreviewComponent title={vacancy.title}
+                                                             company={vacancy.companyShortInfo?.name ?? 'undef'}
+                                                             specialization={vacancy.specialization ?? ''}
+                                                             id={vacancy.vacancyId}/>
+                                )
+                            }) : null}
+                        </div>
+                    </div>
+                ) :
+                null
+        }
+
+        <div className="vacancies-block">
+            <MainHead text="New vacancy"/>
+            <div className="vacancy-container">
+                {latestVacancies ? latestVacancies.map((vacancy) => {
+                    return (
+                        <VacancyPreviewComponent title={vacancy.title} 
+                                                 company={vacancy.companyShortInfo?.name ?? 'undef'} 
+                                                 specialization={vacancy.specialization ?? ''} 
+                                                 id={vacancy.vacancyId}/>
+                    )
+                }) : null}
+            </div>
+        </div> 
+
     </main>
   );
 }

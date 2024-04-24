@@ -17,21 +17,12 @@ namespace AccountService.Controllers;
 [ApiController]
 [Route("[controller]")]
 [DefaultExceptionFilter]
-public class Profile : ControllerBase
+public class Profile(DataContextNpgEf dataContextNpgEf, IMapper mapper) : ControllerBase
 {
-    private readonly IUserProfileRepository _userProfileRepository;
-    private readonly IUserRepositoryBasic _userBasicInfoRepository;
-    private readonly IMapper _mapper;
-    
-    public Profile(DataContextNpgEf dataContextNpgEf, IMapper mapper)
-    {
-        _userProfileRepository = new UserProfileRepository();
-        _userBasicInfoRepository = new UserProfileBasicInfoRepo(dataContextNpgEf);
-        _mapper = mapper;
-    }
+    private readonly IUserProfileRepository _userProfileRepository = new UserProfileRepository();
+    private readonly IUserRepositoryBasic _userBasicInfoRepository = new UserProfileBasicInfoRepo(dataContextNpgEf);
 
-    
-    
+
     [HttpGet("GetDefaultUserAvatar")]
     public Task<FileContentResult> GetDefaultUserAvatar()
     {
@@ -111,7 +102,7 @@ public class Profile : ControllerBase
         if(userId == Guid.Empty)
             return new BadRequestObjectResult("Invalid user id");
         
-        LocalValidator localValidator = new(_mapper);
+        LocalValidator localValidator = new(mapper);
         
         ValidationResults validationResult = localValidator.ValidateProfileToUpdate(userProfile);
         

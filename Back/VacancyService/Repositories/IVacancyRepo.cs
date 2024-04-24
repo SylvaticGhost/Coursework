@@ -6,6 +6,8 @@ namespace VacancyService.Repositories;
 public interface IVacancyRepo
 {
     public Task<Vacancy?> GetVacancy(Guid id);
+    
+    public Task<Guid> GetOwnerOfVacancy(Guid vacancyId);
 
     public Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo, DateTime time = default);
 
@@ -20,4 +22,8 @@ public interface IVacancyRepo
     public Task DeleteVacancy(Guid id);
 
     public Task DeleteCompanyVacancies(Guid companyId);
+    
+    public Task<IEnumerable<Vacancy>> GetLatestVacancies(int count);
+    
+    public Task<IEnumerable<Vacancy>> GetCompanyVacancies(Guid companyId);
 }

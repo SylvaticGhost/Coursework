@@ -28,6 +28,8 @@ builder.Services.AddMassTransit(x =>
     
     x.AddConsumer<GetCompanyVacanciesConsumer>();
     
+    x.AddConsumer<CheckIfVacancyExistConsumer>();
+    x.AddConsumer<GetOwnerOfVacancyConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -38,6 +40,16 @@ builder.Services.AddMassTransit(x =>
             h.Password(builder.Configuration.GetValue("RabbitMq:Password", "mypass"));
         });
     });
+});
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(
+        b => b.WithOrigins("http://localhost:3000")
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials()
+    );
 });
 
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
@@ -60,6 +72,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors();
 app.UseRouting();
 app.MapControllers();
 app.UseHttpsRedirection();

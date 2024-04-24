@@ -5,8 +5,8 @@ namespace MessageSvc.Models;
 
 public class UserMessageBox : Entity
 {
-    public Guid UserId { get; }
-    public List<AnswerOnApplication> CompanyResponses { get; } 
+    public Guid UserId { get; private set; }
+    public List<AnswerOnApplication> CompanyResponses { get; private set; } 
     
     public UserMessageBox (Guid userId)
     {

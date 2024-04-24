@@ -1,6 +1,6 @@
 ﻿namespace Contracts.Events.ResponseOnVacancyEvents;
 
-public record GetUserResponsesEvent(
+public record GetUserApplicationsEvent(
     Guid UserId
 )
 {

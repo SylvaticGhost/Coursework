@@ -6,7 +6,7 @@ using MessageSvc.Repositories.UserMessageBoxRepo;
 
 namespace MessageSvc.Consumers;
 
-public class CreatingUserMessageBoxConsumer(IUserMessageBoxRepo messageBoxRepo) : IConsumer<CreateUserMessageBoxEvent>
+public sealed class CreatingUserMessageBoxConsumer(IUserMessageBoxRepo messageBoxRepo) : IConsumer<CreateUserMessageBoxEvent>
 {
     public async Task Consume(ConsumeContext<CreateUserMessageBoxEvent> context)
     {

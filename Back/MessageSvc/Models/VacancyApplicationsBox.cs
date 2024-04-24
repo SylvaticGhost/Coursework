@@ -15,4 +15,12 @@ public class VacancyApplicationsBox : Entity
         CompanyId = companyId;
         UserApplications = new List<UserApplicationOnVacancy>();
     }
+    
+    
+    public void AddApplication(UserApplicationOnVacancy? application)
+    {
+        ArgumentNullException.ThrowIfNull(application);
+
+        UserApplications.Add(application);
+    }
 }

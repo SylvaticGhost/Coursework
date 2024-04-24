@@ -74,6 +74,19 @@ services:
         ports:
             - "5241:80"
     
+    
+    MessageSvc:
+        image: messagesvc
+        build:
+            context: .
+            dockerfile: MessageSvc/Dockerfile
+        environment:
+            - ASPNETCORE_ENVIRONMENT=Development
+            - ASPNETCORE_URLS=http://+:80
+            - MongoDbSettings__ConnectionString=mongodb://MongoDb
+            - RabbitMq__Host=rabbitmq
+        ports:
+            - "5242:80"
 
 
 

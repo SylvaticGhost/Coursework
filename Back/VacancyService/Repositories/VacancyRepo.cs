@@ -42,6 +42,14 @@ public class VacancyRepo : IVacancyRepo
     }
 
 
+    public async Task<Guid> GetOwnerOfVacancy(Guid vacancyId) =>
+        await GetVacancy(vacancyId) switch
+        {
+            null => Guid.Empty,
+            { } vacancy => vacancy.CompanyInfo.CompanyId
+        };
+
+
     public async Task<bool> CheckIfVacancyExists(Guid id) =>
         await _collection.Find(v => v.VacancyId == id).AnyAsync();
     
@@ -83,4 +91,11 @@ public class VacancyRepo : IVacancyRepo
     
     public async Task DeleteCompanyVacancies(Guid companyId) =>
         await _collection.DeleteManyAsync(v => v.CompanyInfo.CompanyId == companyId);
+    
+    
+    public async Task<IEnumerable<Vacancy>> GetCompanyVacancies(Guid companyId) => 
+        await _collection.Find(v => v.CompanyInfo.CompanyId == companyId).ToListAsync();
+    
+    public async Task<IEnumerable<Vacancy>> GetLatestVacancies(int count) =>
+        await _collection.Find(v => true).SortByDescending(v => v.CreatedAt).Limit(count).ToListAsync();
 }

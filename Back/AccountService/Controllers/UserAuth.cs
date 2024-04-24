@@ -5,6 +5,7 @@ using System.Security.Claims;
 using AccountService.Data;
 using AccountService.Models;
 using AccountService.Repositories;
+using Contracts;
 using Contracts.Events.Messages.CreatingBoxEvents;
 using CustomExceptions;
 using CustomExceptions._500s_exceptions;
@@ -46,11 +47,15 @@ public class UserAuth(DataContextNpgEf dataContextNpgEf,
 
         CreateUserMessageBoxEvent createUserMessageBoxEvent = new(id);
         
-        await createBoxRequestClient.GetResponse<CreateUserMessageBoxEvent>(createUserMessageBoxEvent);
+        var response = await createBoxRequestClient.GetResponse<IServiceBusResult<bool>>(createUserMessageBoxEvent);
+        
+        if(!response.Message.IsSuccess)
+            Console.WriteLine("Failed to create user message box");
         
         return new OkObjectResult(id);
     }
     
+    //TODO: simplify this method
     [AllowAnonymous]
     [HttpPost("Login")]
     public async Task<IActionResult> Login([FromBody] UserAccountToLoginDto userAccountToLoginDto)
