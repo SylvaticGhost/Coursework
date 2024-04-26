@@ -4,9 +4,8 @@ import Cookies from "js-cookie";
 import MainHead from "@/Components/MainHead";
 import Vacancy from "@/lib/Types/Vacancy/Vacancy";
 import {useEffect, useState} from "react";
-import GetLatestVacancy from "@/lib/VacancySearch";
-import {returnStatement} from "@babel/types";
 import VacancyPreviewComponent from "@/Components/VacancyPreviewComponent";
+import {GetLatestVacancy} from "@/lib/VacancySearch";
 
 export default function Home() {
     console.log("Home");

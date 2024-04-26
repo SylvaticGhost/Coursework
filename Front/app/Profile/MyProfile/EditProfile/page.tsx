@@ -4,7 +4,7 @@ import React, {useEffect, useState} from "react";
 import MainHead from "@/Components/MainHead";
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import Cookies from "js-cookie";
-import {GetOwnProfile, UpdateProfile} from "@/lib/Profile";
+import {getOwnProfile, updateProfile} from "@/lib/Profile";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import FailedToLoadProfileComponent from "@/app/Profile/Components/FailedToLoadProfileComponent";
 import {UserProfileToUpdateDto} from "@/lib/Types/UserProfile/UserProfileToUpdateDto";
@@ -26,7 +26,7 @@ export default function EditProfilePage() {
     useEffect(() => {
         (async () => {
             if (token && !profile) {
-                const profileData = await GetOwnProfile(token);
+                const profileData = await getOwnProfile(token);
                 setProfile(profileData);
                 if(profileData) {
                     setFirstName(profileData.FirstName || '');
@@ -58,7 +58,7 @@ export default function EditProfilePage() {
             Avatar: profile.Avatar
         }
         console.log(profileToUpdate);
-        const result: boolean = await UpdateProfile(profileToUpdate, token);
+        const result: boolean = await updateProfile(profileToUpdate, token);
         
         if (result)
             setUpdated(true);

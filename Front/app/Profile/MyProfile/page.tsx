@@ -3,7 +3,7 @@
 import Cookies from "js-cookie";
 import React, {useEffect, useState} from "react";
 import {LogOut} from "@/Components/LogOut";
-import { GetOwnProfile } from "@/lib/Profile";
+import { getOwnProfile } from "@/lib/Profile";
 import ProfileComponent from "@/Components/ProfileComponent";
 // @ts-ignore
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
@@ -20,7 +20,7 @@ export default function UserProfile() {
     useEffect(() => {
         async function fetchProfile() {
             if (token) {
-                const profileData = await GetOwnProfile(token);
+                const profileData = await getOwnProfile(token);
                 
                 setProfile(profileData);
             }

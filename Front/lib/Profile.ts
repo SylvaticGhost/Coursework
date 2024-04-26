@@ -72,7 +72,7 @@ export async function GetProfile(id: string) {
 }
 
 
-export async function GetOwnProfile(token: string) {
+export async function getOwnProfile(token: string) {
   const response = await fetch('http://localhost:5239/Profile/GetOwnProfile', {
     method: 'GET',
     headers: {
@@ -96,7 +96,7 @@ export async function GetOwnProfile(token: string) {
 }
 
 
-export async function UpdateProfile(profile: UserProfileToUpdateDto, token: string) : Promise<boolean> {
+export async function updateProfile(profile: UserProfileToUpdateDto, token: string) : Promise<boolean> {
     const jsonProfile = JSON.stringify(profile);
     
     const response = await fetch('http://localhost:5239/Profile/UpdateUserProfile', {

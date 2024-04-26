@@ -83,3 +83,7 @@ body {
 .vacancy-container{
   @apply flex  
 }
+
+.blue-container{
+  @apply m-2 bg-blue-100 p-2 rounded-xl
+}
