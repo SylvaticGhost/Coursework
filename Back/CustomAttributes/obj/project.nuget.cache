@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "xrGLlq5iOhWJ8DewRtnIOVL1GEJgyRGula6hXXgxuO6r23dCjHNm1lResXrNUWIzDbQR0M31TjlpMcGV5oSuOQ==",
+  "dgSpecHash": "H/o6URjP/LTMe2yZWeODvaFv31b25/vEmI1XcYl7XyTh4bLEJZ704LA17scldNKeIZsd71PgZ33PqGr1p7VdXQ==",
   "success": true,
-  "projectFilePath": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj",
+  "projectFilePath": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\ktkac\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.1.1\\microsoft.aspnetcore.authentication.abstractions.2.1.1.nupkg.sha512",
     "C:\\Users\\ktkac\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.1.1\\microsoft.aspnetcore.authentication.core.2.1.1.nupkg.sha512",

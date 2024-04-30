@@ -1,6 +1,6 @@
-using Contracts;
-using CustomAtributtes;
-using MassTransit;
+using AutoMapper;
+using CustomAttributes;
+using GlobalModels.Vacancy;
 using Microsoft.AspNetCore.Mvc;
 using VacancyService.Models;
 using VacancyService.Repositories;
@@ -14,14 +14,12 @@ namespace VacancyService.Controllers;
 public class VacancyController : ControllerBase
 {
     private readonly IVacancyRepo _vacancyRepo;
-    private readonly IPublishEndpoint _endpoint;
-    private readonly IRequestClient<GetCompanyShortInfoEvent> _requestClient;
+    private readonly IMapper _mapper;
     
-    public VacancyController(IPublishEndpoint endpoint, IRequestClient<GetCompanyShortInfoEvent> requestClient)
+    public VacancyController(IMapper mapper)
     {
         _vacancyRepo = new VacancyRepo();
-        _endpoint = endpoint;
-        _requestClient = requestClient;
+        _mapper = mapper;
     }
     
     
@@ -56,6 +54,42 @@ public class VacancyController : ControllerBase
         ISearchVacancyContext searchVacancyContext = new SearchVacancyContext();
         
         var vacancies = searchVacancyContext.SearchVacancy(searchVacancyParams);
+        
+        return Ok(vacancies);
+    }
+
+    
+    [CheckInputString]
+    [HttpGet("SearchVacancyByKeyWords")]
+    public IActionResult SearchVacancyByKeyWords(string keyWords)
+    {
+        ISearchVacancyContext searchVacancyContext = new SearchVacancyContext();
+        
+        List<VacancyDto> vacancies = new();
+        
+        SearchVacancyParams params1 = new()
+        {
+            Title = keyWords
+        };
+        
+        var vacancies1 = searchVacancyContext.SearchVacancy(params1);
+        vacancies.AddRange(_mapper.Map<List<VacancyDto>>(vacancies1));
+        
+        SearchVacancyParams params2 = new()
+        {
+            Specialization = keyWords
+        };
+        
+        var vacancies2 = searchVacancyContext.SearchVacancy(params2);
+        vacancies.AddRange(_mapper.Map<List<VacancyDto>>(vacancies2));
+        
+        SearchVacancyParams params3 = new()
+        {
+            CompanyName = keyWords
+        };
+        
+        var vacancies3 = searchVacancyContext.SearchVacancy(params3);
+        vacancies.AddRange(_mapper.Map<List<VacancyDto>>(vacancies3));
         
         return Ok(vacancies);
     }

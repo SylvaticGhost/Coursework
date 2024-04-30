@@ -4,6 +4,7 @@ using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using VacancyService.Consumers;
 using VacancyService.Data;
+using VacancyService.Helpers;
 using VacancyService.SearchContext;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddControllers();
+
+builder.Services.AddAutoMapper(typeof(MappingProfiles));
 
 builder.Services.AddMassTransit(x =>
 {

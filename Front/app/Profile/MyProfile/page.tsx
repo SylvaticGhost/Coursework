@@ -10,27 +10,36 @@ import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import MainHead from "@/Components/MainHead";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import FailedToLoadProfileComponent from "@/app/Profile/Components/FailedToLoadProfileComponent";
+import UnauthorizedException from "@/lib/Errors/UnauthorizedException";
+import NotLoggedComponent from "@/app/Profile/Components/NotLoggedComponent";
 
 const url : string = 'http://localhost:3000'
 
 export default function UserProfile() {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
+    const [authorized, setAuthorized] = useState<boolean>(true);
     const token = Cookies.get('token')
 
     useEffect(() => {
         async function fetchProfile() {
             if (token) {
-                const profileData = await getOwnProfile(token);
-                
-                setProfile(profileData);
+                try {
+                    const profileData = await getOwnProfile(token);
+                    setProfile(profileData);
+                }
+                catch(exception: any) {
+                    if(exception instanceof UnauthorizedException) {
+                        setAuthorized(false);
+                    }
+                }
             }
         }
 
         fetchProfile().then(r => {});
     }, [token]);
 
-    if(!token)
-        return <div className="center-content">Not logged in</div>
+    if(!token || !authorized)
+        return <NotLoggedComponent/>
 
     if (!profile) 
         return <FailedToLoadProfileComponent/>

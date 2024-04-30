@@ -4,7 +4,7 @@ using VacancyService.Models;
 
 namespace GlobalModels.Vacancy;
 
-public class Vacancy : Entity
+public class Vacancy : Entity, IVacancyInputFields
 {
     [Required]
     public Guid VacancyId { get; set; }
@@ -19,7 +19,7 @@ public class Vacancy : Entity
     
     public string Specialization { get; set; }
     
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } 
     
     public DateTime UpdatedAt { get; set; }
     [Required]

@@ -63,14 +63,14 @@
         }
       }
     },
-    "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj": {
+    "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj",
-        "projectName": "CustomAtributtes",
-        "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj",
+        "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj",
+        "projectName": "CustomAttributes",
+        "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj",
         "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
-        "outputPath": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\obj\\",
+        "outputPath": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -342,8 +342,8 @@
               "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj": {
                 "projectPath": "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj"
               },
-              "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj": {
-                "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj"
+              "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj": {
+                "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj"
               },
               "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\CustomExceptions.csproj": {
                 "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomExceptions\\CustomExceptions.csproj"
@@ -367,6 +367,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
             "MassTransit.EntityFrameworkCore": {
               "target": "Package",
               "version": "[8.2.1-develop.1720, )"

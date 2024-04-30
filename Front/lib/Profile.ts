@@ -3,6 +3,7 @@ import {Contact} from "./Types/Contact";
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import {UserProfileToUpdateDto} from "@/lib/Types/UserProfile/UserProfileToUpdateDto";
 import {ID} from "postcss-selector-parser";
+import UnauthorizedException from "@/lib/Errors/UnauthorizedException";
 
 
 export async function CreateProfile(profile: UserProfileToAddDto, token: string) {
@@ -91,6 +92,10 @@ export async function getOwnProfile(token: string) {
     return profile;
   } else {
     console.log('Profile not found');
+    if (response.status === 401) {
+      console.log('Unauthorized');
+      throw new UnauthorizedException('user');
+    }
     return undefined;
   }
 }

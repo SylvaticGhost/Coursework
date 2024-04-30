@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "XhWXoSH1mn40DgcxcbBBos2yqYtOengT0T8Vzc9z4gbzClSX8/RBlEMXN8jsXA83uk+UzCSVbGcEAjfFqxRgkA==",
+  "dgSpecHash": "ovQ96RxRqHNBxcNocnmkXFivapcG9wZoqMvIeSBt8+93gH+Hvw1CQ/XnpL5icGMIwglMXedkZtHvus06MzmT+w==",
   "success": true,
   "projectFilePath": "G:\\GitHub\\Coursework\\Back\\VacancyService\\VacancyService.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ktkac\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\ktkac\\.nuget\\packages\\awssdk.core\\3.7.100.14\\awssdk.core.3.7.100.14.nupkg.sha512",
     "C:\\Users\\ktkac\\.nuget\\packages\\awssdk.securitytoken\\3.7.100.14\\awssdk.securitytoken.3.7.100.14.nupkg.sha512",
     "C:\\Users\\ktkac\\.nuget\\packages\\dnsclient\\1.6.1\\dnsclient.1.6.1.nupkg.sha512",

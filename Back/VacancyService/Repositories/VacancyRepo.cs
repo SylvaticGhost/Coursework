@@ -36,10 +36,11 @@ public class VacancyRepo : IVacancyRepo
     }
 
 
-    public async Task<Vacancy?> GetVacancy(Guid id)
-    {
-        return await _collection.Find(v => v.VacancyId == id).FirstOrDefaultAsync();
-    }
+    public async Task<Vacancy?> GetVacancy(Guid id) =>
+        await _collection.Find(v => v.VacancyId == id).FirstOrDefaultAsync();    
+    
+    public async Task<IEnumerable<Vacancy>> GetVacancies(IEnumerable<Guid> ids) => 
+        await _collection.Find(v => ids.Contains(v.VacancyId)).ToListAsync();
 
 
     public async Task<Guid> GetOwnerOfVacancy(Guid vacancyId) =>

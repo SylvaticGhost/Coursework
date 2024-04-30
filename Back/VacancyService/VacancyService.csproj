@@ -8,6 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="AutoMapper" Version="13.0.1" />
         <PackageReference Include="MassTransit.EntityFrameworkCore" Version="8.2.1-develop.1720" />
         <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.1-develop.1720" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.3"/>
@@ -23,7 +24,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Contracts\Contracts.csproj" />
-      <ProjectReference Include="..\CustomAtributtes\CustomAtributtes.csproj" />
+      <ProjectReference Include="..\CustomAttributes\CustomAttributes.csproj" />
       <ProjectReference Include="..\CustomExceptions\CustomExceptions.csproj" />
       <ProjectReference Include="..\GlobalHelpers\GlobalHelpers.csproj" />
       <ProjectReference Include="..\GlobalModels\GlobalModels.csproj" />

@@ -52,3 +52,37 @@ export async function getVacancyById(id: string) {
         }
     });
 }
+
+
+
+export async function searchVacancyByKeyword(keywords: string) : Promise<Vacancy[] | null> {
+    const response = await fetch(`${url}/Vacancy/SearchVacancyByKeyWords?keyWords=${keywords}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+            'AcceptEncoding': 'gzip, deflate, br',
+            'Connection': 'keep-alive'
+        },
+    });
+
+    if(response.ok) {
+        const json = await response.json();
+
+        const mappedVacancies = json.map((vacancy: any) => new Vacancy(
+            vacancy.vacancyId,
+            new Date(vacancy.createdAt),
+            vacancy.title,
+            vacancy.description,
+            vacancy.salary,
+            vacancy.specialization,
+            vacancy.experience
+        ));
+
+        return mappedVacancies;
+
+    } else {
+        console.log('Error: ' + response.statusText);
+        return null;
+    }
+}

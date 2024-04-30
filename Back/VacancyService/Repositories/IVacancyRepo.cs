@@ -7,6 +7,8 @@ public interface IVacancyRepo
 {
     public Task<Vacancy?> GetVacancy(Guid id);
     
+    public Task<IEnumerable<Vacancy>> GetVacancies(IEnumerable<Guid> ids);
+    
     public Task<Guid> GetOwnerOfVacancy(Guid vacancyId);
 
     public Task<Guid> AddVacancy(VacancyToAddDto vacancy, CompanyShortInfo companyInfo, DateTime time = default);
