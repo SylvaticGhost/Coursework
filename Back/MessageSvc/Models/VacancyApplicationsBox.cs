@@ -23,4 +23,14 @@ public class VacancyApplicationsBox : Entity
 
         UserApplications.Add(application);
     }
+    
+    
+    public void DeleteApplication(Guid applicationId)
+    {
+        UserApplicationOnVacancy? application = UserApplications.FirstOrDefault(a => a.UserApplicationId == applicationId);
+        
+        ArgumentNullException.ThrowIfNull(application);
+        
+        UserApplications.Remove(application);
+    }
 }

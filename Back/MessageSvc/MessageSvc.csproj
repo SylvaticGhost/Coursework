@@ -22,11 +22,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Consumers\UserMessages\" />
+      <ProjectReference Include="..\Contracts\Contracts.csproj" />
+      <ProjectReference Include="..\GlobalHelpers\GlobalHelpers.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Contracts\Contracts.csproj" />
-      <ProjectReference Include="..\GlobalHelpers\GlobalHelpers.csproj" />
+      <Folder Include="Consumers\UserMessages\" />
     </ItemGroup>
 </Project>

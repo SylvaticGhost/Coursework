@@ -3,6 +3,7 @@ import {Contact} from "./Types/Contact";
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import {UserProfileToUpdateDto} from "@/lib/Types/UserProfile/UserProfileToUpdateDto";
 import {ID} from "postcss-selector-parser";
+import UnauthorizedException from "@/lib/Errors/UnauthorizedException";
 
 
 export async function CreateProfile(profile: UserProfileToAddDto, token: string) {
@@ -72,7 +73,7 @@ export async function GetProfile(id: string) {
 }
 
 
-export async function GetOwnProfile(token: string) {
+export async function getOwnProfile(token: string) {
   const response = await fetch('http://localhost:5239/Profile/GetOwnProfile', {
     method: 'GET',
     headers: {
@@ -91,12 +92,16 @@ export async function GetOwnProfile(token: string) {
     return profile;
   } else {
     console.log('Profile not found');
+    if (response.status === 401) {
+      console.log('Unauthorized');
+      throw new UnauthorizedException('user');
+    }
     return undefined;
   }
 }
 
 
-export async function UpdateProfile(profile: UserProfileToUpdateDto, token: string) : Promise<boolean> {
+export async function updateProfile(profile: UserProfileToUpdateDto, token: string) : Promise<boolean> {
     const jsonProfile = JSON.stringify(profile);
     
     const response = await fetch('http://localhost:5239/Profile/UpdateUserProfile', {

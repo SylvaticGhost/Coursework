@@ -3961,11 +3961,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj",
-      "projectName": "CustomAtributtes",
-      "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\CustomAtributtes.csproj",
+      "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj",
+      "projectName": "CustomAttributes",
+      "projectPath": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\CustomAttributes.csproj",
       "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
-      "outputPath": "G:\\GitHub\\Coursework\\Back\\CustomAtributtes\\obj\\",
+      "outputPath": "G:\\GitHub\\Coursework\\Back\\CustomAttributes\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -50,4 +50,22 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
         
         return boxes.SelectMany(b => b.UserApplications.Where(a => a.UserId == userId));
     }
+    
+    
+    public async Task DeleteApplications(params Guid[] applicationIds)
+    {
+        var boxes = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.UserApplications.Any(a => applicationIds.Contains(a.UserApplicationId)))
+            .ExecuteAsync();
+        
+        foreach (var box in boxes)
+        {
+            foreach (Guid applicationId in applicationIds)
+            {
+                box.DeleteApplication(applicationId);
+            }
+            
+            await box.SaveAsync();
+        }
+    }
 }

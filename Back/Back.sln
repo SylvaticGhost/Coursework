@@ -28,7 +28,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompanySvcTests", "CompanyS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GlobalHelpersTests", "GlobalHelpersTests\GlobalHelpersTests.csproj", "{96165AFB-D5BC-4980-95E9-91FAF0D8C833}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAtributtes", "CustomAtributtes\CustomAtributtes.csproj", "{5DCDD271-EC2D-4656-B82E-BA9FEDC6A247}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomAttributes", "CustomAttributes\CustomAttributes.csproj", "{5DCDD271-EC2D-4656-B82E-BA9FEDC6A247}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MessageSvc", "MessageSvc\MessageSvc.csproj", "{F931C38D-BA97-48C1-9855-5A0E529F2ED5}"
 EndProject

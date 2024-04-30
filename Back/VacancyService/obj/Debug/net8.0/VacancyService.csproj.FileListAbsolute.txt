@@ -144,3 +144,4 @@ G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\scopedcss\bundle\Vacan
 G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\VacancyService.csproj.CopyComplete
 G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\VacancyService.genruntimeconfig.cache
 G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\ref\VacancyService.dll
+G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\AutoMapper.dll
