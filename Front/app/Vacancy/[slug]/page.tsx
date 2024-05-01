@@ -1,6 +1,7 @@
 import {getVacancyById} from "@/lib/VacancySearch";
 import React from "react";
 import MainHead from "@/Components/MainHead";
+import ApplyOnVacancyBtnComponent from "@/app/Vacancy/Components/ApplyOnVacancyBtnComponent";
 
 export async function generateMetadata ( {params: {slug}}: {params: {slug: string}}) {
     const vacancy = await getVacancyById(slug);
@@ -35,6 +36,7 @@ export default async function ReviewPage({params: {slug}}: {params: {slug: strin
                 <h3 className="font-semibold">Salary</h3>
                 <p>{salary}</p>
             </div>
+            <ApplyOnVacancyBtnComponent vacancyId={vacancy.vacancyId}/>
         </div>
     )
 }

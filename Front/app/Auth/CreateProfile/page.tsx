@@ -5,6 +5,8 @@ import Cookies from "js-cookie";
 import UserProfileToAddDto from "@/lib/Types/UserProfile/UserProfileToAddDto";
 import {Contact} from "@/lib/Types/Contact";
 import { CreateProfile } from "@/lib/Profile";
+import MainHead from "@/Components/MainHead";
+import ToMainPageBtn from "@/Components/ToMainPageBtn";
 
 export default function CreateProfilePage() { 
     const token = Cookies.get('token')
@@ -21,6 +23,19 @@ export default function CreateProfilePage() {
     const [city, setCity] = useState('')
     const [contacts, setContacts] = useState('')
     let [contactType, setContactType] = useState(GetContactsType()[0])
+    
+    const [profileCreated, setProfileCreated] = useState(false)
+    
+    if(profileCreated) {
+        return ( 
+            <div className="center-content">
+                <MainHead text="Profile Created"/>
+                <p className="my-2">
+                    <ToMainPageBtn/>
+                </p>
+            </div>
+        )
+    }
     
     return(
         <div>
@@ -132,7 +147,12 @@ export default function CreateProfilePage() {
         
         console.log('Profile: \n' + profile.toString())
 
-        await CreateProfile(profile, token);
+        const result = await CreateProfile(profile, token);
+        
+        if(result) {
+            setProfileCreated(true)
+        } else {
+            setError('Error creating profile')
     }
 }
 
@@ -156,4 +176,5 @@ function GetContactsType() {
         "GitHub",
         "Other"
     ] as const;
+} 
 }

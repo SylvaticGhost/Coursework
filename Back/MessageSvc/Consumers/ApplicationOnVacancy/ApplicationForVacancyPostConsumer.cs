@@ -45,6 +45,7 @@ public sealed class ApplicationForVacancyPostConsumer
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 FailedResponse(e.Message);
                 return;
             }
@@ -72,7 +73,7 @@ public sealed class ApplicationForVacancyPostConsumer
         try
         {
             await vacancyMessageBoxRepo.AddApplication(application);
-            var result = ServiceBusResultFactory.SuccessResult(true);
+            IServiceBusResult<bool> result = ServiceBusResultFactory.SuccessResult(true);
             await context.RespondAsync(result);
         }
         catch (Exception e)
@@ -85,6 +86,7 @@ public sealed class ApplicationForVacancyPostConsumer
 
         async void FailedResponse(string message)
         {
+            Console.WriteLine("failed: " + message);
             var result = ServiceBusResultFactory.FailResult<bool>(message);
             await context.RespondAsync(result);
         }

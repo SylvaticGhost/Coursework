@@ -20,81 +20,85 @@ spec:
                 app.kubernetes.io/name: workly
         spec:
             containers:
-                - name: accountservice
-                  image: accountservice
-                  ports:
-                      - containerPort: 80
-                  env:
-                      - name: ASPNETCORE_ENVIRONMENT
-                        value: "Development"
-                      - name: ASPNETCORE_URLS
-                        value: "http://+:80"
-                      - name: ConnectionStrings__DefaultConnection
-                        value: "Server=AcountDb;Port=5432;Database=accountdb;Username=postgres;Password=postgres;"
-                      - name: MongoDbSettings__ConnectionString
-                        value: "mongodb://MongoDb"
-                - name: company-svc
-                  image: companysvc
-                  ports:
-                      - containerPort: 80
-                  env:
-                      - name: ASPNETCORE_ENVIRONMENT
-                        value: "Development"
-                      - name: ASPNETCORE_URLS
-                        value: "http://+:80"
-                      - name: MongoDbSettings__ConnectionString
-                        value: "mongodb://MongoDb"
-                      - name: RabbitMq__Host
-                        value: "rabbitmq"
-                - name: vacancy-service
-                  image: vacancyservice
-                  ports:
-                        - containerPort: 80
-                  env:
-                      - name: ASPNETCORE_ENVIRONMENT
-                        value: "Development"
-                      - name: ASPNETCORE_URLS
-                        value: "http://+:80"
-                      - name: MongoDbSettings__ConnectionString
-                        value: "mongodb://MongoDb"
-                      - name: RabbitMq__Host
-                        value: "rabbitmq"
-                - name: rabbitmq
-                  image: rabbitmq
-                  ports:
-                      - containerPort: 80
-                  env:
-                      - name: ASPNETCORE_ENVIRONMENT
-                        value: "Development"
-                      - name: ASPNETCORE_URLS
-                        value: "http://+:80"
-                      - name: MongoDbSettings__ConnectionString
-                        value: "mongodb://MongoDb"
-                      - name: RabbitMq__Host
-                        value: "rabbitmq"
-                - name: mongodb
-                  image: mongo
-                  ports:
-                        - containerPort: 80
-                  env:
-                      - name: ASPNETCORE_ENVIRONMENT
-                        value: "Development"
-                      - name: ASPNETCORE_URLS
-                        value: "http://+:80"
-                      - name: MongoDbSettings__ConnectionString
-                        value: "mongodb://MongoDb"
-                      - name: RabbitMq__Host
-                        value: "rabbitmq"
-                - name: acountdb
-                  image: postgres
-                  ports:
-                            - containerPort: 80
-                  env:
-                      - name: ASPNETCORE_ENVIRONMENT
-                        value: "Development"
-                      - name: ASPNETCORE_URLS
-                        value: "http://+:80"
-                      - name: MongoDbSettings__ConnectionString
-                        value: "mongodb://MongoDb"
-                      - name: RabbitMq__Host
-                        value: "rabbitmq"
+                -   name: accountservice
+                    image: accountservice
+                    ports:
+                        -   containerPort: 80
+                    env:
+                        -   name: ASPNETCORE_ENVIRONMENT
+                            value: "Development"
+                        -   name: ASPNETCORE_URLS
+                            value: "http://+:80"
+                        -   name: ConnectionStrings__DefaultConnection
+                            value: "Server=AcountDb;Port=5432;Database=accountdb;Username=postgres;Password=postgres;"
+                        -   name: MongoDbSettings__ConnectionString
+                            value: "mongodb://MongoDb"
+                            
+                -   name: company-svc
+                    image: companysvc
+                    ports:
+                        -   containerPort: 80
+                    env:
+                        -   name: ASPNETCORE_ENVIRONMENT
+                            value: "Development"
+                        -   name: ASPNETCORE_URLS
+                            value: "http://+:80"
+                        -   name: MongoDbSettings__ConnectionString
+                            value: "mongodb://MongoDb"
+                        -   name: RabbitMq__Host
+                            value: "rabbitmq"
+                            
+                -   name: vacancy-service
+                    image: vacancyservice
+                    ports:
+                        -   containerPort: 80
+                    env:
+                        -   name: ASPNETCORE_ENVIRONMENT
+                            value: "Development"
+                        -   name: ASPNETCORE_URLS
+                            value: "http://+:80"
+                        -   name: MongoDbSettings__ConnectionString
+                            value: "mongodb://MongoDb"
+                        -   name: RabbitMq__Host
+                            value: "rabbitmq"
+                            
+                -   name: rabbitmq
+                    image: rabbitmq
+                    ports:
+                        -   containerPort: 80
+                    env:
+                        - name: RABBITMQ_DEFAULT_USER
+                          value: "myuser"
+                        - name: RABBITMQ_DEFAULT_PASS
+                          value: "mypass"
+                          
+                -   name: mongodb
+                    image: mongo
+                    ports:
+                        -   containerPort: 80
+                
+        
+                -   name: acountdb
+                    image: postgres
+                    ports:
+                        -   containerPort: 80
+                    env:
+                        - name: POSTGRES_USER
+                          value: "postgres"
+                        - name: POSTGRES_PASSWORD
+                          value: "postgres"
+                          
+                -   name: message-svc
+                    image: messagesvc
+                    ports:
+                        -   containerPort: 80
+                    env:
+                        -   name: ASPNETCORE_ENVIRONMENT
+                            value: "Development"
+                        -   name: ASPNETCORE_URLS
+                            value: "http://+:80"
+                        -   name: MongoDbSettings__ConnectionString
+                            value: "mongodb://MongoDb"
+                        -   name: RabbitMq__Host
+                            value: "rabbitmq"
+                

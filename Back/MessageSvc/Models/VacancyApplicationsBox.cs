@@ -5,9 +5,9 @@ namespace MessageSvc.Models;
 
 public class VacancyApplicationsBox : Entity
 {
-    public Guid VacancyId { get; }
-    public Guid CompanyId { get; }
-    public List<UserApplicationOnVacancy> UserApplications { get; }
+    public Guid VacancyId { get; set; }
+    public Guid CompanyId { get; set; }
+    public List<UserApplicationOnVacancy> UserApplications { get; private set; }
     
     public VacancyApplicationsBox(Guid vacancyId, Guid companyId)
     {

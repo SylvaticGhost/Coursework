@@ -2,7 +2,6 @@
 import {Contact} from "./Types/Contact";
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import {UserProfileToUpdateDto} from "@/lib/Types/UserProfile/UserProfileToUpdateDto";
-import {ID} from "postcss-selector-parser";
 import UnauthorizedException from "@/lib/Errors/UnauthorizedException";
 
 
@@ -27,10 +26,11 @@ export async function CreateProfile(profile: UserProfileToAddDto, token: string)
     if(response.ok) {
         console.log('Profile created');
         await AddContact(profile.Contacts, token);
-        return;
+        return true;
     }
     else 
         console.log('Profile not created');
+        return false;
 }
 
 
