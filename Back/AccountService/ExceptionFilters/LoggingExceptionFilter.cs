@@ -1,18 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc.Filters;
 
-namespace AccountService.ExceptionFilters;
-
-public class LoggingExceptionFilter : ExceptionFilterAttribute
+namespace AccountService.ExceptionFilters
 {
-    private readonly ILogger<LoggingExceptionFilter> _logger;
-    
-    public LoggingExceptionFilter(ILogger<LoggingExceptionFilter> logger)
+    public class LoggingExceptionFilter : ExceptionFilterAttribute
     {
-        _logger = logger;
-    }
-
-    public override void OnException(ExceptionContext context)
-    {
-        _logger.LogError(context.Exception, "An error occurred");
+        public override void OnException(ExceptionContext context)
+        {
+            var logger = context.HttpContext.RequestServices.GetService<ILogger<LoggingExceptionFilter>>();
+            logger!.LogError(context.Exception, "An error occurred");
+        }
     }
 }

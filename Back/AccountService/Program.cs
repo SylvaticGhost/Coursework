@@ -1,6 +1,7 @@
 using System.Data;
 using System.Text;
 using AccountService.Data;
+using AccountService.Repositories;
 using AccountService.Repositories.UserProfile;
 using GlobalHelpers;
 using GlobalHelpers.DataHelpers.Models;
@@ -83,6 +84,8 @@ builder.Services.AddMassTransit(x =>
 });
 
 builder.Services.AddScoped<IUserProfileRepository, UserProfileRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepositoryBasic, UserProfileBasicInfoRepo>();
 
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 

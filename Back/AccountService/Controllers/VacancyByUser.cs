@@ -1,4 +1,5 @@
 using System.Security.Claims;
+using AccountService.ExceptionFilters;
 using Contracts;
 using Contracts.Events.Messages;
 using Contracts.Events.ResponseOnVacancyEvents;
@@ -15,22 +16,41 @@ namespace AccountService.Controllers;
 [Authorize]
 [ApiController]
 [Route("[controller]")]
+[LoggingExceptionFilter]
 public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> requestClient,
-    IRequestClient<DeleteUsersApplicationEvent> deleteApplicationClient) : ControllerBase
+    IRequestClient<DeleteUsersApplicationEvent> deleteApplicationClient, 
+    ILogger<VacancyByUser> logger) : ControllerBase
 {
     [HttpPost("ResponseOnVacancy")]
-    public async Task<IActionResult> ResponseOnVacancyEndPoint([FromBody] UserApplicationOnVacancyToAddDto applicationOnVacancy)
+    public async Task<IActionResult> ResponseOnVacancyEndPoint([FromBody] UserApplicationOnVacancyToAddDto? applicationOnVacancy)
     {
+        if (applicationOnVacancy is null)
+            return BadRequest("Invalid request body");
+        
         Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
+        
+        if (userId == Guid.Empty || userId == null)
+        {
+            const string errorMessage = "Cannot to find user id";
+            logger.LogError(errorMessage);
+            return BadRequest("Error while processing request");
+        }
         
         ApplicationOnVacancyPostEvent postEvent = new(applicationOnVacancy, userId);
         
         var responseOnVacancyEvent = await requestClient.GetResponse<IServiceBusResult<bool>>(postEvent);
+
+        if (responseOnVacancyEvent.Message is null)
+        {
+            logger.LogError("Empty response from service bus");
+            return BadRequest("Error while processing request");
+        }
+
+        if (responseOnVacancyEvent.Message.IsSuccess) 
+            return Ok();
         
-        if (!responseOnVacancyEvent.Message.IsSuccess)
-            return BadRequest(responseOnVacancyEvent.Message.ErrorMessage);
-        
-        return Ok();
+        logger.LogError(responseOnVacancyEvent.Message.ErrorMessage);
+        return BadRequest(responseOnVacancyEvent.Message.ErrorMessage);
     }
     
     
