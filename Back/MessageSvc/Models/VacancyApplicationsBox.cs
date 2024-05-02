@@ -52,10 +52,23 @@ public class VacancyApplicationsBox : Entity
     public void DeleteApplication(Guid applicationId)
     {
         
-        UserApplicationOnVacancy? application = UserApplications.FirstOrDefault(a => a.UserApplicationId == applicationId);
+        UserApplicationOnVacancy? application = UserApplications!.FirstOrDefault(a => a.UserApplicationId == applicationId);
         
         ArgumentNullException.ThrowIfNull(application);
         
-        UserApplications.Remove(application);
+        UserApplications!.Remove(application);
+    }
+
+
+    public void DeleteApplicationsByUser(Guid userId) =>
+        UserApplications!.RemoveAll(a => a.UserId == userId);
+    
+    
+    public bool CheckIfUserApplied(Guid userId)
+    {
+        if (UserApplications is null)
+            throw new ArgumentException("UserApplications is null");
+        
+        return UserApplications.Any(a => a.UserId == userId);
     }
 }

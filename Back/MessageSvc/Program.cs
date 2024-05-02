@@ -19,7 +19,7 @@ builder.Services.AddScoped<IVacancyMessageBoxRepo, VacancyMessageBoxRepo>();
 builder.Services.AddMassTransit(x => 
 {
     x.SetKebabCaseEndpointNameFormatter();
-
+    
     x.AddConsumer<CreatingUserMessageBoxConsumer>();
     x.AddConsumer<CreatingVacancyMessageBoxConsumer>();
     
@@ -27,6 +27,8 @@ builder.Services.AddMassTransit(x =>
     
     x.AddConsumer<GetUserApplicationsConsumer>();
     x.AddConsumer<DeleteApplicationConsumer>();
+    
+    x.AddConsumer<CheckIfUserAppliedConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {
@@ -38,6 +40,8 @@ builder.Services.AddMassTransit(x =>
         });
     });
 });
+
+
 
 MongoDbSettings? mongoDbSettings = builder.Configuration.GetSection(nameof(MongoDbSettings)).Get<MongoDbSettings>();
 builder.Services.Configure<MongoDbSettings>(builder.Configuration.GetSection(nameof(MongoDbSettings)));

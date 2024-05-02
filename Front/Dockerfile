@@ -17,8 +17,3 @@ COPY . .
 # Build the Next.js app
 RUN npm run build
 
-# Expose the listening port
-EXPOSE 3000
-
-# Run npm start script
-CMD ["npm", "start"]

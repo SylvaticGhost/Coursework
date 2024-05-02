@@ -76,4 +76,29 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
             await box.SaveAsync();
         }
     }
+
+    public async Task DeleteApplication(Guid vacancyId, Guid userId)
+    {
+        var box = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.VacancyId == vacancyId)
+            .ExecuteSingleAsync();
+        
+        ArgumentNullException.ThrowIfNull(box);
+        
+        box.DeleteApplicationsByUser(userId);
+        
+        await box.SaveAsync();
+    }
+    
+    
+    public async Task<bool> CheckIfUserApplied(Guid vacancyId, Guid userId)
+    {
+        VacancyApplicationsBox? box = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.VacancyId == vacancyId)
+            .ExecuteSingleAsync();
+        
+        ArgumentNullException.ThrowIfNull(box);
+        
+        return box.CheckIfUserApplied(userId);
+    }
 }

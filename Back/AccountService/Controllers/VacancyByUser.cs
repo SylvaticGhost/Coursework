@@ -19,6 +19,7 @@ namespace AccountService.Controllers;
 [LoggingExceptionFilter]
 public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> requestClient,
     IRequestClient<DeleteUsersApplicationEvent> deleteApplicationClient, 
+    IRequestClient<CheckIfUserAppliedEvent> checkIfUserAppliedClient,
     ILogger<VacancyByUser> logger) : ControllerBase
 {
     [HttpPost("ResponseOnVacancy")]
@@ -29,28 +30,31 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
         
         Guid userId = Guid.Parse(User.FindFirst(ClaimTypes.PrimarySid)?.Value!);
         
-        if (userId == Guid.Empty || userId == null)
-        {
-            const string errorMessage = "Cannot to find user id";
-            logger.LogError(errorMessage);
-            return BadRequest("Error while processing request");
-        }
-        
         ApplicationOnVacancyPostEvent postEvent = new(applicationOnVacancy, userId);
         
         var responseOnVacancyEvent = await requestClient.GetResponse<IServiceBusResult<bool>>(postEvent);
-
-        if (responseOnVacancyEvent.Message is null)
-        {
-            logger.LogError("Empty response from service bus");
-            return BadRequest("Error while processing request");
-        }
 
         if (responseOnVacancyEvent.Message.IsSuccess) 
             return Ok();
         
         logger.LogError(responseOnVacancyEvent.Message.ErrorMessage);
         return BadRequest(responseOnVacancyEvent.Message.ErrorMessage);
+    }
+    
+    
+    [HttpGet("CheckIfUserApplied")]
+    public async Task<IActionResult> CheckIfUserAppliedEndPoint(Guid vacancyId)
+    {
+        Guid userId = GetUserId();
+        
+        CheckIfUserAppliedEvent checkIfUserAppliedEvent = new(userId, vacancyId);
+        
+        var response = await checkIfUserAppliedClient.GetResponse<IServiceBusResult<bool>>(checkIfUserAppliedEvent);
+        
+        if (!response.Message.IsSuccess)
+            return BadRequest(response.Message.ErrorMessage);
+        
+        return Ok(response.Message.Result);
     }
     
     
@@ -98,6 +102,22 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
         Guid userId = GetUserId();
         
         DeleteUsersApplicationEvent deleteUsersApplicationEvent = new(userId, applicationId);
+        
+        var response = await deleteApplicationClient.GetResponse<IServiceBusResult<bool>>(deleteUsersApplicationEvent);
+        
+        if (!response.Message.IsSuccess)
+            return BadRequest(response.Message.ErrorMessage);
+        
+        return Ok();
+    }
+    
+    
+    [HttpPost("DeleteApplicationByVacancyId")]
+    public async Task<IActionResult> DeleteApplicationOnVacancyEndPoint(Guid vacancyId)
+    {
+        Guid userId = GetUserId();
+        
+        DeleteUsersApplicationEvent deleteUsersApplicationEvent = DeleteUsersApplicationEvent.FromVacancyId(userId, vacancyId);
         
         var response = await deleteApplicationClient.GetResponse<IServiceBusResult<bool>>(deleteUsersApplicationEvent);
         

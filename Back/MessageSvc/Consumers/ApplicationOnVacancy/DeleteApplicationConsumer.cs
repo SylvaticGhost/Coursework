@@ -15,8 +15,17 @@ public sealed class DeleteApplicationConsumer(IVacancyMessageBoxRepo repo) : ICo
 
         try
         {
-            await repo.DeleteApplications(message.ApplicationId.ToArray());
-            result = ServiceBusResultFactory.SuccessResult(true);
+            if (message.DeleteByApplicationId)
+            {
+                await repo.DeleteApplications(message.ApplicationId.ToArray());
+                result = ServiceBusResultFactory.SuccessResult(true);
+            }
+            else
+            {
+                await repo.DeleteApplication(message.VacancyId, message.UserId);
+                result = ServiceBusResultFactory.SuccessResult(true);
+            }
+            
         }
         catch (Exception e)
         {

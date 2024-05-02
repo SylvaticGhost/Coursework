@@ -32,7 +32,7 @@ public class UserRepository(DataContextNpgEf dataContextNpgEf,
         
         await dataContextNpgEf.UserAccount.AddAsync(userAccount);
         await dataContextNpgEf.SaveChangesAsync();
-
+        
         return userAccount.Id;
     }
     

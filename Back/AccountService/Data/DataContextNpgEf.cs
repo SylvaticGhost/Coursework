@@ -12,12 +12,13 @@ public class DataContextNpgEf : DbContext
 
     public DataContextNpgEf(DbContextOptions options) : base(options)
     {
-    
+       
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
         optionsBuilder.UseNpgsql().UseSnakeCaseNamingConvention();
+        
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
