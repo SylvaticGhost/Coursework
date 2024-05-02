@@ -124,12 +124,10 @@ G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\runtimes\linux\native\
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\runtimes\osx\native\libmongocrypt.dylib
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\runtimes\win\native\mongocrypt.dll
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\Contracts.dll
-G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\CustomAtributtes.dll
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\CustomExceptions.dll
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\GlobalHelpers.dll
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\GlobalModels.dll
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\Contracts.pdb
-G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\CustomAtributtes.pdb
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\CustomExceptions.pdb
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\GlobalHelpers.pdb
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\GlobalModels.pdb
@@ -145,3 +143,5 @@ G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\VacancyService.csproj.
 G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\VacancyService.genruntimeconfig.cache
 G:\GitHub\Coursework\Back\VacancyService\obj\Debug\net8.0\ref\VacancyService.dll
 G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\AutoMapper.dll
+G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\CustomAttributes.dll
+G:\GitHub\Coursework\Back\VacancyService\bin\Debug\net8.0\CustomAttributes.pdb

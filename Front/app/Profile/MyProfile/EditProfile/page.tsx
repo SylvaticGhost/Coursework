@@ -47,7 +47,7 @@ export default function EditProfilePage() {
     if (!profile)
         return <FailedToLoadProfileComponent/>
     
-    const updateProfile = async () => { 
+    const updateProfileBtn = async () => { 
         const profileToUpdate : UserProfileToUpdateDto = { 
             FirstName: firstName,
             LastName: lastName,
@@ -134,15 +134,15 @@ export default function EditProfilePage() {
                 />
             </div>
             <div className="my-3">
-                <textarea rows="4" cols="22" 
+                <textarea 
                 placeholder=" About"
                 value={about}
                 onChange={e => setAbout(e.target.value)}
-                className="default-text-input"/> 
+                className="default-text-input w-2/12 h-4"/> 
             </div>
             <div className="mt-2">
                 <button className="default-purple-button"
-                onClick={updateProfile}>Save</button>
+                onClick={updateProfileBtn}>Save</button>
             </div>
             <div className="my-3">
                 <ToMainPageBtn/>

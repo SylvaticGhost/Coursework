@@ -10,7 +10,7 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Contracts": "1.0.0",
-          "CustomAtributtes": "1.0.0",
+          "CustomAttributes": "1.0.0",
           "CustomExceptions": "1.0.0",
           "GlobalHelpers": "1.0.0",
           "GlobalModels": "1.0.0",
@@ -884,12 +884,12 @@
           "Contracts.dll": {}
         }
       },
-      "CustomAtributtes/1.0.0": {
+      "CustomAttributes/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.1.2"
         },
         "runtime": {
-          "CustomAtributtes.dll": {}
+          "CustomAttributes.dll": {}
         }
       },
       "CustomExceptions/1.0.0": {
@@ -1687,7 +1687,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CustomAtributtes/1.0.0": {
+    "CustomAttributes/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

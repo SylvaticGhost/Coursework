@@ -2,5 +2,5 @@
 
 public record GetOwnerOfVacancyEvent(Guid VacancyId)
 {
-    public DateTime Date { get; } = DateTime.Now;
+    public DateTime Date { get; init; } = DateTime.Now;
 }

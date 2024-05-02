@@ -9,6 +9,14 @@ namespace MessageSvc.Repositories.VacancyMessageBoxRepo;
 
 public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
 {
+    private readonly IMongoCollection<VacancyApplicationsBox> _collection = DB.Collection<VacancyApplicationsBox>();
+
+    public VacancyMessageBoxRepo()
+    {
+        if(_collection is null)
+            throw new NullReferenceException("Collection is null");
+    }
+    
     public async Task CreateMessageBox(Guid vacancyId, Guid companyId)
     {
         VacancyApplicationsBox box = new(vacancyId, companyId);
@@ -18,7 +26,7 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
     
     
     public async Task<bool> CheckIfVacancyHasApplicationBox(Guid vacancyId) =>
-        await DB.Collection<VacancyApplicationsBox>().Find(b => b.VacancyId == vacancyId).AnyAsync();
+        await _collection.Find(b => b.VacancyId == vacancyId).AnyAsync();
     
     
     public async Task<bool> CheckIfUserHasApplication(Guid vacancyId, Guid userId) =>
@@ -67,5 +75,30 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
             
             await box.SaveAsync();
         }
+    }
+
+    public async Task DeleteApplication(Guid vacancyId, Guid userId)
+    {
+        var box = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.VacancyId == vacancyId)
+            .ExecuteSingleAsync();
+        
+        ArgumentNullException.ThrowIfNull(box);
+        
+        box.DeleteApplicationsByUser(userId);
+        
+        await box.SaveAsync();
+    }
+    
+    
+    public async Task<bool> CheckIfUserApplied(Guid vacancyId, Guid userId)
+    {
+        VacancyApplicationsBox? box = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.VacancyId == vacancyId)
+            .ExecuteSingleAsync();
+        
+        ArgumentNullException.ThrowIfNull(box);
+        
+        return box.CheckIfUserApplied(userId);
     }
 }

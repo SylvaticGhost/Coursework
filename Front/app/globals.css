@@ -84,6 +84,19 @@ body {
   @apply flex  
 }
 
+
 .blue-container{
   @apply m-2 bg-blue-100 p-2 rounded-xl
+}
+
+.text-area{
+  @apply w-full border-2 rounded-md py-1 m-2
+}
+
+.medium-text-area{
+  @apply text-area h-24
+}
+
+.large-text-area{
+  @apply text-area h-48
 }

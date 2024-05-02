@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("MessageSvc")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5a6580078fb2759bfd324db14f6d4d18a3a1e207")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1edbcbfa4f1e038122e381da220c947cae059a5b")]
 [assembly: System.Reflection.AssemblyProductAttribute("MessageSvc")]
 [assembly: System.Reflection.AssemblyTitleAttribute("MessageSvc")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

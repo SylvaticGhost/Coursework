@@ -2,5 +2,5 @@
 
 public record CheckIfVacancyExistEvent(Guid VacancyId)
 {
-    public DateTime Date { get; } = DateTime.UtcNow;
+    public DateTime Date { get; init; } = DateTime.UtcNow;
 }
