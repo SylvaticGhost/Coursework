@@ -18,7 +18,7 @@ export default class VacancyPreviewComponent extends Component<VacancyPreviewCom
         return (
             <Link href={url + '/Vacancy/' + this.props.id}>
                 <div className="m-3 p-2 rounded-xl bg-blue-100 flex-column shrink min-width-content">
-                    <p className="no-wrap">{this.props.title}</p>
+                    <p className="no-wrap font-semibold">{this.props.title}</p>
                     <p className="no-wrap">{this.props.company}</p>
                     <p className="no-wrap">{this.props.specialization}</p>
                 </div>

@@ -17,6 +17,7 @@ export default function Home() {
         async function fetchLatestVacancies() {
             const v = await GetLatestVacancy(3);
             setLatestVacancies(v);
+            console.log(v);
         }
         fetchLatestVacancies();
     }, [latestVacancies]);
@@ -63,7 +64,7 @@ export default function Home() {
                   {latestVacancies ? latestVacancies.map((vacancy) => {
                       return (
                           <VacancyPreviewComponent title={vacancy.title}
-                                                   company={vacancy.companyShortInfo?.name ?? 'undef'}
+                                                   company={vacancy.companyShortInfo?.name ?? 'company name'}
                                                    specialization={vacancy.specialization ?? ''}
                                                    id={vacancy.vacancyId}/>
                       )
