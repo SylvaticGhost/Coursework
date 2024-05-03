@@ -31,7 +31,7 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
     
     public async Task<bool> CheckIfUserHasApplication(Guid vacancyId, Guid userId) =>
         await DB.Collection<VacancyApplicationsBox>()
-            .Find(b => b.VacancyId == vacancyId && b.UserApplications
+            .Find(b => b.UserApplications != null && b.VacancyId == vacancyId && b.UserApplications
                 .Any(a => a.UserId == userId))
             .AnyAsync();
 
@@ -53,17 +53,30 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
     public async Task<IEnumerable<UserApplicationOnVacancy>> GetUserApplications(Guid userId)
     {
         var boxes = await DB.Find<VacancyApplicationsBox>()
-            .Match(b => b.UserApplications.Any(a => a.UserId == userId))
+            .Match(b => b.UserApplications != null && b.UserApplications.Any(a => a.UserId == userId))
             .ExecuteAsync();
         
-        return boxes.SelectMany(b => b.UserApplications.Where(a => a.UserId == userId));
+        return boxes.SelectMany(b => b.UserApplications!.Where(a => a.UserId == userId));
+    }
+    
+    
+    public async Task<UserApplicationOnVacancy?> GetUserApplicationOnVacancy(Guid vacancyId, Guid userId)
+    {
+        VacancyApplicationsBox? box = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.VacancyId == vacancyId)
+            .ExecuteSingleAsync();
+        
+        ArgumentNullException.ThrowIfNull(box);
+        ArgumentNullException.ThrowIfNull(box.UserApplications);
+        
+        return box.UserApplications.FirstOrDefault(a => a.UserId == userId);
     }
     
     
     public async Task DeleteApplications(params Guid[] applicationIds)
     {
         var boxes = await DB.Find<VacancyApplicationsBox>()
-            .Match(b => b.UserApplications.Any(a => applicationIds.Contains(a.UserApplicationId)))
+            .Match(b => b.UserApplications != null && b.UserApplications.Any(a => applicationIds.Contains(a.UserApplicationId)))
             .ExecuteAsync();
         
         foreach (var box in boxes)

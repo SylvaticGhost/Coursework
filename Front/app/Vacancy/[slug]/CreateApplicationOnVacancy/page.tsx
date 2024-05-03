@@ -5,11 +5,12 @@ import React from "react";
 import MainHead from "@/Components/MainHead";
 import Vacancy from "@/lib/Types/Vacancy/Vacancy";
 import Cookies from "js-cookie";
-import {postApplication} from "@/lib/VacancyApplication";
+import {checkIfUserApplied, postApplication} from "@/lib/VacancyApplication";
 import {ShortResume} from "@/lib/Types/Vacancy/Messages/ShortResume";
 import ApplicationOnVacancy from "@/lib/Types/Vacancy/Messages/ApplicationOnVacancy";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import LogInComponent from "@/Components/LogInComponent";
+import {LoadingComponent} from "@/Components/LoadingComponent";
 
 export default function CreateApplicationOnVacancy({params: {slug}}: {params: {slug: string}}) {
     
@@ -26,8 +27,20 @@ export default function CreateApplicationOnVacancy({params: {slug}}: {params: {s
     
     const [error, setError] = React.useState<string | null>(null);
     
+    const [loading, setLoading] = React.useState<boolean>(true);
+    const [userApplied, setUserApplied] = React.useState<boolean>(false);
+    
     React.useEffect(() => {
         getVacancyById(slug).then(vacancy => setVacancy(vacancy));
+        
+        if (!token) {
+            setLoading(false);
+            return;
+        }
+        
+        checkIfUserApplied(slug, token).then(result => setUserApplied(result));
+        console.log('checkIfUserApplied' + userApplied);
+        setLoading(false);
     }, []);
     
     const postApplicationOnVacancy = async () => { 
@@ -53,12 +66,16 @@ export default function CreateApplicationOnVacancy({params: {slug}}: {params: {s
                 }
 
                 await postApplication(application, token);
+                setUserApplied(true);
                 
             } catch (e) {
                 setError('Failed to post application');
             }
         }
     }
+    
+    if (loading)
+        return <div className="center-content"><LoadingComponent/></div>
     
     if (error) 
         return (
@@ -78,6 +95,21 @@ export default function CreateApplicationOnVacancy({params: {slug}}: {params: {s
                 <ToMainPageBtn/>
             </div>
         )
+    
+    if (userApplied) {
+        return (
+            <div className="center-content">
+                <p className="font-semibold mb-2 text-lg">You have already applied to this vacancy</p>
+                <ToMainPageBtn/>
+                <div className="mt-2">
+                    <button className="button default-purple-button"
+                    onClick={event => window.location.href='/Vacancy/' + slug + '/ViewApplication'}>
+                        View
+                    </button>
+                </div>
+            </div>
+        )
+    }
     
     return ( 
         <div className="center-content">

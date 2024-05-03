@@ -17,9 +17,12 @@ namespace AccountService.Controllers;
 [ApiController]
 [Route("[controller]")]
 [LoggingExceptionFilter]
-public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> requestClient,
+public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> applicationPostClient,
     IRequestClient<DeleteUsersApplicationEvent> deleteApplicationClient, 
     IRequestClient<CheckIfUserAppliedEvent> checkIfUserAppliedClient,
+    IRequestClient<GetUserApplicationsEvent> getUserApplicationsClient,
+    IRequestClient<GetUserApplicationOnVacancyEvent> getUserApplicationOnVacancyClient,
+    IRequestClient<DeleteUserApplicationByVacancyEvent> deleteApplicationByVacancyClient,
     ILogger<VacancyByUser> logger) : ControllerBase
 {
     [HttpPost("ResponseOnVacancy")]
@@ -32,7 +35,7 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
         
         ApplicationOnVacancyPostEvent postEvent = new(applicationOnVacancy, userId);
         
-        var responseOnVacancyEvent = await requestClient.GetResponse<IServiceBusResult<bool>>(postEvent);
+        var responseOnVacancyEvent = await applicationPostClient.GetResponse<IServiceBusResult<bool>>(postEvent);
 
         if (responseOnVacancyEvent.Message.IsSuccess) 
             return Ok();
@@ -65,7 +68,7 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
         
         GetUserApplicationsEvent getApplicationsEvent = new(userId);
         
-        var response = await requestClient.GetResponse<IServiceBusResult<List<UserApplicationOnVacancy>>>(getApplicationsEvent);
+        var response = await getUserApplicationsClient.GetResponse<IServiceBusResult<List<UserApplicationOnVacancy>>>(getApplicationsEvent);
         
         if (!response.Message.IsSuccess)
             return BadRequest(response.Message.ErrorMessage);
@@ -77,7 +80,7 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
         
         var vacanciesEvent = new GetVacanciesEvent(vacancyIds);
         
-        var responseVacancies = await requestClient.GetResponse<IServiceBusResult<IEnumerable<VacancyDto>>>(vacanciesEvent);
+        var responseVacancies = await getUserApplicationsClient.GetResponse<IServiceBusResult<IEnumerable<VacancyDto>>>(vacanciesEvent);
         
         if (!responseVacancies.Message.IsSuccess)
             return BadRequest(responseVacancies.Message.ErrorMessage);
@@ -94,6 +97,26 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
         
         return Ok(result);
     }
+    
+    [HttpGet("GetMyApplicationOnVacancy")]
+    public async Task<IActionResult> GetMyApplicationsOnVacancyEndPoint(Guid vacancyId)
+    {
+        Guid userId = GetUserId();
+        
+        GetUserApplicationOnVacancyEvent getApplicationsEvent = new(userId, vacancyId);
+        
+        var response = await getUserApplicationOnVacancyClient.GetResponse<IServiceBusResult<UserApplicationOnVacancy>>(getApplicationsEvent);
+        
+        if (!response.Message.IsSuccess)
+            return BadRequest(response.Message.ErrorMessage);
+        
+        if (response.Message.Result is null)
+            return Ok(null);
+        
+        var applications = response.Message.Result;
+        
+        return Ok(applications);
+    }
 
 
     [HttpPost("DeleteApplication")]
@@ -101,7 +124,7 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
     {
         Guid userId = GetUserId();
         
-        DeleteUsersApplicationEvent deleteUsersApplicationEvent = new(userId, applicationId);
+        DeleteUsersApplicationEvent deleteUsersApplicationEvent = new(applicationId);
         
         var response = await deleteApplicationClient.GetResponse<IServiceBusResult<bool>>(deleteUsersApplicationEvent);
         
@@ -117,9 +140,9 @@ public class VacancyByUser(IRequestClient<ApplicationOnVacancyPostEvent> request
     {
         Guid userId = GetUserId();
         
-        DeleteUsersApplicationEvent deleteUsersApplicationEvent = DeleteUsersApplicationEvent.FromVacancyId(userId, vacancyId);
+        DeleteUserApplicationByVacancyEvent deleteUsersApplicationEvent = new(userId, vacancyId);
         
-        var response = await deleteApplicationClient.GetResponse<IServiceBusResult<bool>>(deleteUsersApplicationEvent);
+        var response = await deleteApplicationByVacancyClient.GetResponse<IServiceBusResult<bool>>(deleteUsersApplicationEvent);
         
         if (!response.Message.IsSuccess)
             return BadRequest(response.Message.ErrorMessage);
