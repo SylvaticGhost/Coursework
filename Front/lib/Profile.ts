@@ -3,6 +3,7 @@ import {Contact} from "./Types/Contact";
 import UserProfile from "@/lib/Types/UserProfile/UserProfile";
 import {UserProfileToUpdateDto} from "@/lib/Types/UserProfile/UserProfileToUpdateDto";
 import UnauthorizedException from "@/lib/Errors/UnauthorizedException";
+import {generateDefaultHeader} from "@/lib/Helpers/requestHelper";
 
 
 export async function CreateProfile(profile: UserProfileToAddDto, token: string) {
@@ -98,6 +99,26 @@ export async function getOwnProfile(token: string) {
     }
     return undefined;
   }
+}
+
+
+export async function getUserProfile(id: string) {
+    const param = '?id=' + id;
+    
+    const response = await fetch('http://localhost:5239/Profile/GetUserProfile' + param, {
+            method: 'GET',
+            headers: generateDefaultHeader()
+        }
+    );
+    
+    if(response.ok) {
+        const data = await response.json();
+        return new UserProfile(data.userId, data.city, data.country, data.contacts, data.avatar, data.firstName, data.lastName, data.about);
+    }
+    else {
+        console.log('Profile not found');
+        return undefined;
+    }
 }
 
 

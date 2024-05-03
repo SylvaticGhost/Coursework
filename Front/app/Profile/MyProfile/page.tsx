@@ -12,12 +12,16 @@ import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import FailedToLoadProfileComponent from "@/app/Profile/Components/FailedToLoadProfileComponent";
 import UnauthorizedException from "@/lib/Errors/UnauthorizedException";
 import NotLoggedComponent from "@/app/Profile/Components/NotLoggedComponent";
+import {LoadingComponent} from "@/Components/LoadingComponent";
 
 const url : string = 'http://localhost:3000'
 
 export default function UserProfile() {
     const [profile, setProfile] = useState<UserProfile | undefined>(undefined);
     const [authorized, setAuthorized] = useState<boolean>(true);
+    
+    const [loading, setLoading] = useState<boolean>(true);
+    
     const token = Cookies.get('token')
 
     useEffect(() => {
@@ -26,10 +30,12 @@ export default function UserProfile() {
                 try {
                     const profileData = await getOwnProfile(token);
                     setProfile(profileData);
+                    setLoading(false);
                 }
                 catch(exception: any) {
                     if(exception instanceof UnauthorizedException) {
                         setAuthorized(false);
+                        setLoading(false);
                     }
                 }
             }
@@ -37,6 +43,9 @@ export default function UserProfile() {
 
         fetchProfile().then(r => {});
     }, [token]);
+    
+    if(loading)
+        return <LoadingComponent/>
 
     if(!token || !authorized)
         return <NotLoggedComponent/>
@@ -55,6 +64,9 @@ export default function UserProfile() {
                 <br/>
                 <p>
                     <a href={url + '/Profile/MyProfile/Settings'}>Settings</a>
+                </p>
+                <p className="m-10">
+                    <a href={url + '/Profile/' + profile.Id}>Public view</a>
                 </p>
             </div>
             <div className="text-center">

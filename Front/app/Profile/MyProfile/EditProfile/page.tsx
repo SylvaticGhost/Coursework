@@ -8,6 +8,7 @@ import {getOwnProfile, updateProfile} from "@/lib/Profile";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import FailedToLoadProfileComponent from "@/app/Profile/Components/FailedToLoadProfileComponent";
 import {UserProfileToUpdateDto} from "@/lib/Types/UserProfile/UserProfileToUpdateDto";
+import {LoadingComponent} from "@/Components/LoadingComponent";
 
 export default function EditProfilePage() {
     const [firstName, setFirstName] = useState<string>('');
@@ -20,6 +21,8 @@ export default function EditProfilePage() {
     
     const [updated, setUpdated] = useState<boolean>(false);
     const [errorOnUpdate, setErrorOnUpdate] = useState<boolean>(false);
+    
+    const [loading, setLoading] = useState<boolean>(true);
 
     const token = Cookies.get('token')
 
@@ -34,9 +37,13 @@ export default function EditProfilePage() {
                     setAbout(profileData.About || '');
                     setCity(profileData.City);
                     setCountry(profileData.Country);
+                    setLoading(false);
                 }
             }
         })(); }, [token, profile]);
+    
+    if(loading)
+        return <LoadingComponent/>
     
     if(!token)
         return <div className="center-content">
@@ -138,7 +145,7 @@ export default function EditProfilePage() {
                 placeholder=" About"
                 value={about}
                 onChange={e => setAbout(e.target.value)}
-                className="default-text-input w-2/12 h-4"/> 
+                className="default-text-input w-full h-24"/> 
             </div>
             <div className="mt-2">
                 <button className="default-purple-button"
