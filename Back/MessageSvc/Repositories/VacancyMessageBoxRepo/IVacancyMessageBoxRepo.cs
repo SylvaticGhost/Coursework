@@ -14,6 +14,8 @@ public interface IVacancyMessageBoxRepo
     
     public Task<IEnumerable<UserApplicationOnVacancy>> GetUserApplications(Guid userId);
     
+    public Task<UserApplicationOnVacancy?> GetUserApplicationOnVacancy(Guid vacancyId, Guid userId);
+    
     public Task DeleteApplications(params Guid[] applicationIds);
 
     public Task DeleteApplication(Guid vacancyId, Guid userId);

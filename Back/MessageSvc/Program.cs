@@ -26,6 +26,7 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<ApplicationForVacancyPostConsumer>();
     
     x.AddConsumer<GetUserApplicationsConsumer>();
+    x.AddConsumer<GetUserApplicationOnVacancyConsumer>();
     x.AddConsumer<DeleteApplicationConsumer>();
     
     x.AddConsumer<CheckIfUserAppliedConsumer>();
