@@ -1,5 +1,6 @@
 ﻿using System.Security.Claims;
 using CompanySvc.MiddleWare.CompanyMessageController;
+using CompanySvc.Repositories;
 using Contracts;
 using Contracts.Events.Messages;
 using Contracts.Events.ResponseOnVacancyEvents;
@@ -17,6 +18,7 @@ namespace CompanySvc.Controllers;
 [Route("ApplicationOnVacancies")]
 [Authorize]
 public class ApplicationOnVacanciesController(
+    ICompanyRepo companyRepo,
     IPublishEndpoint publisher,
     IConfiguration configuration,
     IRequestClient<GetVacancyResponsesEvent> requestGetResponsesOnVacancyClient,
@@ -44,8 +46,9 @@ public class ApplicationOnVacanciesController(
     public async Task<IActionResult> MakeFeedbackOnResponse([FromBody] AnswerOnApplicationToAddDto feedback)
     {
         Guid companyId = GetCompanyId();
+        string companyName = await companyRepo.GetCompanyById(companyId).ContinueWith(c => c.Result!.Name);
         
-        PostAnswerOnApplicationEvent @event = new PostAnswerOnApplicationEvent(feedback);
+        PostAnswerOnApplicationEvent @event = new PostAnswerOnApplicationEvent(feedback, companyId, companyName);
         
         var result = await requestFeedbackOnResponseClient.GetResponse<IServiceBusResult<bool>>(@event);
         

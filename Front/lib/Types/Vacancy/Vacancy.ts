@@ -23,3 +23,4 @@ export default class Vacancy {
     }
 }
 
+//fix returning after delete application

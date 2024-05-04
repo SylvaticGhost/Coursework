@@ -47,6 +47,7 @@ export default function ViewVacancyPage() {
                 <ToVacancyListComponent url={url}/>
             </p>
             <ToCompanyHubComponent url={url}/>
+            <a className="m-2 purple-large-text" href={url + '/CompanyHub/VacancyList/ViewVacancy/ViewApplication'}>View applications</a>
         </div>
     )
 }

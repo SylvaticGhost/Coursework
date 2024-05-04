@@ -6,15 +6,31 @@ import {UserLogin} from "../../../lib/auth";
 import {UserAuth} from "../../../lib/Types/UserAuth";
 import Cookies from "js-cookie";
 import ToMainPageBtn from "../../../Components/ToMainPageBtn";
+import {validateEmail} from "../../../lib/Helpers/authHelpers";
 
 export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
     const [loggedIn, setLoggedIn] = useState(false);
-   
 
     async function login() {
+        
+        if (!email) {
+            setError('Email is required');
+            return;
+        }
+        
+        const emailValid = validateEmail(email);
+        
+        if (!emailValid) 
+            setError('Email is not valid');
+        
+        if (!password) {
+            setError('Password is required');
+            return;
+        }
+        
         const userAuth = new UserAuth(email, password);
 
         try {
@@ -25,7 +41,7 @@ export default function Login() {
             Cookies.set('token', response, { expires: 7, secure: true });
             setLoggedIn(true);
         } catch (error) {
-            setError(error.message);
+            //setError(error.message);
             console.log(error.message);
         }
         //window.location.href = "http://localhost:3000/";
@@ -83,7 +99,9 @@ export default function Login() {
                     </div>
                 </div>
                 <div className="m-5  text-center">
-                    {setError && ` ${error}`}
+                    <p className="font-semibold text-red-600">
+                        {setError && ` ${error}`}
+                    </p>
                 </div>
             </div>
         </div>

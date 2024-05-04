@@ -71,4 +71,13 @@ public class VacancyApplicationsBox : Entity
         
         return UserApplications.Any(a => a.UserId == userId);
     }
+    
+    public Guid GetUserIdFromApplication(Guid applicationId)
+    {
+        UserApplicationOnVacancy? application = UserApplications!.FirstOrDefault(a => a.UserApplicationId == applicationId);
+        
+        ArgumentNullException.ThrowIfNull(application);
+        
+        return application.UserId;
+    }
 }

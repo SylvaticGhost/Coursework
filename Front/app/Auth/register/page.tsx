@@ -24,6 +24,8 @@ export default function Register() {
     const [error, setError] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     
+    const [registered, setRegistered] = useState(false)
+    
     async function CreateAccount(event: any) {
         event.preventDefault();
         if(!terms) {
@@ -51,13 +53,25 @@ export default function Register() {
             setError(valid)
             return
         }  
+        else 
+            setError('')
+        
             const response = await UserRegistration(user)
+            if(response)
+                Cookies.set('token', response, {expires: 7, secure: false})
             console.log(response)
 
-           if(Cookies.get('token') !== undefined && Cookies.get('token') !== null)
-                window.location.href = 'http://localhost:3000/Auth/CreateProfile'
+           if(Cookies.get('token') !== undefined && Cookies.get('token') !== null){
+               setRegistered(true);
+               window.location.href = 'http://localhost:3000/Auth/CreateProfile'
+           }
             else
             console.log('trouble with token')
+    }
+
+    if(Cookies.get('token') !== undefined && Cookies.get('token') !== null){
+        setRegistered(true);
+        window.location.href = 'http://localhost:3000/Auth/CreateProfile'
     }
     
     return (

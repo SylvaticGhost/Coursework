@@ -113,4 +113,62 @@ public class UserRepository(DataContextNpgEf dataContextNpgEf,
             .FirstOrDefaultAsync()
             .ContinueWith(x => (x.Result!.FirstName, x.Result.LastName));
     }
+
+
+    public async Task UpdatePassword(string newPassword, Guid userId) 
+    {
+        UserAccount? user = await GetUserById(userId) ?? throw new ArgumentException("User not found");
+
+        if (string.IsNullOrWhiteSpace(newPassword))
+            throw new ArgumentException("Password is required");
+
+        HashedPasswords password = GlobalAuthHelpers.CreatePasswordHash(newPassword);
+
+        user.PasswordHash = password.PasswordHash;
+        user.PasswordSalt = password.PasswordSalt;
+
+        await dataContextNpgEf.SaveChangesAsync();
+    }
+
+
+    public async Task UpdateEmail(string newEmail, Guid userId)
+    {
+        UserAccount? user = await GetUserById(userId) ?? throw new ArgumentException("User not found");
+
+        if (string.IsNullOrWhiteSpace(newEmail))
+            throw new ArgumentException("Email is required");
+
+        user.Email = newEmail;
+
+        await dataContextNpgEf.SaveChangesAsync();
+    }
+
+
+    public async Task UpdatePhoneNumber(string newPhoneNumber, Guid userId)
+    {
+        UserAccount? user = await GetUserById(userId) ?? throw new ArgumentException("User not found");
+
+        if (string.IsNullOrWhiteSpace(newPhoneNumber))
+            throw new ArgumentException("Phone number is required");
+
+        user.PhoneNumber = newPhoneNumber;
+
+        await dataContextNpgEf.SaveChangesAsync();
+    }
+
+
+    public async Task UpdateName(Guid userId,string newFirstName = "", string newLastName = "") {
+        UserAccount? user = await GetUserById(userId) ?? throw new ArgumentException("User not found");
+
+        if (string.IsNullOrWhiteSpace(newFirstName) && string.IsNullOrWhiteSpace(newLastName))
+            throw new ArgumentException("At least one of the fields is required");
+
+        if (!string.IsNullOrWhiteSpace(newFirstName))
+            user.FirstName = newFirstName;
+
+        if (!string.IsNullOrWhiteSpace(newLastName))
+            user.LastName = newLastName;
+
+        await dataContextNpgEf.SaveChangesAsync();  
+    }
 }

@@ -94,6 +94,10 @@ body {
   @apply m-2 bg-blue-100 p-2 rounded-xl
 }
 
+.gray-container{
+  @apply m-2 bg-gray-100 p-2 rounded-xl
+}
+
 .text-area{
   @apply w-full border-2 rounded-md py-1 m-2
 }
@@ -104,4 +108,12 @@ body {
 
 .large-text-area{
   @apply text-area h-48
+}
+
+.purple-large-text {
+  @apply font-semibold text-purple-500 text-xl text-center
+}
+
+.middle-button {
+  @apply button-press p-1 text-lg rounded-md
 }

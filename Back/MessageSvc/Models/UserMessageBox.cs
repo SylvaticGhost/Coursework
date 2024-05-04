@@ -13,4 +13,10 @@ public class UserMessageBox : Entity
         UserId = userId;
         CompanyResponses = new List<AnswerOnApplication>();
     }
+    
+    public void AddAnswer(AnswerOnApplication? answer)
+    {
+        ArgumentNullException.ThrowIfNull(answer, "Answer is null");
+        CompanyResponses.Add(answer);
+    }
 }

@@ -21,4 +21,6 @@ public interface IVacancyMessageBoxRepo
     public Task DeleteApplication(Guid vacancyId, Guid userId);
     
     public Task<bool> CheckIfUserApplied(Guid vacancyId, Guid userId);
+    
+    public Task<Guid> GetUserIdFromApplication(Guid applicationId, Guid vacancyId);
 }

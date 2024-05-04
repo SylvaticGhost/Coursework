@@ -909,34 +909,32 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\ktkac\\.nuget\\packages\\": {}
+    "/Users/Kostia/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj",
+      "projectUniqueName": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj",
       "projectName": "Contracts",
-      "projectPath": "G:\\GitHub\\Coursework\\Back\\Contracts\\Contracts.csproj",
-      "packagesPath": "C:\\Users\\ktkac\\.nuget\\packages\\",
-      "outputPath": "G:\\GitHub\\Coursework\\Back\\Contracts\\obj\\",
+      "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/Contracts.csproj",
+      "packagesPath": "/Users/Kostia/.nuget/packages/",
+      "outputPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/Contracts/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\ktkac\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/Kostia/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj": {
-              "projectPath": "G:\\GitHub\\Coursework\\Back\\GlobalModels\\GlobalModels.csproj"
+            "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj": {
+              "projectPath": "/Users/Kostia/Documents/GitHub/Coursework/Back/GlobalModels/GlobalModels.csproj"
             }
           }
         }
@@ -966,7 +964,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.104/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

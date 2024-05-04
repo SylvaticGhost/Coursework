@@ -2,5 +2,6 @@
 
 public record AnswerOnApplicationToAddDto(
     Guid UserApplicationId,
+    Guid VacancyId,
     string? Text
     );
