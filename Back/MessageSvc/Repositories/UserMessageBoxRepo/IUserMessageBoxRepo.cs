@@ -8,7 +8,7 @@ public interface IUserMessageBoxRepo
     
     public Task<bool> UserMessageBoxExists(Guid userId);
     
-    public Task<IEnumerable<AnswerOnApplication>> GetAnswersForUser(Guid userId);
+    public Task<IEnumerable<AnswerOnApplication>?> GetAnswersForUser(Guid userId);
     
     public Task DeleteAnswer(Guid userId, Guid applicationId);
     

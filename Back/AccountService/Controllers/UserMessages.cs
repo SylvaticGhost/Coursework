@@ -14,9 +14,11 @@ public class UserMessages(IRequestClient<GetAnswerForUserEvent> getAnswerForUser
     IPublishEndpoint publishEndpoint,
     ILogger<UserMessages> logger) : UserControllerBase
 {
-    [HttpGet("GetMessages")]
-    public async Task<IActionResult> GetUserMessages(Guid userId)
+    [HttpGet("GetMyMessages")]
+    public async Task<IActionResult> GetUserMessages()
     {
+        Guid userId = GetUserId();
+        
         if (userId == Guid.Empty)
             return new BadRequestObjectResult("Invalid user id");
         
@@ -25,7 +27,7 @@ public class UserMessages(IRequestClient<GetAnswerForUserEvent> getAnswerForUser
         var response = await getAnswerForUserEventClient.GetResponse<IServiceBusResult<IEnumerable<AnswerOnApplication>>>(getAnswerForUserEvent);
 
         if (response.Message.IsSuccess)
-            return Ok(response.Message.Result);
+            return Ok(response.Message.Result ?? new List<AnswerOnApplication>());
         
         logger.LogError(response.Message.ErrorMessage);
         return new BadRequestObjectResult("Internal server error");

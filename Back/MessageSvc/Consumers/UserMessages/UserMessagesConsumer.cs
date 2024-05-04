@@ -30,6 +30,7 @@ public sealed class UserMessagesConsumer(IUserMessageBoxRepo repo, ILogger<GetAn
                 ServiceBusResultFactory.FailResult<IEnumerable<AnswerOnApplication>?>(ex.Message);
             
             logger.LogError(ex.Message + ex.Source + ex.StackTrace);
+            await context.RespondAsync(response);
         }
     }
 

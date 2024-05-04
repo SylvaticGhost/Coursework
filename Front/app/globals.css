@@ -94,6 +94,10 @@ body {
   @apply m-2 bg-blue-100 p-2 rounded-xl
 }
 
+.gray-container{
+  @apply m-2 bg-gray-100 p-2 rounded-xl
+}
+
 .text-area{
   @apply w-full border-2 rounded-md py-1 m-2
 }

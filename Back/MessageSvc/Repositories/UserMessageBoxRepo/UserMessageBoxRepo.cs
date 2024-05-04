@@ -22,16 +22,20 @@ public class UserMessageBoxRepo : IUserMessageBoxRepo
     }
 
 
-    public async Task<IEnumerable<AnswerOnApplication>> GetAnswersForUser(Guid userId)
+    public async Task<IEnumerable<AnswerOnApplication>?> GetAnswersForUser(Guid userId)
     {
-        var messageBox = await GetUserMessageBox(userId);
-        return messageBox.CompanyResponses;
+        UserMessageBox? messageBox = await GetUserMessageBox(userId);
+
+        return messageBox?.CompanyResponses;
     }
     
     
     public async Task DeleteAnswer(Guid userId, Guid applicationId)
     {
         var messageBox = await GetUserMessageBox(userId);
+
+        ArgumentNullException.ThrowIfNull(messageBox, "MessageBox not found");
+        
         var answer = messageBox.CompanyResponses.FirstOrDefault(a => a.UserApplicationId == applicationId);
 
         if (answer == null)
@@ -50,7 +54,7 @@ public class UserMessageBoxRepo : IUserMessageBoxRepo
     }
 
 
-    private async Task<UserMessageBox> GetUserMessageBox(Guid userId) =>
+    private async Task<UserMessageBox?> GetUserMessageBox(Guid userId) =>
         await _collection.FindAsync(m => m.UserId == userId).Result.FirstOrDefaultAsync();
 
 }
