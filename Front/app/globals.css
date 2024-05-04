@@ -113,3 +113,7 @@ body {
 .purple-large-text {
   @apply font-semibold text-purple-500 text-xl text-center
 }
+
+.middle-button {
+  @apply button-press p-1 text-lg rounded-md
+}
