@@ -20,10 +20,10 @@ public class ValidationResults
         
         foreach (string error in Errors)
         {
-            stringBuilder.AppendLine(error);
+            stringBuilder.AppendLine(error + ",");
         }
         
-        return stringBuilder.ToString();
+        return stringBuilder.ToString().TrimEnd();
     }
     
     

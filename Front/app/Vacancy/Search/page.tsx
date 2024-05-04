@@ -40,9 +40,10 @@ export default function SearchPage() {
                 <MainHead text="Founded vacancies"/>
                 {foundedVacancies ? foundedVacancies.map((vacancy) => {
                     return (
-                        <VacancyPreviewComponent title={vacancy.title} 
-                                                 company={vacancy.companyShortInfo?.name ?? 'undef'} 
-                                                 specialization={vacancy.specialization ?? ''} 
+                        <VacancyPreviewComponent key={vacancy.vacancyId}
+                                                 title={vacancy.title}
+                                                 company={vacancy.companyShortInfo?.name ?? 'undef'}
+                                                 specialization={vacancy.specialization ?? ''}
                                                  id={vacancy.vacancyId}/>
                     )
                 }) : 'Empty'}

@@ -51,7 +51,12 @@ export default function UserProfile() {
         return <NotLoggedComponent/>
 
     if (!profile) 
-        return <FailedToLoadProfileComponent/>
+        return (
+            <div>
+                <FailedToLoadProfileComponent/>
+                <a href={url + '/Auth/CreateProfile'} className="my-2 font-semibold text-purple-500">If you haven't created create now</a>
+            </div>
+        )
     
 
     return(

@@ -58,9 +58,6 @@ public class Profile(DataContextNpgEf dataContextNpgEf, IMapper mapper) : Contro
         
         UserProfile? userProfile = await _userProfileRepository.GetUserProfile(userId);
         
-        if(userProfile == null)
-            return new NotFoundObjectResult("User not found");
-        
         return new OkObjectResult(userProfile);
     }
 

@@ -7,24 +7,33 @@ import {Contact} from "@/lib/Types/Contact";
 import { CreateProfile } from "@/lib/Profile";
 import MainHead from "@/Components/MainHead";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
+import LogInComponent from "@/Components/LogInComponent";
 
-export default function CreateProfilePage() { 
-    const token = Cookies.get('token')
-    
-    
-    if(!token) {
-        window.location.href = 'http://localhost:3000/Auth/login'
-        return 
-    }
-    
-    
+export default function CreateProfilePage() {
+
     const [error, setError] = useState('')
     const [country, setCountry] = useState('')
     const [city, setCity] = useState('')
     const [contacts, setContacts] = useState('')
-    let [contactType, setContactType] = useState(GetContactsType()[0])
-    
+    const [contactType, setContactType] = useState(GetContactsType()[0])
+
     const [profileCreated, setProfileCreated] = useState(false)
+
+    const token = Cookies.get('token')
+    
+    
+    if(!token) {
+        return (
+            <div className="center-content">
+                <MainHead text="Occured an error with auth"/>
+                <a className="my-2">Your account is created, but try to login yourself</a>
+                <LogInComponent/>
+                <p className="my-2">
+                    <ToMainPageBtn/>
+                </p>
+            </div>
+        )
+    }
     
     if(profileCreated) {
         return ( 

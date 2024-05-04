@@ -11,7 +11,7 @@ import {LoadingComponent} from "@/Components/LoadingComponent";
 import ApplicationViewComponent from "@/app/Vacancy/Components/ApplicationViewComponent";
 import BackButtonComponent from "@/Components/BackButtonComponent";
 
-export default function viewApplicationPage({params: {slug}}: {params: {slug: string}}) {
+export default function ViewApplicationPage({params: {slug}}: {params: {slug: string}}) {
     const [loading, setLoading] = React.useState<boolean>(true);
     const [application, setApplication] = React.useState<ApplicationOnVacancy | null>(null);
     

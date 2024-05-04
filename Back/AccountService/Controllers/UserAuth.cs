@@ -3,6 +3,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
 using AccountService.Data;
+using AccountService.ExceptionFilters;
 using AccountService.Models;
 using AccountService.Repositories;
 using Contracts;
@@ -21,6 +22,7 @@ namespace AccountService.Controllers;
 [ApiController]
 [Route("[controller]")]
 [DefaultExceptionFilter]
+[LoggingExceptionFilter]
 public class UserAuth(DataContextNpgEf dataContextNpgEf, 
     IConfiguration configuration,
     IRequestClient<CreateUserMessageBoxEvent> createBoxRequestClient)
@@ -41,7 +43,7 @@ public class UserAuth(DataContextNpgEf dataContextNpgEf,
             validationResult.AddError("Phone number already exists");
         
         if(!validationResult.IsValid)
-            return new BadRequestObjectResult("Invalid input");
+            return new BadRequestObjectResult(validationResult.ToString());
         
         Guid id = await _userRepository.AddUser(userAccountToAddDto);
 

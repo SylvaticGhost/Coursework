@@ -7,7 +7,9 @@ export default class FailedToLoadProfileComponent extends Component {
         return (
             <div className="center-content">
                 <h3>Failed to load profile</h3>
-                <LogOut/>
+                <p className="my-2">
+                    <LogOut/>
+                </p>
                 <ToMainPageBtn/>
             </div>
         )

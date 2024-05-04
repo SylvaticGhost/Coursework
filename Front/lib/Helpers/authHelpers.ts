@@ -5,6 +5,9 @@ export function ValidRegistrationForm(userRegister: UserRegister): string {
         return 'Email is required'
     }
     
+    if(!validateEmail(userRegister.email)) 
+        return 'Email is not valid';
+    
     if(userRegister.phoneNumber === '') {
         return 'Phone number is required'
     }
