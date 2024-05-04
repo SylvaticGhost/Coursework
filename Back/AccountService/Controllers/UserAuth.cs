@@ -20,6 +20,7 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 namespace AccountService.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("[controller]")]
 [DefaultExceptionFilter]
 [LoggingExceptionFilter]
@@ -94,7 +95,6 @@ public class UserAuth(DataContextNpgEf dataContextNpgEf,
     }
     
     
-    [Authorize]
     [HttpGet("RefreshToken")]
     public async Task<IActionResult> RefreshToken()
     {
@@ -118,7 +118,6 @@ public class UserAuth(DataContextNpgEf dataContextNpgEf,
     }
     
     
-    [Authorize]
     [HttpPost("DeleteAccount")]
     public async Task<IActionResult> DeleteAccount()
     {
@@ -134,7 +133,6 @@ public class UserAuth(DataContextNpgEf dataContextNpgEf,
     }
     
     
-    [Authorize]
     [HttpGet("TestAuth")]
     public IActionResult TestAuth()
     {

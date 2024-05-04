@@ -1,0 +1,13 @@
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/bin/Debug/net8.0/CustomAttributes.deps.json
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/bin/Debug/net8.0/CustomAttributes.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/bin/Debug/net8.0/CustomAttributes.pdb
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.csproj.AssemblyReference.cache
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.GeneratedMSBuildEditorConfig.editorconfig
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.AssemblyInfoInputs.cache
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.AssemblyInfo.cs
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.csproj.CoreCompileInputs.cache
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.sourcelink.json
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/refint/CustomAttributes.dll
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/CustomAttributes.pdb
+/Users/Kostia/Documents/GitHub/Coursework/Back/CustomAttributes/obj/Debug/net8.0/ref/CustomAttributes.dll

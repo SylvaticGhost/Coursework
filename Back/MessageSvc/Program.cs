@@ -1,9 +1,11 @@
 using System.Data;
+using Contracts.Events.Messages;
 using GlobalHelpers.DataHelpers.Models;
 using MassTransit;
 using MessageSvc;
 using MessageSvc.Consumers;
 using MessageSvc.Consumers.ApplicationOnVacancy;
+using MessageSvc.Consumers.UserMessages;
 using MessageSvc.Data;
 using MessageSvc.Repositories.UserMessageBoxRepo;
 using MessageSvc.Repositories.VacancyMessageBoxRepo;
@@ -30,6 +32,8 @@ builder.Services.AddMassTransit(x =>
     x.AddConsumer<DeleteApplicationConsumer>();
     
     x.AddConsumer<CheckIfUserAppliedConsumer>();
+
+    x.AddConsumer<UserMessagesConsumer>();
     
     x.UsingRabbitMq((context, cfg) =>
     {

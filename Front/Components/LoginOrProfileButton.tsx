@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
+import UserMessageBoxIconComponent from "@/Components/UserMessageBoxIconComponent";
 
 export default function LoginOrProfileButton() {
   const [logged, setLogged] = useState<boolean | undefined>(undefined);
@@ -29,6 +30,17 @@ export default function LoginOrProfileButton() {
     };
   }, []); // Empty dependency array means this effect runs once on mount and cleanup on unmount
 
+  if(token) {
+    return (
+        <div className="flex flex-row">
+          <UserMessageBoxIconComponent />
+          <a href='http://localhost:3000/Profile/MyProfile' className="flex ml-6 mr-2">
+            Profile
+          </a>
+        </div>
+    )
+  }
+  
   return (
     <a href={token ? 'http://localhost:3000/Profile/MyProfile' : 'http://localhost:3000/Auth/login'} className="flex ">
       {token ? 'Profile' : 'Login'}
