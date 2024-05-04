@@ -13,4 +13,6 @@ public interface IUserMessageBoxRepo
     public Task DeleteAnswer(Guid userId, Guid applicationId);
     
     public Task DeleteBox(Guid userId);
+    
+    public Task AddAnswerOnApplication(AnswerOnApplication answer);
 }

@@ -2,7 +2,5 @@
 
 namespace Contracts.Events.Messages;
 
-public record PostAnswerOnApplicationEvent(AnswerOnApplicationToAddDto AnswerOnApplicationToAddDto)
-{
-    public DateTime Date { get; init; } = DateTime.UtcNow;
-}
+public record PostAnswerOnApplicationEvent(AnswerOnApplicationToAddDto Answer, Guid CompanyId, string CompanyName) 
+    : Event;

@@ -54,6 +54,19 @@ public class UserMessageBoxRepo : IUserMessageBoxRepo
     }
 
 
+    public async Task AddAnswerOnApplication(AnswerOnApplication answer)
+    {
+        var box = await GetUserMessageBox(answer.UserId);
+        
+        if(box is null)
+            throw new Exception("User message box not found");
+        
+        box.AddAnswer(answer);
+        
+        await box.SaveAsync();
+    }
+
+
     private async Task<UserMessageBox?> GetUserMessageBox(Guid userId) =>
         await _collection.FindAsync(m => m.UserId == userId).Result.FirstOrDefaultAsync();
 

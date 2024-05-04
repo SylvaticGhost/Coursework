@@ -109,3 +109,7 @@ body {
 .large-text-area{
   @apply text-area h-48
 }
+
+.purple-large-text {
+  @apply font-semibold text-purple-500 text-xl text-center
+}

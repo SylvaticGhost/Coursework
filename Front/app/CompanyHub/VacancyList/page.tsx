@@ -35,8 +35,7 @@ export default function VacancyListPage() {
                 })}   
                 </div>
                 <div className="flex justify-items-center max-width-content">
-                    <a className="font-semibold text-purple-500 text-xl text-center" href={url + '/CompanyHub/Company'}>TO COMPANY PAGE</a>
-
+                    <a className="purple-large-text" href={url + '/CompanyHub/Company'}>TO COMPANY PAGE</a>
                 </div>
             </div>
         </div>
