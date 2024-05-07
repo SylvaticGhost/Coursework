@@ -1,0 +1,7 @@
+.field-in-resume {
+    @apply m-1 flex flex-col;
+}
+
+.answering-button {
+    @apply mx-3 p-1
+}

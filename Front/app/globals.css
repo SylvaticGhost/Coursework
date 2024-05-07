@@ -62,8 +62,12 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 55vh;
   flex-direction: column;
+}
+
+.min-h-55vh {
+  min-height: 55vh;
 }
 
 

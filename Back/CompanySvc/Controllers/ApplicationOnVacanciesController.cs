@@ -19,6 +19,7 @@ namespace CompanySvc.Controllers;
 [Authorize]
 public class ApplicationOnVacanciesController(
     ICompanyRepo companyRepo,
+    ILogger<ApplicationOnVacanciesController> logger,
     IPublishEndpoint publisher,
     IConfiguration configuration,
     IRequestClient<GetVacancyResponsesEvent> requestGetResponsesOnVacancyClient,
@@ -37,7 +38,8 @@ public class ApplicationOnVacanciesController(
         if (response.Message.IsSuccess)
             return Ok(response.Message.Result);
         
-        return new BadRequestObjectResult(response.Message.ErrorMessage);
+        logger.LogError(response.Message.ErrorMessage);
+        return new BadRequestObjectResult("Error while getting applications on vacancy");
     }
     
     

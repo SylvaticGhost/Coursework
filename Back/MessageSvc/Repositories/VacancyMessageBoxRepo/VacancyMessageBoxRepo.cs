@@ -125,4 +125,16 @@ public class VacancyMessageBoxRepo : IVacancyMessageBoxRepo
         
         return box.GetUserIdFromApplication(applicationId);
     }
+    
+    
+    public async Task<IEnumerable<UserApplicationOnVacancy>> GetApplicationsOnVacancy(Guid vacancyId)
+    {
+        var box = await DB.Find<VacancyApplicationsBox>()
+            .Match(b => b.VacancyId == vacancyId)
+            .ExecuteSingleAsync();
+        
+        ArgumentNullException.ThrowIfNull(box);
+        
+        return box.UserApplications ?? [];
+    }
 }

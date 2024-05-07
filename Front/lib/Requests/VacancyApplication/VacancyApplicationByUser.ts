@@ -1,8 +1,9 @@
 import ApplicationOnVacancy from "@/lib/Types/Vacancy/Messages/ApplicationOnVacancy";
+import {ApplicationOnVacancyToAddDto} from "@/lib/Types/Vacancy/Messages/ApplicationOnVacancyToAddDto";
 
 const backendUrl = 'http://localhost:5239';
 
-export async function postApplication(application: ApplicationOnVacancy, token: string): Promise<void> {
+export async function postApplication(application: ApplicationOnVacancyToAddDto, token: string): Promise<void> {
     const response = await fetch(backendUrl + '/VacancyByUser/ResponseOnVacancy', {
         method: 'POST',
         headers: getHeaders(token),

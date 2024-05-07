@@ -39,6 +39,7 @@ export default function UserProfile() {
                     }
                 }
             }
+            setLoading(false);
         }
 
         fetchProfile().then(r => {});
@@ -52,7 +53,7 @@ export default function UserProfile() {
 
     if (!profile) 
         return (
-            <div>
+            <div className="center-content">
                 <FailedToLoadProfileComponent/>
                 <a href={url + '/Auth/CreateProfile'} className="my-2 font-semibold text-purple-500">If you haven't created create now</a>
             </div>
@@ -60,7 +61,7 @@ export default function UserProfile() {
     
 
     return(
-        <div className="flex justify-center my-10">
+        <div className="flex justify-center my-10 min-h-55vh">
             <div className="mx-10 mt-8 pr-10 text-xl text-purple-500 text-center font-semibold">
                 <LogOut/>
                 <p className="mt-10">

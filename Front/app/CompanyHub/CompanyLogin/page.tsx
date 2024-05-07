@@ -12,7 +12,7 @@ export default function CompanyLogin() {
     
     
     return (
-        <div className="flex justify-center my-8">
+        <div className="center-content">
             <div className="flex-row">
                 <div className="flex justify-center items-center">
                     <h1 className="text-2xl font-semibold text-purple-600 mb-2">Company Login</h1>

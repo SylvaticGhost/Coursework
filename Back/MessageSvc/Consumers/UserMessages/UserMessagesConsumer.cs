@@ -7,7 +7,7 @@ using Guid = System.Guid;
 
 namespace MessageSvc.Consumers.UserMessages;
 
-public sealed class UserMessagesConsumer(IUserMessageBoxRepo repo, ILogger<GetAnswerForUserEvent> logger) 
+public sealed class UserMessagesConsumer(IUserMessageBoxRepo repo, ILogger<UserMessagesConsumer> logger) 
     : IConsumer<GetAnswerForUserEvent>,
         IConsumer<DeleteAnswerEvent>
 {

@@ -35,6 +35,8 @@ builder.Services.AddMassTransit(x =>
 
     x.AddConsumer<UserMessagesConsumer>();
     
+    x.AddConsumer<GetResponsesOnVacancyConsumer>();
+    
     x.UsingRabbitMq((context, cfg) =>
     {
         cfg.ConfigureEndpoints(context);
