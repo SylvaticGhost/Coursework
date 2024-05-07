@@ -2439,6 +2439,7 @@
         "dependencies": {
           "AutoMapper": "13.0.1",
           "Contracts": "1.0.0",
+          "CustomAttributes": "1.0.0",
           "CustomExceptions": "1.0.0",
           "EFCore.NamingConventions": "8.0.3",
           "GlobalHelpers": "1.0.0",
@@ -2471,6 +2472,19 @@
         },
         "runtime": {
           "bin/placeholder/Contracts.dll": {}
+        }
+      },
+      "CustomAttributes/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v8.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Mvc.Core": "2.1.2"
+        },
+        "compile": {
+          "bin/placeholder/CustomAttributes.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/CustomAttributes.dll": {}
         }
       },
       "CustomExceptions/1.0.0": {
@@ -7152,6 +7166,11 @@
       "type": "project",
       "path": "../Contracts/Contracts.csproj",
       "msbuildProject": "../Contracts/Contracts.csproj"
+    },
+    "CustomAttributes/1.0.0": {
+      "type": "project",
+      "path": "../CustomAttributes/CustomAttributes.csproj",
+      "msbuildProject": "../CustomAttributes/CustomAttributes.csproj"
     },
     "CustomExceptions/1.0.0": {
       "type": "project",

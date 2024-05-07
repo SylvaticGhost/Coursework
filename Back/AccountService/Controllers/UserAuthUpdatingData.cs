@@ -2,6 +2,7 @@ using AccountService.ExceptionFilters;
 using AccountService.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using CustomAttributes;
 
 namespace AccountService.Controllers;
 
@@ -11,7 +12,7 @@ namespace AccountService.Controllers;
 [LoggingExceptionFilter]
 public class UserAuthUpdatingData(IUserRepository userRepository) : UserControllerBase
 {
-    [HttpPost("UdpatePassword")]
+    [HttpPost("UpdatePassword")]
     public async Task<IActionResult> UpdatePassword(string newPassword)
     {
         Guid userId = GetUserId();
@@ -40,6 +41,20 @@ public class UserAuthUpdatingData(IUserRepository userRepository) : UserControll
             return new BadRequestObjectResult("First name or last name are required");
 
         await userRepository.UpdateName(userId,nameDto.FirstName,nameDto.LastName);
+
+        return new OkResult();
+    }
+
+
+    [CheckInputString]
+    [HttpPost("UpdatePhoneNumber")]
+    public async Task<IActionResult> UpdatePhone([FromQuery]string newPhoneNumber) {
+        Guid userId = GetUserId();
+
+        if(userId == Guid.Empty)
+            return new BadRequestObjectResult("Invalid user id");
+
+        await userRepository.UpdatePhoneNumber(newPhoneNumber, userId);
 
         return new OkResult();
     }

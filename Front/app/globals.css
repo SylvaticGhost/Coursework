@@ -118,6 +118,14 @@ body {
   @apply font-semibold text-purple-500 text-xl text-center
 }
 
+.purple-text {
+  @apply text-purple-500 text-lg text-center font-semibold
+}
+
 .middle-button {
   @apply button-press p-1 text-lg rounded-md
+}
+
+.error-text {
+  @apply font-bold text-xl text-red-600
 }

@@ -16,3 +16,4 @@ export function generateHeaderWithToken(token: string) {
         'AcceptEncoding': 'gzip, deflate, br',
         'Connection': 'keep-alive'
     } }
+
