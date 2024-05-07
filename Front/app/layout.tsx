@@ -4,6 +4,7 @@ import "./globals.css";
 import React from "react";
 import LoginOrProfileButton from "@/Components/LoginOrProfileButton";
 import WorklyTittle from "@/Components/WorklyTittle";
+import { useRouter } from 'next/router';
 
 const url = 'http://localhost:3000';
 const inter = Inter({ subsets: ["latin"] });
@@ -26,12 +27,12 @@ export default function RootLayout({
   return (
       <html lang="en">
       <body>
-      <header className="py-2 border-b-4 border-b-fuchsia-600 px-1 flex justify-between text-xl">
+      <header className="mb-3 py-2 border-b-4 border-b-fuchsia-600 px-1 flex justify-between text-xl">
           <WorklyTittle />
           <LoginOrProfileButton />
       </header>
-      <main className="my-2" style={{flexGrow: 1}}>{children}</main>
-      <footer className="py-3 my-2 border-t-4 border-t-fuchsia-600 px-4 bg-fuchsia-500 text-white">
+      <main className="my-24" style={{flexGrow: 1}}>{children}</main>
+      <footer className="py-3 mt-3 border-t-4 border-t-fuchsia-600 px-4 bg-fuchsia-500 text-white">
           <div className="flex justify-between  font-semibold text-xl">
               <a href="http://localhost:3000/AppPages/AboutUs">About Us</a>
               <a href={url + '/CompanyHub/CompanyLogin'}>Company Hub</a>

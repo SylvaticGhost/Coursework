@@ -5,12 +5,13 @@ import React from "react";
 import MainHead from "@/Components/MainHead";
 import Vacancy from "@/lib/Types/Vacancy/Vacancy";
 import Cookies from "js-cookie";
-import {checkIfUserApplied, postApplication} from "@/lib/VacancyApplication";
+import {checkIfUserApplied, postApplication} from "@/lib/Requests/VacancyApplication/VacancyApplicationByUser";
 import {ShortResume} from "@/lib/Types/Vacancy/Messages/ShortResume";
 import ApplicationOnVacancy from "@/lib/Types/Vacancy/Messages/ApplicationOnVacancy";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import LogInComponent from "@/Components/LogInComponent";
 import {LoadingComponent} from "@/Components/LoadingComponent";
+import {ApplicationOnVacancyToAddDto} from "@/lib/Types/Vacancy/Messages/ApplicationOnVacancyToAddDto";
 
 export default function CreateApplicationOnVacancy({params: {slug}}: {params: {slug: string}}) {
     
@@ -54,7 +55,7 @@ export default function CreateApplicationOnVacancy({params: {slug}}: {params: {s
                 additionalInfo: additional,
             }
             
-            const application : ApplicationOnVacancy = {
+            const application : ApplicationOnVacancyToAddDto = {
                 vacancyId: vacancy.vacancyId,
                 shortResume: shortResume
             }

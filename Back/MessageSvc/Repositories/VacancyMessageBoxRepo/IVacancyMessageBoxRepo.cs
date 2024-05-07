@@ -23,4 +23,6 @@ public interface IVacancyMessageBoxRepo
     public Task<bool> CheckIfUserApplied(Guid vacancyId, Guid userId);
     
     public Task<Guid> GetUserIdFromApplication(Guid applicationId, Guid vacancyId);
+    
+    public Task<IEnumerable<UserApplicationOnVacancy>> GetApplicationsOnVacancy(Guid vacancyId);
 }

@@ -23,9 +23,9 @@ export default function Home() {
     }, [latestVacancies]);
     
   return (
-      <main>
+      <main className="min-h-55vh">
           <BrowseVacancyBtnComponent/>
-          <div className="vacancies-block">
+          <div className="vacancies-block mt-4">
               <MainHead text="Popular vacancy"/>
               <div className="vacancy-container">
                   {latestVacancies ? latestVacancies.map((vacancy) => {

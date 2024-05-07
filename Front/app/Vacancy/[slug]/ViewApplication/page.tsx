@@ -6,7 +6,7 @@ import LogInComponent from "@/Components/LogInComponent";
 import MainHead from "@/Components/MainHead";
 import ToMainPageBtn from "@/Components/ToMainPageBtn";
 import ApplicationOnVacancy from "@/lib/Types/Vacancy/Messages/ApplicationOnVacancy";
-import {deleteApplication, getApplication} from "@/lib/VacancyApplication";
+import {deleteApplication, getApplication} from "@/lib/Requests/VacancyApplication/VacancyApplicationByUser";
 import {LoadingComponent} from "@/Components/LoadingComponent";
 import ApplicationViewComponent from "@/app/Vacancy/Components/ApplicationViewComponent";
 import BackButtonComponent from "@/Components/BackButtonComponent";

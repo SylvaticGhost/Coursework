@@ -4,7 +4,7 @@ const url = 'http://localhost:3000'
 export default function CompanyPage() { 
     
     return(
-        <div className="flex justify-center">
+        <div className="center-content">
             <div className="my-8 flex-column">
                 <h1 className="text-xl text-purple-600 font-semibold pb-6">Company Page</h1>
                 <div className="">

@@ -16,7 +16,7 @@ export default function SettingsPage() {
             </div>
             <h3 className="m-2 font-bold text-xl text-red-600">DANGEROUS AREA</h3>
             <div className="m-2 gray-container flex flex-row">
-                <a className="font-semibold"> Delete account and data</a>
+                <a className="font-semibold mr-4"> Delete account and data</a>
                 <button className="default-red-button">Delete</button>
             </div>
         </div>
