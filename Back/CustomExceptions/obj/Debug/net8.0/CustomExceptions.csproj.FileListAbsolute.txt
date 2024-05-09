@@ -24,3 +24,16 @@ G:/GitHub/Coursework/Back/CustomExceptions/obj/Debug/net8.0/CustomExceptions.csp
 /Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Debug/net8.0/refint/CustomExceptions.dll
 /Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Debug/net8.0/CustomExceptions.pdb
 /Users/Kostia/Documents/GitHub/Coursework/Back/CustomExceptions/obj/Debug/net8.0/ref/CustomExceptions.dll
+G:\GitHub\Coursework\Back\CustomExceptions\bin\Debug\net8.0\CustomExceptions.deps.json
+G:\GitHub\Coursework\Back\CustomExceptions\bin\Debug\net8.0\CustomExceptions.dll
+G:\GitHub\Coursework\Back\CustomExceptions\bin\Debug\net8.0\CustomExceptions.pdb
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.csproj.AssemblyReference.cache
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.GeneratedMSBuildEditorConfig.editorconfig
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.AssemblyInfoInputs.cache
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.AssemblyInfo.cs
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.csproj.CoreCompileInputs.cache
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.sourcelink.json
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.dll
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\refint\CustomExceptions.dll
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\CustomExceptions.pdb
+G:\GitHub\Coursework\Back\CustomExceptions\obj\Debug\net8.0\ref\CustomExceptions.dll

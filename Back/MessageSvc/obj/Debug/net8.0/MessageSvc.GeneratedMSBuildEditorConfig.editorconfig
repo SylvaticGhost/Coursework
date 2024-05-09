@@ -8,6 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = MessageSvc
-build_property.ProjectDir = /Users/Kostia/Documents/GitHub/Coursework/Back/MessageSvc/
+build_property.ProjectDir = G:\GitHub\Coursework\Back\MessageSvc\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 

@@ -13,24 +13,23 @@ namespace AccountService.Controllers;
 public class UserAuthUpdatingData(IUserRepository userRepository) : UserControllerBase
 {
     [HttpPost("UpdatePassword")]
-    public async Task<IActionResult> UpdatePassword(string newPassword)
+    [CheckInputString]
+    public async Task<IActionResult> UpdatePassword([FromQuery]string newPassword)
     {
         Guid userId = GetUserId();
         
         if(userId == Guid.Empty)
             return new BadRequestObjectResult("Invalid user id");
-        
-        if(string.IsNullOrWhiteSpace(newPassword))
-            return new BadRequestObjectResult("New password is required");
 
         await userRepository.UpdatePassword(newPassword, userId);
 
         return new OkResult();
     }
 
-
+    
     [HttpPost("UpdateName")]
-    public async Task<IActionResult> UpdateName(NameDto nameDto)
+    [CheckHasNotNullParam<NameDto>]
+    public async Task<IActionResult> UpdateName([FromBody]NameDto nameDto)
     {
         Guid userId = GetUserId();
         
