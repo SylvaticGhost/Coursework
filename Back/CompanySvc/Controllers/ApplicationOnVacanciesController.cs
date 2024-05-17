@@ -22,7 +22,7 @@ public class ApplicationOnVacanciesController(
     ILogger<ApplicationOnVacanciesController> logger,
     IPublishEndpoint publisher,
     IConfiguration configuration,
-    IRequestClient<GetVacancyResponsesEvent> requestGetResponsesOnVacancyClient,
+    IRequestClient<GetVacancyApplicationEvent> requestGetResponsesOnVacancyClient,
     IRequestClient<PostAnswerOnApplicationEvent> requestFeedbackOnResponseClient)
     : CompanyControllerBase(publisher, configuration)
 {
@@ -31,7 +31,7 @@ public class ApplicationOnVacanciesController(
     {
         Guid companyId = GetCompanyId();
         
-        GetVacancyResponsesEvent @event = new GetVacancyResponsesEvent(vacancyId, companyId);
+        GetVacancyApplicationEvent @event = new GetVacancyApplicationEvent(vacancyId, companyId);
         
         var response = await requestGetResponsesOnVacancyClient.GetResponse<IServiceBusResult<IEnumerable<UserApplicationOnVacancy>>>(@event);
         

@@ -25,24 +25,25 @@ export default function ViewApplicationPage() {
     const vacancy: Vacancy = JSON.parse(localStorage.getItem('vacancy') ?? '{}');
     
     console.log(applications)
-    
-    // if(loading) 
-    //     return <LoadingComponent/>
-    
-    
-    if(!token)
-        return <ErrorWithCompanyAuthorizationComponent />;
 
     useEffect(() => {
         // @ts-ignore
         getApplicationsOnVacancy(token ?? '', vacancy.VacancyId).then(apps => {
             setApplications(apps);
+            setLoading(false); // Move setLoading here
         }).catch(e => {
             setInternalError(true);
-            console.log(e)
-        }).finally(() => {setLoading(false)});
-        setLoading(false);
+            console.log(e);
+        });
     }, []);
+
+
+    if(loading) 
+        return <LoadingComponent/>
+    
+    
+    if(!token)
+        return <ErrorWithCompanyAuthorizationComponent />;
     
     if(!vacancy)
         return (

@@ -6,11 +6,11 @@ using MessageSvc.Repositories.VacancyMessageBoxRepo;
 
 namespace MessageSvc.Consumers;
 
-public sealed class GetResponsesOnVacancyConsumer(IVacancyMessageBoxRepo repo, 
-    ILogger<GetResponsesOnVacancyConsumer> logger)
-    : IConsumer<GetVacancyResponsesEvent>
+public sealed class GetApplicationsOnVacancyConsumer(IVacancyMessageBoxRepo repo, 
+    ILogger<GetApplicationsOnVacancyConsumer> logger)
+    : IConsumer<GetVacancyApplicationEvent>
 {
-    public async Task Consume(ConsumeContext<GetVacancyResponsesEvent> context)
+    public async Task Consume(ConsumeContext<GetVacancyApplicationEvent> context)
     {
         Guid vacancyId = context.Message.VacancyId;
 
